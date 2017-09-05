@@ -61,7 +61,7 @@
 		477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListReadable.swift; sourceTree = "<group>"; };
 		477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateCollectionViewController.swift; sourceTree = "<group>"; };
 		477BE0941F5C57EB006A8E3E /* LBNand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNand.swift; sourceTree = "<group>"; };
-		47D642ED1F5EADE0005F2069 /* UIImageExtras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtras.swift; path = ../UIImageExtras.swift; sourceTree = "<group>"; };
+		47D642ED1F5EADE0005F2069 /* UIImageExtras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtras.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
