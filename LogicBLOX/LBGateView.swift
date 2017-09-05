@@ -67,8 +67,41 @@ class LBGateView: UIView {
         setNeedsDisplay()
     }
     
+    var initialDelta: CGPoint = CGPoint.zero
+    var selected : LBGate? = nil
+    
     func moveSelected(_ gesture: UIPanGestureRecognizer) {
-        
+        let position = gesture.location(in: self)
+        if gesture.state == .began {
+            selected = gateUnderPoint(position)
+            if let selected = selected {
+                if !selected.highlighted { toggleSelection(selected); setNeedsDisplay() }
+                initialDelta.x = selected.bounds.origin.x - position.x
+                initialDelta.y = selected.bounds.origin.y - position.y
+            }
+        } else if gesture.state == .changed {
+            if let selected = selected {
+                selected.bounds.origin = CGPoint(x: position.x + initialDelta.x, y: position.y + initialDelta.y)
+                setNeedsDisplay()
+            }
+        } else if gesture.state == .ended {
+            setNeedsDisplay()
+        }
+    }
+    
+    func deleteSelected(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            selected = gateUnderPoint(gesture.location(in: self))
+            if let selected = selected {
+                if !selected.highlighted { toggleSelection(selected); setNeedsDisplay() }
+            }
+        } else if gesture.state == .ended {
+            print("Long pressed...")
+            if let deleted = selected, let index = gates.index(of: deleted) {
+                gates.remove(at: index)
+                setNeedsDisplay()
+            }
+        }
     }
     
     func gateUnderPoint(_ point: CGPoint) -> LBGate? {

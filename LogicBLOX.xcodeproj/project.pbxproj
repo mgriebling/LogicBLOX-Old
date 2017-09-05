@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F8723A21F5F463300DB0A9B /* UIImageExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8723A11F5F463300DB0A9B /* UIImageExtras.swift */; };
 		47244B801F5D4AEE006CB51D /* Gates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B7F1F5D4AEE006CB51D /* Gates.swift */; };
 		47244B821F5D8C86006CB51D /* LBAnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B811F5D8C86006CB51D /* LBAnd.swift */; };
 		47244B841F5D8D59006CB51D /* LBOr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B831F5D8D59006CB51D /* LBOr.swift */; };
@@ -31,10 +32,10 @@
 		477BE08B1F5C24FB006A8E3E /* PropertyListReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */; };
 		477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */; };
 		477BE0951F5C57EB006A8E3E /* LBNand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0941F5C57EB006A8E3E /* LBNand.swift */; };
-		47D642EE1F5EADE0005F2069 /* UIImageExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642ED1F5EADE0005F2069 /* UIImageExtras.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F8723A11F5F463300DB0A9B /* UIImageExtras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtras.swift; sourceTree = SOURCE_ROOT; };
 		47244B7F1F5D4AEE006CB51D /* Gates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gates.swift; sourceTree = "<group>"; };
 		47244B811F5D8C86006CB51D /* LBAnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBAnd.swift; sourceTree = "<group>"; };
 		47244B831F5D8D59006CB51D /* LBOr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBOr.swift; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListReadable.swift; sourceTree = "<group>"; };
 		477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateCollectionViewController.swift; sourceTree = "<group>"; };
 		477BE0941F5C57EB006A8E3E /* LBNand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNand.swift; sourceTree = "<group>"; };
-		47D642ED1F5EADE0005F2069 /* UIImageExtras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtras.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +98,8 @@
 		47244B941F5DF133006CB51D /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				2F8723A11F5F463300DB0A9B /* UIImageExtras.swift */,
 				477BE06E1F5AD877006A8E3E /* AppDelegate.swift */,
-				47D642ED1F5EADE0005F2069 /* UIImageExtras.swift */,
 				47244B7F1F5D4AEE006CB51D /* Gates.swift */,
 				477BE0751F5AD877006A8E3E /* Assets.xcassets */,
 				477BE0771F5AD877006A8E3E /* LaunchScreen.storyboard */,
@@ -218,6 +218,7 @@
 				477BE0811F5AFC16006A8E3E /* LBZoomingCanvasView.swift in Sources */,
 				47244B961F5EA03E006CB51D /* LBButton.swift in Sources */,
 				47244B801F5D4AEE006CB51D /* Gates.swift in Sources */,
+				2F8723A21F5F463300DB0A9B /* UIImageExtras.swift in Sources */,
 				47244B921F5D95F8006CB51D /* LBConnection.swift in Sources */,
 				477BE0891F5C24C9006A8E3E /* LBGate.swift in Sources */,
 				47244B8C1F5D90CC006CB51D /* LBBuffer.swift in Sources */,
@@ -230,7 +231,6 @@
 				477BE0871F5B03B0006A8E3E /* LBGrid.swift in Sources */,
 				477BE06F1F5AD877006A8E3E /* AppDelegate.swift in Sources */,
 				477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */,
-				47D642EE1F5EADE0005F2069 /* UIImageExtras.swift in Sources */,
 				47244B8A1F5D8F03006CB51D /* LBXnor.swift in Sources */,
 				47244B981F5EA05A006CB51D /* LBIndicator.swift in Sources */,
 				47244B841F5D8D59006CB51D /* LBOr.swift in Sources */,

@@ -42,6 +42,14 @@ class LBCanvasViewController: UIViewController {
             tapGesture.numberOfTapsRequired = 1
             tapGesture.numberOfTouchesRequired = 1
             canvasView.addGestureRecognizer(tapGesture)
+            
+            // tap gesture for selecting and creating objects
+            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
+            longPressGesture.numberOfTapsRequired = 0
+            longPressGesture.numberOfTouchesRequired = 1
+            longPressGesture.minimumPressDuration = 1
+            longPressGesture.allowableMovement = 10
+            canvasView.addGestureRecognizer(longPressGesture)
         }
     }
     
@@ -121,43 +129,12 @@ class LBCanvasViewController: UIViewController {
         }
     }
     
-    var initialDelta: CGPoint = CGPoint.zero
-    var selected : LBGate? = nil
-    
     func didPan(_ sender: UIPanGestureRecognizer) {
-        let position = sender.location(in: gateView)
-        if sender.state == .began {
-            selected = gateView.gateUnderPoint(sender.location(in: gateView))
-            if let selected = selected {
-                if !selected.highlighted { gateView.toggleSelection(selected); gateView.setNeedsDisplay() }
-                initialDelta.x = selected.bounds.origin.x - position.x
-                initialDelta.y = selected.bounds.origin.y - position.y
-            }
-        } else if sender.state == .changed {
-            if let selected = selected {
-                selected.bounds.origin = CGPoint(x: position.x + initialDelta.x, y: position.y + initialDelta.y)
-                gateView.setNeedsDisplay()
-            }
-        } else if sender.state == .ended {
-            gateView.setNeedsDisplay()
-        }
+        gateView.moveSelected(sender)
     }
     
     func didLongPress(_ sender: UILongPressGestureRecognizer) {
-//        if sender.state == .began {
-//            let position = sender.location(in: drawingView)
-//            selected?.highlighted = false
-//            selected = document?.data.highlightGateUnderPoint(position)
-//            selected?.highlighted = true
-//            drawingView.setNeedsDisplay()
-//        } else if sender.state == .ended {
-//            if let deleted = selected {
-//                document?.data.removeGate(deleted)
-//                selected = nil
-//                drawingView.setNeedsDisplay()
-//                saveDoc()
-//            }
-//        }
+        gateView.deleteSelected(sender)
     }
 
     // MARK: - Navigation
