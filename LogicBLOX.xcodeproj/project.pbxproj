@@ -7,21 +7,61 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47244B801F5D4AEE006CB51D /* Gates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B7F1F5D4AEE006CB51D /* Gates.swift */; };
+		47244B821F5D8C86006CB51D /* LBAnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B811F5D8C86006CB51D /* LBAnd.swift */; };
+		47244B841F5D8D59006CB51D /* LBOr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B831F5D8D59006CB51D /* LBOr.swift */; };
+		47244B861F5D8E19006CB51D /* LBNor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B851F5D8E19006CB51D /* LBNor.swift */; };
+		47244B881F5D8ECE006CB51D /* LBXor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B871F5D8ECE006CB51D /* LBXor.swift */; };
+		47244B8A1F5D8F03006CB51D /* LBXnor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B891F5D8F03006CB51D /* LBXnor.swift */; };
+		47244B8C1F5D90CC006CB51D /* LBBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B8B1F5D90CC006CB51D /* LBBuffer.swift */; };
+		47244B8E1F5D90DF006CB51D /* LBInverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B8D1F5D90DF006CB51D /* LBInverter.swift */; };
+		47244B901F5D90EB006CB51D /* LBBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B8F1F5D90EB006CB51D /* LBBlock.swift */; };
+		47244B921F5D95F8006CB51D /* LBConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B911F5D95F8006CB51D /* LBConnection.swift */; };
+		47244B961F5EA03E006CB51D /* LBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B951F5EA03E006CB51D /* LBButton.swift */; };
+		47244B981F5EA05A006CB51D /* LBIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B971F5EA05A006CB51D /* LBIndicator.swift */; };
 		477BE06F1F5AD877006A8E3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE06E1F5AD877006A8E3E /* AppDelegate.swift */; };
-		477BE0711F5AD877006A8E3E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0701F5AD877006A8E3E /* ViewController.swift */; };
 		477BE0741F5AD877006A8E3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 477BE0721F5AD877006A8E3E /* Main.storyboard */; };
 		477BE0761F5AD877006A8E3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 477BE0751F5AD877006A8E3E /* Assets.xcassets */; };
 		477BE0791F5AD877006A8E3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 477BE0771F5AD877006A8E3E /* LaunchScreen.storyboard */; };
+		477BE0811F5AFC16006A8E3E /* LBZoomingCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0801F5AFC16006A8E3E /* LBZoomingCanvasView.swift */; };
+		477BE0831F5AFDC4006A8E3E /* LBCanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0821F5AFDC4006A8E3E /* LBCanvasViewController.swift */; };
+		477BE0851F5AFEBD006A8E3E /* LBGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0841F5AFEBD006A8E3E /* LBGateView.swift */; };
+		477BE0871F5B03B0006A8E3E /* LBGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0861F5B03B0006A8E3E /* LBGrid.swift */; };
+		477BE0891F5C24C9006A8E3E /* LBGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0881F5C24C9006A8E3E /* LBGate.swift */; };
+		477BE08B1F5C24FB006A8E3E /* PropertyListReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */; };
+		477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */; };
+		477BE0951F5C57EB006A8E3E /* LBNand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0941F5C57EB006A8E3E /* LBNand.swift */; };
+		47D642EE1F5EADE0005F2069 /* UIImageExtras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642ED1F5EADE0005F2069 /* UIImageExtras.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		47244B7F1F5D4AEE006CB51D /* Gates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gates.swift; sourceTree = "<group>"; };
+		47244B811F5D8C86006CB51D /* LBAnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBAnd.swift; sourceTree = "<group>"; };
+		47244B831F5D8D59006CB51D /* LBOr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBOr.swift; sourceTree = "<group>"; };
+		47244B851F5D8E19006CB51D /* LBNor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNor.swift; sourceTree = "<group>"; };
+		47244B871F5D8ECE006CB51D /* LBXor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXor.swift; sourceTree = "<group>"; };
+		47244B891F5D8F03006CB51D /* LBXnor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXnor.swift; sourceTree = "<group>"; };
+		47244B8B1F5D90CC006CB51D /* LBBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBuffer.swift; sourceTree = "<group>"; };
+		47244B8D1F5D90DF006CB51D /* LBInverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBInverter.swift; sourceTree = "<group>"; };
+		47244B8F1F5D90EB006CB51D /* LBBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBBlock.swift; sourceTree = "<group>"; };
+		47244B911F5D95F8006CB51D /* LBConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBConnection.swift; sourceTree = "<group>"; };
+		47244B951F5EA03E006CB51D /* LBButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBButton.swift; sourceTree = "<group>"; };
+		47244B971F5EA05A006CB51D /* LBIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBIndicator.swift; sourceTree = "<group>"; };
 		477BE06B1F5AD876006A8E3E /* LogicBLOX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LogicBLOX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		477BE06E1F5AD877006A8E3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		477BE0701F5AD877006A8E3E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		477BE0731F5AD877006A8E3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		477BE0751F5AD877006A8E3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		477BE0781F5AD877006A8E3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		477BE07A1F5AD877006A8E3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		477BE0801F5AFC16006A8E3E /* LBZoomingCanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBZoomingCanvasView.swift; sourceTree = "<group>"; };
+		477BE0821F5AFDC4006A8E3E /* LBCanvasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBCanvasViewController.swift; sourceTree = "<group>"; };
+		477BE0841F5AFEBD006A8E3E /* LBGateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateView.swift; sourceTree = "<group>"; };
+		477BE0861F5B03B0006A8E3E /* LBGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGrid.swift; sourceTree = "<group>"; };
+		477BE0881F5C24C9006A8E3E /* LBGate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGate.swift; sourceTree = "<group>"; };
+		477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListReadable.swift; sourceTree = "<group>"; };
+		477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateCollectionViewController.swift; sourceTree = "<group>"; };
+		477BE0941F5C57EB006A8E3E /* LBNand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNand.swift; sourceTree = "<group>"; };
+		47D642ED1F5EADE0005F2069 /* UIImageExtras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtras.swift; path = ../UIImageExtras.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +75,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		47244B931F5DF111006CB51D /* Logic Elements */ = {
+			isa = PBXGroup;
+			children = (
+				477BE0881F5C24C9006A8E3E /* LBGate.swift */,
+				477BE0941F5C57EB006A8E3E /* LBNand.swift */,
+				47244B811F5D8C86006CB51D /* LBAnd.swift */,
+				47244B831F5D8D59006CB51D /* LBOr.swift */,
+				47244B851F5D8E19006CB51D /* LBNor.swift */,
+				47244B871F5D8ECE006CB51D /* LBXor.swift */,
+				47244B891F5D8F03006CB51D /* LBXnor.swift */,
+				47244B8B1F5D90CC006CB51D /* LBBuffer.swift */,
+				47244B911F5D95F8006CB51D /* LBConnection.swift */,
+				47244B8D1F5D90DF006CB51D /* LBInverter.swift */,
+				47244B8F1F5D90EB006CB51D /* LBBlock.swift */,
+				47244B951F5EA03E006CB51D /* LBButton.swift */,
+				47244B971F5EA05A006CB51D /* LBIndicator.swift */,
+			);
+			name = "Logic Elements";
+			sourceTree = "<group>";
+		};
+		47244B941F5DF133006CB51D /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				477BE06E1F5AD877006A8E3E /* AppDelegate.swift */,
+				47D642ED1F5EADE0005F2069 /* UIImageExtras.swift */,
+				47244B7F1F5D4AEE006CB51D /* Gates.swift */,
+				477BE0751F5AD877006A8E3E /* Assets.xcassets */,
+				477BE0771F5AD877006A8E3E /* LaunchScreen.storyboard */,
+				477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */,
+				477BE07A1F5AD877006A8E3E /* Info.plist */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
 		477BE0621F5AD876006A8E3E = {
 			isa = PBXGroup;
 			children = (
@@ -54,12 +128,14 @@
 		477BE06D1F5AD877006A8E3E /* LogicBLOX */ = {
 			isa = PBXGroup;
 			children = (
-				477BE06E1F5AD877006A8E3E /* AppDelegate.swift */,
-				477BE0701F5AD877006A8E3E /* ViewController.swift */,
+				477BE0821F5AFDC4006A8E3E /* LBCanvasViewController.swift */,
+				47244B931F5DF111006CB51D /* Logic Elements */,
+				477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */,
+				477BE0841F5AFEBD006A8E3E /* LBGateView.swift */,
+				477BE0801F5AFC16006A8E3E /* LBZoomingCanvasView.swift */,
+				477BE0861F5B03B0006A8E3E /* LBGrid.swift */,
 				477BE0721F5AD877006A8E3E /* Main.storyboard */,
-				477BE0751F5AD877006A8E3E /* Assets.xcassets */,
-				477BE0771F5AD877006A8E3E /* LaunchScreen.storyboard */,
-				477BE07A1F5AD877006A8E3E /* Info.plist */,
+				47244B941F5DF133006CB51D /* Support */,
 			);
 			path = LogicBLOX;
 			sourceTree = "<group>";
@@ -90,6 +166,7 @@
 		477BE0631F5AD876006A8E3E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = LB;
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Computer Inspirations";
@@ -137,8 +214,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				477BE0711F5AD877006A8E3E /* ViewController.swift in Sources */,
+				477BE08B1F5C24FB006A8E3E /* PropertyListReadable.swift in Sources */,
+				477BE0811F5AFC16006A8E3E /* LBZoomingCanvasView.swift in Sources */,
+				47244B961F5EA03E006CB51D /* LBButton.swift in Sources */,
+				47244B801F5D4AEE006CB51D /* Gates.swift in Sources */,
+				47244B921F5D95F8006CB51D /* LBConnection.swift in Sources */,
+				477BE0891F5C24C9006A8E3E /* LBGate.swift in Sources */,
+				47244B8C1F5D90CC006CB51D /* LBBuffer.swift in Sources */,
+				47244B901F5D90EB006CB51D /* LBBlock.swift in Sources */,
+				47244B8E1F5D90DF006CB51D /* LBInverter.swift in Sources */,
+				47244B861F5D8E19006CB51D /* LBNor.swift in Sources */,
+				477BE0851F5AFEBD006A8E3E /* LBGateView.swift in Sources */,
+				477BE0951F5C57EB006A8E3E /* LBNand.swift in Sources */,
+				477BE0831F5AFDC4006A8E3E /* LBCanvasViewController.swift in Sources */,
+				477BE0871F5B03B0006A8E3E /* LBGrid.swift in Sources */,
 				477BE06F1F5AD877006A8E3E /* AppDelegate.swift in Sources */,
+				477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */,
+				47D642EE1F5EADE0005F2069 /* UIImageExtras.swift in Sources */,
+				47244B8A1F5D8F03006CB51D /* LBXnor.swift in Sources */,
+				47244B981F5EA05A006CB51D /* LBIndicator.swift in Sources */,
+				47244B841F5D8D59006CB51D /* LBOr.swift in Sources */,
+				47244B821F5D8C86006CB51D /* LBAnd.swift in Sources */,
+				47244B881F5D8ECE006CB51D /* LBXor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +401,7 @@
 				477BE07F1F5AD877006A8E3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
