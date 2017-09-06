@@ -80,11 +80,18 @@ class LBCanvasViewController: UIViewController {
             }
             
             NSLog("File created at %@", [fileURL])
-            let fileURL = doc.fileURL
-            let state = doc.documentState
-            let version = NSFileVersion.currentVersionOfItem(at: fileURL)
+//            let fileURL = doc.fileURL
+//            let state = doc.documentState
+//            let version = NSFileVersion.currentVersionOfItem(at: fileURL)
         }
         return doc
+    }
+    
+    var designs : [URL] {
+        if let urls = try? FileManager.default.contentsOfDirectory(at: localRoot!, includingPropertiesForKeys: nil, options: FileManager.DirectoryEnumerationOptions.skipsHiddenFiles) {
+            return urls
+        }
+        return [getDocURL(getDocFilename("unnamed", unique: true))]
     }
     
     var localRoot : URL? {
@@ -176,6 +183,7 @@ class LBCanvasViewController: UIViewController {
         super.viewDidLoad()
         setButtonImage()
         gateView.gates = document?.gates ?? []
+        self.title = document?.fileURL.deletingPathExtension().lastPathComponent
     }
     
     // MARK: - Bar button actions
@@ -238,6 +246,14 @@ class LBCanvasViewController: UIViewController {
                 vc?.callback = { selected in
                     self.lastGateType = selected
                     self.setButtonImage()
+                }
+            case "Show Designs":
+                let vc = (segue.destination as! UINavigationController).viewControllers[0] as? LBDesignTableViewController
+                vc?.designs = designs
+                vc?.selectedItem = 0
+                vc?.callback = { selected in
+                    print("Selected design \(self.designs[selected])")
+                    self.title = self.designs[selected].deletingPathExtension().lastPathComponent
                 }
             default: break
             }
