@@ -63,6 +63,84 @@ class LBCanvasViewController: UIViewController {
         return _gateView
     }
     
+    // MARK: - Document methods
+    
+    let LBEXTENSION = "BLOX"
+    
+    var document : LBDocument? {
+        // create a new document
+        let fileURL = getDocURL(getDocFilename("Gates", unique: true))
+        NSLog("Want to create a file at %@", [fileURL])
+        
+        let doc = LBDocument(fileURL: fileURL)
+        doc.save(to: fileURL, for: .forCreating) { (success) in
+            if !success {
+                NSLog("Failed to create a file at %@", [fileURL])
+                return
+            }
+            
+            NSLog("File created at %@", [fileURL])
+            let fileURL = doc.fileURL
+            let state = doc.documentState
+            let version = NSFileVersion.currentVersionOfItem(at: fileURL)
+        }
+        return doc
+    }
+    
+    var localRoot : URL? {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths.first
+    }
+    
+    func getDocURL(_ filename: String) -> URL {
+        return localRoot!.appendingPathComponent(filename, isDirectory: false)
+    }
+    
+    func docNameExistsInObjects(_ docName: String) -> Bool {
+        let fileManager = FileManager.default
+        let docName = getDocURL(docName).absoluteString
+        return fileManager.fileExists(atPath: docName)
+    }
+    
+    func getDocFilename (_ prefix: String, unique: Bool) -> String {
+        var docCount : Int = 0
+        var newDocName = ""
+        
+        var done = false
+        var first = true
+        while !done {
+            if first {
+                first = false
+                newDocName = prefix + "." + LBEXTENSION
+            } else {
+                newDocName = prefix + " \(docCount)." + LBEXTENSION
+            }
+            
+            // look for an existing document with the same name
+            var nameExists = false
+            if unique {
+                nameExists = docNameExistsInObjects(newDocName)
+            }
+            if !nameExists {
+                done = true
+            } else {
+                docCount += 1
+            }
+        }
+        return newDocName
+    }
+    
+    func loadDocAtURL(_ fileURL : URL) {
+        let doc = LBDocument(fileURL: fileURL)
+        doc.open { (success) in
+            if !success {
+                NSLog("Failed to open a file at %@", [fileURL])
+                return
+            }
+        }
+    }
+    
+    
     // MARK: - Support methods
     
     /// We switch between the built-in and our pan gesture recognizer.  Our pan is used during edit mode
@@ -97,6 +175,7 @@ class LBCanvasViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setButtonImage()
+        gateView.gates = document?.gates ?? []
     }
     
     // MARK: - Bar button actions
@@ -130,11 +209,15 @@ class LBCanvasViewController: UIViewController {
     }
     
     func didPan(_ sender: UIPanGestureRecognizer) {
-        gateView.moveSelected(sender)
+        if editingGates {
+            gateView.moveSelected(sender)
+        }
     }
     
     func didLongPress(_ sender: UILongPressGestureRecognizer) {
-        gateView.deleteSelected(sender)
+        if editingGates {
+            gateView.deleteSelected(sender)
+        }
     }
 
     // MARK: - Navigation

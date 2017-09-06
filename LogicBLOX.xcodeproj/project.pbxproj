@@ -32,6 +32,7 @@
 		477BE08B1F5C24FB006A8E3E /* PropertyListReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */; };
 		477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */; };
 		477BE0951F5C57EB006A8E3E /* LBNand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0941F5C57EB006A8E3E /* LBNand.swift */; };
+		47D642F01F5FF499005F2069 /* LBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642EF1F5FF499005F2069 /* LBDocument.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListReadable.swift; sourceTree = "<group>"; };
 		477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateCollectionViewController.swift; sourceTree = "<group>"; };
 		477BE0941F5C57EB006A8E3E /* LBNand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNand.swift; sourceTree = "<group>"; };
+		47D642EF1F5FF499005F2069 /* LBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDocument.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,8 @@
 		47244B941F5DF133006CB51D /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				477BE0861F5B03B0006A8E3E /* LBGrid.swift */,
+				477BE0801F5AFC16006A8E3E /* LBZoomingCanvasView.swift */,
 				2F8723A11F5F463300DB0A9B /* UIImageExtras.swift */,
 				477BE06E1F5AD877006A8E3E /* AppDelegate.swift */,
 				47244B7F1F5D4AEE006CB51D /* Gates.swift */,
@@ -129,12 +133,11 @@
 			isa = PBXGroup;
 			children = (
 				477BE0821F5AFDC4006A8E3E /* LBCanvasViewController.swift */,
-				47244B931F5DF111006CB51D /* Logic Elements */,
-				477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */,
 				477BE0841F5AFEBD006A8E3E /* LBGateView.swift */,
-				477BE0801F5AFC16006A8E3E /* LBZoomingCanvasView.swift */,
-				477BE0861F5B03B0006A8E3E /* LBGrid.swift */,
 				477BE0721F5AD877006A8E3E /* Main.storyboard */,
+				477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */,
+				47D642EF1F5FF499005F2069 /* LBDocument.swift */,
+				47244B931F5DF111006CB51D /* Logic Elements */,
 				47244B941F5DF133006CB51D /* Support */,
 			);
 			path = LogicBLOX;
@@ -234,6 +237,7 @@
 				47244B8A1F5D8F03006CB51D /* LBXnor.swift in Sources */,
 				47244B981F5EA05A006CB51D /* LBIndicator.swift in Sources */,
 				47244B841F5D8D59006CB51D /* LBOr.swift in Sources */,
+				47D642F01F5FF499005F2069 /* LBDocument.swift in Sources */,
 				47244B821F5D8C86006CB51D /* LBAnd.swift in Sources */,
 				47244B881F5D8ECE006CB51D /* LBXor.swift in Sources */,
 			);
