@@ -86,7 +86,7 @@ extension CGPoint {
 
 /// The mother of all gates: basic gate object with default properties & methods.
 
-class LBGate : NSObject {
+class LBGate : NSObject, NSCoding {
     
     static let kVersionKey  = "Version"
     static let kNativeRect  = "NativeRect"

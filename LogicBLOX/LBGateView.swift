@@ -15,7 +15,9 @@ class LBGateView: UIView {
     var creatingGate : LBGate?
     var editingGate : LBGate?
     
-    var gates = [LBGate]()
+    var gates = [LBGate]() {
+        didSet { setNeedsDisplay() }
+    }
 
     override func draw(_ rect: CGRect) {
         UIColor.white.setFill()

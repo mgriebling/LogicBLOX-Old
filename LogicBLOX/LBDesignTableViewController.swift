@@ -12,7 +12,6 @@ class LBDesignTableViewController: UITableViewController {
   
     var selectedItem : Int = 0
     var callback : (_ selected: Int) -> () = { _ in }
-    var designs : [URL] = []
     
     // MARK: - Table view life cycle
 
@@ -45,14 +44,15 @@ class LBDesignTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return designs.count
+        return Designs.list.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Design ID", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = designs[indexPath.row].deletingPathExtension().lastPathComponent
+        let design = Designs.list[indexPath.row]
+        cell.textLabel?.text = design.deletingPathExtension().lastPathComponent
         return cell
     }
     

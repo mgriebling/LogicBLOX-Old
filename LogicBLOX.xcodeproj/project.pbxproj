@@ -34,6 +34,7 @@
 		477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */; };
 		477BE0951F5C57EB006A8E3E /* LBNand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0941F5C57EB006A8E3E /* LBNand.swift */; };
 		47D642F01F5FF499005F2069 /* LBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642EF1F5FF499005F2069 /* LBDocument.swift */; };
+		47D642F21F6143D9005F2069 /* LBDesigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642F11F6143D9005F2069 /* LBDesigns.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateCollectionViewController.swift; sourceTree = "<group>"; };
 		477BE0941F5C57EB006A8E3E /* LBNand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNand.swift; sourceTree = "<group>"; };
 		47D642EF1F5FF499005F2069 /* LBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDocument.swift; sourceTree = "<group>"; };
+		47D642F11F6143D9005F2069 /* LBDesigns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDesigns.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 				2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */,
 				477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */,
 				47D642EF1F5FF499005F2069 /* LBDocument.swift */,
+				47D642F11F6143D9005F2069 /* LBDesigns.swift */,
 				47244B931F5DF111006CB51D /* Logic Elements */,
 				47244B941F5DF133006CB51D /* Support */,
 			);
@@ -228,6 +231,7 @@
 				2F8723A21F5F463300DB0A9B /* UIImageExtras.swift in Sources */,
 				47244B921F5D95F8006CB51D /* LBConnection.swift in Sources */,
 				477BE0891F5C24C9006A8E3E /* LBGate.swift in Sources */,
+				47D642F21F6143D9005F2069 /* LBDesigns.swift in Sources */,
 				47244B8C1F5D90CC006CB51D /* LBBuffer.swift in Sources */,
 				47244B901F5D90EB006CB51D /* LBBlock.swift in Sources */,
 				47244B8E1F5D90DF006CB51D /* LBInverter.swift in Sources */,

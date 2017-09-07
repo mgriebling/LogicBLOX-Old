@@ -21,6 +21,8 @@ class LBDocument: UIDocument {
             let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
             if let gates = unarchiver.decodeObject(forKey: "LBGates") as? [LBGate] {
                 self.gates = gates
+            } else {
+                self.gates = []
             }
         }
     }

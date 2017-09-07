@@ -65,86 +65,58 @@ class LBCanvasViewController: UIViewController {
     
     // MARK: - Document methods
     
-    let LBEXTENSION = "BLOX"
+    var document : LBDocument?
     
-    var document : LBDocument? {
-        // create a new document
-        let fileURL = getDocURL(getDocFilename("Gates", unique: true))
-        NSLog("Want to create a file at %@", [fileURL])
-        
-        let doc = LBDocument(fileURL: fileURL)
-        doc.save(to: fileURL, for: .forCreating) { (success) in
-            if !success {
-                NSLog("Failed to create a file at %@", [fileURL])
-                return
-            }
+    func loadInitialDoc() {
+        // reopen an existing document -- if possible
+        let doc : LBDocument
+        if let design = Designs.list.first {
+            NSLog("Reading existing file at %@", [design])
+            doc = loadDocAtURL(design)
+        } else {
+            // create a new document
+            let fileURL = Designs.getDocURL(Designs.getDocFilename("unnamed", unique: true))
+            NSLog("Want to create a file at %@", [fileURL])
             
-            NSLog("File created at %@", [fileURL])
-//            let fileURL = doc.fileURL
-//            let state = doc.documentState
-//            let version = NSFileVersion.currentVersionOfItem(at: fileURL)
-        }
-        return doc
-    }
-    
-    var designs : [URL] {
-        if let urls = try? FileManager.default.contentsOfDirectory(at: localRoot!, includingPropertiesForKeys: nil, options: FileManager.DirectoryEnumerationOptions.skipsHiddenFiles) {
-            return urls
-        }
-        return [getDocURL(getDocFilename("unnamed", unique: true))]
-    }
-    
-    var localRoot : URL? {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths.first
-    }
-    
-    func getDocURL(_ filename: String) -> URL {
-        return localRoot!.appendingPathComponent(filename, isDirectory: false)
-    }
-    
-    func docNameExistsInObjects(_ docName: String) -> Bool {
-        let fileManager = FileManager.default
-        let docName = getDocURL(docName).absoluteString
-        return fileManager.fileExists(atPath: docName)
-    }
-    
-    func getDocFilename (_ prefix: String, unique: Bool) -> String {
-        var docCount : Int = 0
-        var newDocName = ""
-        
-        var done = false
-        var first = true
-        while !done {
-            if first {
-                first = false
-                newDocName = prefix + "." + LBEXTENSION
-            } else {
-                newDocName = prefix + " \(docCount)." + LBEXTENSION
+            doc = LBDocument(fileURL: fileURL)
+            doc.save(to: fileURL, for: .forCreating) { (success) in
+                if !success {
+                    NSLog("Failed to create a file at %@", [fileURL])
+                    return
+                }
+                NSLog("File created at %@", [fileURL])
             }
-            
-            // look for an existing document with the same name
-            var nameExists = false
-            if unique {
-                nameExists = docNameExistsInObjects(newDocName)
-            }
-            if !nameExists {
-                done = true
-            } else {
-                docCount += 1
-            }
+            gateView.gates = []
+            title = fileURL.deletingPathExtension().lastPathComponent
         }
-        return newDocName
+        document = doc
     }
     
-    func loadDocAtURL(_ fileURL : URL) {
+    func loadDocAtURL(_ fileURL : URL) -> LBDocument {
         let doc = LBDocument(fileURL: fileURL)
         doc.open { (success) in
             if !success {
                 NSLog("Failed to open a file at %@", [fileURL])
+                self.gateView.gates = []
                 return
             }
+            self.gateView.gates = doc.gates
+            self.title = doc.fileURL.deletingPathExtension().lastPathComponent
+            doc.close(completionHandler: nil)
         }
+        return doc
+    }
+    
+    func saveActiveDoc() {
+        guard let doc = document else { return }
+        doc.gates = gateView.gates
+        doc.save(to: doc.fileURL, for: .forOverwriting, completionHandler: { (success) in
+            if !success {
+                NSLog("Failed to save file to %@", [doc.fileURL])
+                return
+            }
+            NSLog("File saved to %@", [doc.fileURL])
+        })
     }
     
     
@@ -182,20 +154,20 @@ class LBCanvasViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setButtonImage()
-        gateView.gates = document?.gates ?? []
-        self.title = document?.fileURL.deletingPathExtension().lastPathComponent
+        loadInitialDoc()
     }
     
     // MARK: - Bar button actions
     
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
         editingGates = false
-        self.navigationItem.setRightBarButtonItems([editBarButton], animated: true)
+        saveActiveDoc()
+        navigationItem.setRightBarButtonItems([editBarButton], animated: true)
     }
     
     @IBAction func toggleEdit(_ sender: UIBarButtonItem) {
         editingGates = true
-        self.navigationItem.setRightBarButtonItems([doneBarButton, imageBarButton], animated: true)
+        navigationItem.setRightBarButtonItems([doneBarButton, imageBarButton], animated: true)
     }
     
     // MARK: - Gesture management
@@ -249,11 +221,14 @@ class LBCanvasViewController: UIViewController {
                 }
             case "Show Designs":
                 let vc = (segue.destination as! UINavigationController).viewControllers[0] as? LBDesignTableViewController
-                vc?.designs = designs
                 vc?.selectedItem = 0
                 vc?.callback = { selected in
-                    print("Selected design \(self.designs[selected])")
-                    self.title = self.designs[selected].deletingPathExtension().lastPathComponent
+                    let url = Designs.list[selected]
+                    print("Selected design \(url)")
+                    if url != self.document!.fileURL {
+                        self.saveActiveDoc()
+                        self.document = self.loadDocAtURL(url)
+                    }
                 }
             default: break
             }
