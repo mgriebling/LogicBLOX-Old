@@ -44,8 +44,10 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="canvasView" destination="s1X-LX-XiB" id="yQY-hd-IFR"/>
+                        <outlet property="deleteBarButton" destination="KFp-8q-sWn" id="lzH-bK-EkI"/>
                         <outlet property="doneBarButton" destination="pQq-wY-PsX" id="jhg-E6-ZZA"/>
                         <outlet property="editBarButton" destination="HDr-yu-SAf" id="cRX-Qz-IHZ"/>
+                        <outlet property="filesBarButton" destination="CMy-5T-rxq" id="Q5R-73-fVX"/>
                         <outlet property="imageBarButton" destination="5S9-Mg-LXa" id="Wwe-5M-eW0"/>
                         <outlet property="imageButton" destination="1pd-oc-fjd" id="rHK-hp-dGL"/>
                     </connections>
@@ -67,6 +69,11 @@
                             </segue>
                         </connections>
                     </button>
+                </barButtonItem>
+                <barButtonItem systemItem="stop" id="KFp-8q-sWn">
+                    <connections>
+                        <action selector="deleteGates:" destination="BYZ-38-t0r" id="pvf-vk-qNN"/>
+                    </connections>
                 </barButtonItem>
             </objects>
             <point key="canvasLocation" x="942.02898550724649" y="39.945652173913047"/>
@@ -131,7 +138,7 @@
         <scene sceneID="agK-34-9aW">
             <objects>
                 <collectionViewController id="Kvt-iQ-ihW" customClass="LBGateCollectionViewController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="2C1-Nf-FJ6">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="2C1-Nf-FJ6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -185,11 +192,12 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rle-8g-IAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="zEr-ET-gFN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2613.04347826087" y="39.945652173913047"/>
+            <point key="canvasLocation" x="2468" y="40"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ux1-GV-Odq">

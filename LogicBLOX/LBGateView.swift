@@ -91,15 +91,22 @@ class LBGateView: UIView {
         }
     }
     
-    func deleteSelected(_ gesture: UILongPressGestureRecognizer) {
-        if gesture.state == .began {
-            selected = gateUnderPoint(gesture.location(in: self))
-            if let selected = selected {
-                if !selected.highlighted { toggleSelection(selected); setNeedsDisplay() }
-            }
-        } else if gesture.state == .ended {
-            print("Long pressed...")
-            if let deleted = selected, let index = gates.index(of: deleted) {
+    func clearSelected() {
+        let selected = gates.filter { (gate) -> Bool in
+            return gate.highlighted
+        }
+        for gate in selected {
+            gate.highlighted = false
+        }
+        setNeedsDisplay()
+    }
+    
+    func deleteSelected(_ sender: UIBarButtonItem) {
+        let selected = gates.filter { (gate) -> Bool in
+            return gate.highlighted
+        }
+        for delete in selected {
+            if let index = gates.index(of: delete) {
                 gates.remove(at: index)
                 setNeedsDisplay()
             }

@@ -14,6 +14,8 @@ class LBCanvasViewController: UIViewController {
     @IBOutlet var imageBarButton: UIBarButtonItem!
     @IBOutlet var doneBarButton: UIBarButtonItem!
     @IBOutlet var editBarButton: UIBarButtonItem!
+    @IBOutlet var deleteBarButton: UIBarButtonItem!
+    @IBOutlet var filesBarButton: UIBarButtonItem!
     
     var lastGateType : LBGateType = .nand
     var editingGates = false {
@@ -42,14 +44,6 @@ class LBCanvasViewController: UIViewController {
             tapGesture.numberOfTapsRequired = 1
             tapGesture.numberOfTouchesRequired = 1
             canvasView.addGestureRecognizer(tapGesture)
-            
-            // tap gesture for selecting and creating objects
-            let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
-            longPressGesture.numberOfTapsRequired = 0
-            longPressGesture.numberOfTouchesRequired = 1
-            longPressGesture.minimumPressDuration = 1
-            longPressGesture.allowableMovement = 10
-            canvasView.addGestureRecognizer(longPressGesture)
         }
     }
     
@@ -75,19 +69,9 @@ class LBCanvasViewController: UIViewController {
             doc = loadDocAtURL(design)
         } else {
             // create a new document
-            let fileURL = Designs.getDocURL(Designs.getDocFilename("unnamed", unique: true))
-            NSLog("Want to create a file at %@", [fileURL])
-            
-            doc = LBDocument(fileURL: fileURL)
-            doc.save(to: fileURL, for: .forCreating) { (success) in
-                if !success {
-                    NSLog("Failed to create a file at %@", [fileURL])
-                    return
-                }
-                NSLog("File created at %@", [fileURL])
-            }
+            doc = Designs.addNewDesign()
             gateView.gates = []
-            title = fileURL.deletingPathExtension().lastPathComponent
+            title = doc.fileURL.deletingPathExtension().lastPathComponent
         }
         document = doc
     }
@@ -157,17 +141,31 @@ class LBCanvasViewController: UIViewController {
         loadInitialDoc()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        saveActiveDoc()
+    }
+    
     // MARK: - Bar button actions
     
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
         editingGates = false
+        gateView.clearSelected()
         saveActiveDoc()
+        navigationItem.setLeftBarButtonItems([filesBarButton], animated: true)
         navigationItem.setRightBarButtonItems([editBarButton], animated: true)
     }
     
     @IBAction func toggleEdit(_ sender: UIBarButtonItem) {
         editingGates = true
+        navigationItem.setLeftBarButtonItems([deleteBarButton], animated: true)
         navigationItem.setRightBarButtonItems([doneBarButton, imageBarButton], animated: true)
+    }
+    
+    @IBAction func deleteGates(_ sender: UIBarButtonItem) {
+        if editingGates {
+            gateView.deleteSelected(sender)
+        }
     }
     
     // MARK: - Gesture management
@@ -191,12 +189,6 @@ class LBCanvasViewController: UIViewController {
     func didPan(_ sender: UIPanGestureRecognizer) {
         if editingGates {
             gateView.moveSelected(sender)
-        }
-    }
-    
-    func didLongPress(_ sender: UILongPressGestureRecognizer) {
-        if editingGates {
-            gateView.deleteSelected(sender)
         }
     }
 

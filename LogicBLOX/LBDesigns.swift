@@ -11,13 +11,14 @@ import Foundation
 struct Designs {
     
     static let LBEXTENSION = "BLOX"
+    static let DEFPREFIX = "unnamed"
     
-    static var list : [URL] {
+    static var list : [URL] = {
         if let urls = try? FileManager.default.contentsOfDirectory(at: localRoot!, includingPropertiesForKeys: nil, options: .skipsHiddenFiles) {
             return urls
         }
-        return [getDocURL(getDocFilename("unnamed", unique: true))]
-    }
+        return [getDocURL(getDocFilename(DEFPREFIX, unique: true))]
+    }()
     
     static var localRoot : URL? {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -29,9 +30,26 @@ struct Designs {
     }
     
     static func docNameExistsInObjects(_ docName: String) -> Bool {
-        let fileManager = FileManager.default
-        let docName = getDocURL(docName).absoluteString
-        return fileManager.fileExists(atPath: docName)
+        let url = getDocURL(docName)
+        let found = list.contains(url)
+        return found
+    }
+    
+    static func addNewDesign(_ prefix: String = DEFPREFIX) -> LBDocument {
+        // create a new document
+        let fileURL = Designs.getDocURL(Designs.getDocFilename(prefix, unique: true))
+        NSLog("Want to create a file at %@", [fileURL])
+        
+        let doc = LBDocument(fileURL: fileURL)
+        doc.save(to: fileURL, for: .forCreating) { (success) in
+            if !success {
+                NSLog("Failed to create a file at %@", [fileURL])
+                return
+            }
+            NSLog("File created at %@", [fileURL])
+        }
+        list.append(fileURL)
+        return doc
     }
     
     static func getDocFilename (_ prefix: String, unique: Bool) -> String {
