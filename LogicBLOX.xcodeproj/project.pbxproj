@@ -35,6 +35,7 @@
 		477BE0951F5C57EB006A8E3E /* LBNand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0941F5C57EB006A8E3E /* LBNand.swift */; };
 		47D642F01F5FF499005F2069 /* LBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642EF1F5FF499005F2069 /* LBDocument.swift */; };
 		47D642F21F6143D9005F2069 /* LBDesigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642F11F6143D9005F2069 /* LBDesigns.swift */; };
+		47D642F41F62A277005F2069 /* EditTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642F31F62A277005F2069 /* EditTableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		477BE0941F5C57EB006A8E3E /* LBNand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNand.swift; sourceTree = "<group>"; };
 		47D642EF1F5FF499005F2069 /* LBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDocument.swift; sourceTree = "<group>"; };
 		47D642F11F6143D9005F2069 /* LBDesigns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDesigns.swift; sourceTree = "<group>"; };
+		47D642F31F62A277005F2069 /* EditTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */,
 				47D642EF1F5FF499005F2069 /* LBDocument.swift */,
 				47D642F11F6143D9005F2069 /* LBDesigns.swift */,
+				47D642F31F62A277005F2069 /* EditTableCell.swift */,
 				47244B931F5DF111006CB51D /* Logic Elements */,
 				47244B941F5DF133006CB51D /* Support */,
 			);
@@ -223,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47D642F41F62A277005F2069 /* EditTableCell.swift in Sources */,
 				477BE08B1F5C24FB006A8E3E /* PropertyListReadable.swift in Sources */,
 				2FE3BD4C1F601853005B4BF0 /* LBDesignTableViewController.swift in Sources */,
 				477BE0811F5AFC16006A8E3E /* LBZoomingCanvasView.swift in Sources */,

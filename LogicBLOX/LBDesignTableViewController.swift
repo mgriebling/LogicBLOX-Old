@@ -10,6 +10,9 @@ import UIKit
 
 class LBDesignTableViewController: UITableViewController {
   
+    @IBOutlet var openBarButton: UIBarButtonItem!
+    @IBOutlet var AddItemBarButton: UIBarButtonItem!
+
     var selectedItem : Int = 0
     var callback : (_ selected: Int) -> () = { _ in }
     
@@ -23,7 +26,6 @@ class LBDesignTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         navigationItem.rightBarButtonItem = editButtonItem
-        
         tableView.selectRow(at: IndexPath(row: selectedItem, section: 0), animated: false, scrollPosition: .middle)
     }
     
@@ -32,14 +34,6 @@ class LBDesignTableViewController: UITableViewController {
         callback(selectedItem)
     }
     
-    // MARK: - Table editing actions
-    
-    @IBAction func addNewDesign(_ sender: UIBarButtonItem) {
-        _ = Designs.addNewDesign()
-        let path = IndexPath(row: Designs.list.count-1, section: 0)
-        tableView.insertRows(at: [path], with: .automatic)
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -51,12 +45,55 @@ class LBDesignTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Design ID", for: indexPath)
+        var designID = "Design ID"
+        if indexPath.row == selectedItem
+        {
+            designID = "Edit " + designID
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: designID, for: indexPath)
 
         // Configure the cell...
         let design = Designs.list[indexPath.row]
-        cell.textLabel?.text = design.deletingPathExtension().lastPathComponent
+        if indexPath.row == selectedItem {
+            let editCell = cell as! EditTableCell
+            editCell.cellTextField.text = design.deletingPathExtension().lastPathComponent
+            editCell.cellTextField.delegate = self
+        } else {
+            cell.textLabel?.text = design.deletingPathExtension().lastPathComponent
+        }
         return cell
+    }
+    
+    // MARK: - Table editing actions
+    
+    @IBAction func addNewDesign(_ sender: UIBarButtonItem) {
+        _ = Designs.addNewDesign()
+        let path = IndexPath(row: 0, section: 0)
+        selectedItem = 0
+        tableView.insertRows(at: [path], with: .automatic)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
+            self.tableView.selectRow(at: path, animated: true, scrollPosition: .middle)
+        }
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        print("Edit mode changed to \(editing)")
+        openBarButton.isEnabled = !editing
+        super.setEditing(editing, animated: animated)
+        if !editing {
+            // restore selected item
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
+                self.tableView.reloadData()
+
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
+                    self.tableView.selectRow(at: IndexPath(row: self.selectedItem, section: 0), animated: true, scrollPosition: .middle)
+                }
+            }
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -76,32 +113,40 @@ class LBDesignTableViewController: UITableViewController {
             let url = Designs.list.remove(at: indexPath.row)
             try? FileManager.default.removeItem(at: url)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            if indexPath.row == selectedItem {
+                selectedItem = 0
+            }
         }    
     }
 
-    /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+        let design = Designs.list.remove(at: fromIndexPath.row)
+        Designs.list.insert(design, at: to.row)
+        tableView.moveRow(at: fromIndexPath, to: to)
+        if selectedItem == fromIndexPath.row {
+            // keep track of selected item when moved
+            selectedItem = to.row
+        }
     }
-    */
 
-    /*
     // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
+        return Designs.list.count > 1
+    }
+
+}
+
+extension LBDesignTableViewController : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("New text = \"\(textField.text!)\"")
     }
-    */
-
+    
 }

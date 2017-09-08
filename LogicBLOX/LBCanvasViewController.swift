@@ -213,7 +213,7 @@ class LBCanvasViewController: UIViewController {
                 }
             case "Show Designs":
                 let vc = (segue.destination as! UINavigationController).viewControllers[0] as? LBDesignTableViewController
-                vc?.selectedItem = 0
+                vc?.selectedItem = Designs.list.index(of: document!.fileURL) ?? 0
                 vc?.callback = { selected in
                     let url = Designs.list[selected]
                     print("Selected design \(url)")

@@ -48,7 +48,7 @@ struct Designs {
             }
             NSLog("File created at %@", [fileURL])
         }
-        list.append(fileURL)
+        list.insert(fileURL, at: 0)
         return doc
     }
     
