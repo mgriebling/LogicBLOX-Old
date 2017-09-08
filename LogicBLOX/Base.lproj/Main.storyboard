@@ -87,7 +87,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Design ID" textLabel="klg-4f-vkh" imageView="xAx-SO-2wO" style="IBUITableViewCellStyleDefault" id="Pbn-Ye-8Tp">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Design ID" textLabel="klg-4f-vkh" imageView="xAx-SO-2wO" style="IBUITableViewCellStyleDefault" id="Pbn-Ye-8Tp">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pbn-Ye-8Tp" id="D8Q-EO-85X">
@@ -107,6 +107,9 @@
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="ofi-JX-Qg7" kind="unwind" trigger="accessoryAction" unwindAction="exitFromPopupWithSegue:" id="qSg-JY-N81"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Edit Design ID" id="jfz-zJ-mop" customClass="EditTableCell" customModule="LogicBLOX" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="44"/>
@@ -115,9 +118,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hSx-wp-CyC">
-                                            <rect key="frame" x="93" y="6" width="238" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <textField clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hSx-wp-CyC">
+                                            <rect key="frame" x="93" y="6" width="306" height="30"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
@@ -128,6 +132,7 @@
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="cellPic" destination="4SP-3o-ys2" id="CX9-Il-w1v"/>
                                     <outlet property="cellTextField" destination="hSx-wp-CyC" id="Iju-Lf-ufu"/>

@@ -14,6 +14,7 @@ class LBDesignTableViewController: UITableViewController {
     @IBOutlet var AddItemBarButton: UIBarButtonItem!
 
     var selectedItem : Int = 0
+    var editingItem : Int = -1
     var callback : (_ selected: Int) -> () = { _ in }
     
     // MARK: - Table view life cycle
@@ -46,20 +47,24 @@ class LBDesignTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var designID = "Design ID"
-        if indexPath.row == selectedItem
-        {
+        if indexPath.row == editingItem {
             designID = "Edit " + designID
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: designID, for: indexPath)
 
         // Configure the cell...
         let design = Designs.list[indexPath.row]
-        if indexPath.row == selectedItem {
+        if indexPath.row == editingItem {
             let editCell = cell as! EditTableCell
             editCell.cellTextField.text = design.deletingPathExtension().lastPathComponent
             editCell.cellTextField.delegate = self
+            editCell.cellTextField.becomeFirstResponder()
+            editCell.cellPic.tintColor = UIColor.black
+            editCell.backgroundColor = UIColor.lightGray
         } else {
             cell.textLabel?.text = design.deletingPathExtension().lastPathComponent
+            cell.imageView?.tintColor = UIColor.black
+            cell.backgroundColor = indexPath.row == selectedItem ? UIColor.lightGray : UIColor.white
         }
         return cell
     }
@@ -80,24 +85,19 @@ class LBDesignTableViewController: UITableViewController {
         print("Edit mode changed to \(editing)")
         openBarButton.isEnabled = !editing
         super.setEditing(editing, animated: animated)
-        if !editing {
-            // restore selected item
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-                self.tableView.reloadData()
-
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-                    self.tableView.selectRow(at: IndexPath(row: self.selectedItem, section: 0), animated: true, scrollPosition: .middle)
-                }
-            }
-        } else {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-                self.tableView.reloadData()
-            }
-        }
+//        if !editing {
+//            // restore selected item
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
+//                self.tableView.selectRow(at: IndexPath(row: self.selectedItem, section: 0), animated: true, scrollPosition: .middle)
+//            }
+//        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let prevPath = IndexPath(row: selectedItem, section: 0)
         selectedItem = indexPath.row
+        editingItem = selectedItem
+        tableView.reloadRows(at: [indexPath, prevPath], with: .automatic)
     }
 
     // Override to support conditional editing of the table view.
@@ -146,6 +146,14 @@ extension LBDesignTableViewController : UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        editingItem = -1
+        let path = IndexPath(row: selectedItem, section: 0)
+        tableView.reloadRows(at: [path], with: .automatic)
+//        if editingItem == -1 {
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
+//                self.tableView.selectRow(at: path, animated: true, scrollPosition: .middle)
+//            }
+//        }
         print("New text = \"\(textField.text!)\"")
     }
     
