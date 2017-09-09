@@ -87,7 +87,6 @@ class LBDesignTableViewController: UITableViewController {
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
-        print("Edit mode changed to \(editing)")
         openBarButton.isEnabled = !editing
         if editing && editingItem != -1 {
             editingItem = -1

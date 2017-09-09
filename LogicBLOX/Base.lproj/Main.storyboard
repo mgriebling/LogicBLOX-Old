@@ -62,7 +62,7 @@
                     <button key="customView" opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1pd-oc-fjd">
                         <rect key="frame" x="334" y="5" width="60" height="34"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="Nand"/>
+                        <state key="normal" image="Nand Gate"/>
                         <connections>
                             <segue destination="eIz-j7-CJL" kind="popoverPresentation" identifier="Show Gates" popoverAnchorView="1pd-oc-fjd" id="fbm-Vt-Ok8">
                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -95,14 +95,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Design Name 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="klg-4f-vkh">
-                                            <rect key="frame" x="93" y="0.0" width="306" height="43.666666666666664"/>
+                                            <rect key="frame" x="107" y="0.0" width="292" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" image="Nand" id="xAx-SO-2wO">
-                                            <rect key="frame" x="15" y="0.0" width="63" height="43.666666666666664"/>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Nand Gate" id="xAx-SO-2wO">
+                                            <rect key="frame" x="15" y="0.0" width="77" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
                                     </subviews>
@@ -126,7 +126,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                         </textField>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" fixedFrame="YES" image="Nand" translatesAutoresizingMaskIntoConstraints="NO" id="4SP-3o-ys2">
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="Nand Gate" translatesAutoresizingMaskIntoConstraints="NO" id="4SP-3o-ys2">
                                             <rect key="frame" x="15" y="0.0" width="63" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
@@ -291,6 +291,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Nand" width="98" height="68"/>
+        <image name="Nand Gate" width="123" height="70"/>
     </resources>
 </document>

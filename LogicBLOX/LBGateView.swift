@@ -23,7 +23,7 @@ class LBGateView: UIView {
         UIColor.white.setFill()
         UIRectFill(rect)
         
-        print("Drawing gates in \(rect)")
+//        print("Drawing gates in \(rect)")
         
         // draw the grid
         grid.drawRect(rect, inView: self)

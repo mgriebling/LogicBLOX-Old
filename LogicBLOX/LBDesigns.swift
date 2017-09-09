@@ -43,7 +43,6 @@ struct Designs {
     static func addNewDesign(_ prefix: String = DEFPREFIX) -> LBDocument {
         // create a new document
         let fileURL = getDocURL(getDocFilename(prefix, unique: true))
-        NSLog("Want to create a file at %@", [fileURL])
         
         let doc = LBDocument(fileURL: fileURL)
         doc.save(to: fileURL, for: .forCreating) { (success) in
@@ -51,7 +50,6 @@ struct Designs {
                 NSLog("Failed to create a file at %@", [fileURL])
                 return
             }
-            NSLog("File created at %@", [fileURL])
         }
         list.insert(fileURL, at: 0)
         return doc

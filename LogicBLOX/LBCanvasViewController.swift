@@ -65,7 +65,6 @@ class LBCanvasViewController: UIViewController {
         // reopen an existing document -- if possible
         let doc : LBDocument
         if let design = Designs.list.first {
-            NSLog("Reading existing file at %@", [design])
             doc = loadDocAtURL(design)
         } else {
             // create a new document
@@ -99,7 +98,6 @@ class LBCanvasViewController: UIViewController {
                 NSLog("Failed to save file to %@", [doc.fileURL])
                 return
             }
-            NSLog("File saved to %@", [doc.fileURL])
         })
     }
     
@@ -216,7 +214,6 @@ class LBCanvasViewController: UIViewController {
                 vc?.selectedItem = Designs.list.index(of: document!.fileURL) ?? 0
                 vc?.callback = { selected in
                     let url = Designs.list[selected]
-                    print("Selected design \(url)")
                     if url != self.document!.fileURL {
                         self.saveActiveDoc()
                         self.document = self.loadDocAtURL(url)
@@ -239,15 +236,15 @@ extension LBCanvasViewController : UIScrollViewDelegate {
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        let x = scrollView.contentSize
+//        let x = scrollView.contentSize
 //        gateView.contentScaleFactor = scrollView.zoomScale
-        print("Zoom scale = \(scrollView.zoomScale), size = \(x)")
+//        print("Zoom scale = \(scrollView.zoomScale), size = \(x)")
         gateView.setNeedsDisplay()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let x = scrollView.contentOffset
-        print("Scrolled to = \(x)")
+//        let x = scrollView.contentOffset
+//        print("Scrolled to = \(x)")
         gateView.setNeedsDisplay()
     }
     
