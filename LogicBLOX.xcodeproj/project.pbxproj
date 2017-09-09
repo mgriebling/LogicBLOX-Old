@@ -140,11 +140,11 @@
 			children = (
 				477BE0821F5AFDC4006A8E3E /* LBCanvasViewController.swift */,
 				477BE0721F5AD877006A8E3E /* Main.storyboard */,
-				477BE0841F5AFEBD006A8E3E /* LBGateView.swift */,
 				2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */,
 				477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */,
 				47D642EF1F5FF499005F2069 /* LBDocument.swift */,
 				47D642F11F6143D9005F2069 /* LBDesigns.swift */,
+				477BE0841F5AFEBD006A8E3E /* LBGateView.swift */,
 				47D642F31F62A277005F2069 /* EditTableCell.swift */,
 				47244B931F5DF111006CB51D /* Logic Elements */,
 				47244B941F5DF133006CB51D /* Support */,

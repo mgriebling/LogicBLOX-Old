@@ -17,6 +17,8 @@ class LBDesignTableViewController: UITableViewController {
     var editingItem : Int = -1
     var callback : (_ selected: Int) -> () = { _ in }
     
+    var editingText : String = ""   // design name being edited
+    
     // MARK: - Table view life cycle
 
     override func viewDidLoad() {
@@ -60,11 +62,11 @@ class LBDesignTableViewController: UITableViewController {
             editCell.cellTextField.delegate = self
             editCell.cellTextField.becomeFirstResponder()
             editCell.cellPic.tintColor = UIColor.black
-            editCell.backgroundColor = UIColor.lightGray
+            editCell.backgroundColor = UIColor.init(white: 0.89, alpha: 1)
         } else {
             cell.textLabel?.text = design.deletingPathExtension().lastPathComponent
             cell.imageView?.tintColor = UIColor.black
-            cell.backgroundColor = indexPath.row == selectedItem ? UIColor.lightGray : UIColor.white
+            cell.backgroundColor = indexPath.row == selectedItem ? UIColor.init(white: 0.89, alpha: 1) : UIColor.white
         }
         return cell
     }
@@ -72,31 +74,33 @@ class LBDesignTableViewController: UITableViewController {
     // MARK: - Table editing actions
     
     @IBAction func addNewDesign(_ sender: UIBarButtonItem) {
+        let selectedPath = IndexPath(row: selectedItem, section: 0)
+        editingItem = -1
+        selectedItem = -1
+        tableView.reloadRows(at: [selectedPath], with: .automatic)
+        
         _ = Designs.addNewDesign()
-        let path = IndexPath(row: 0, section: 0)
         selectedItem = 0
+        let path = IndexPath(row: selectedItem, section: 0)
+        editingItem = tableView.isEditing ? -1 : selectedItem
         tableView.insertRows(at: [path], with: .automatic)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-            self.tableView.selectRow(at: path, animated: true, scrollPosition: .middle)
-        }
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         print("Edit mode changed to \(editing)")
         openBarButton.isEnabled = !editing
+        if editing && editingItem != -1 {
+            editingItem = -1
+            tableView.reloadRows(at: [IndexPath(row: selectedItem, section: 0)], with: .automatic)
+        }
         super.setEditing(editing, animated: animated)
-//        if !editing {
-//            // restore selected item
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+0.5) {
-//                self.tableView.selectRow(at: IndexPath(row: self.selectedItem, section: 0), animated: true, scrollPosition: .middle)
-//            }
-//        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let prevPath = IndexPath(row: selectedItem, section: 0)
+        editingItem = -1
+        if selectedItem == indexPath.row { editingItem = indexPath.row } // 2nd click we edit text field
         selectedItem = indexPath.row
-        editingItem = selectedItem
         tableView.reloadRows(at: [indexPath, prevPath], with: .automatic)
     }
 
@@ -140,19 +144,31 @@ class LBDesignTableViewController: UITableViewController {
 
 extension LBDesignTableViewController : UITextFieldDelegate {
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        editingText = textField.text!
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let text = textField.text! as NSString
+        let newText = text.replacingCharacters(in: range, with: string)
+        if newText == editingText { return true }       // allow the original name to be restored
+        return !Designs.prefixExistsInObjects(newText)  // only allow unique design names
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         editingItem = -1
+        let newText = textField.text!
+        if newText != editingText {
+            print("Text changed from \"\(editingText)\" to \"\(newText)\"")
+            Designs.renameDesign(editingText, to: newText)   
+        }
         let path = IndexPath(row: selectedItem, section: 0)
         tableView.reloadRows(at: [path], with: .automatic)
-        let original = Designs.list[selectedItem].deletingPathExtension().lastPathComponent
-        if textField.text != original {
-            print("Text changed from \"\(original)\" to \"\(textField.text!)\"")
-        }
     }
     
 }

@@ -35,9 +35,14 @@ struct Designs {
         return found
     }
     
+    static func prefixExistsInObjects(_ prefix: String) -> Bool {
+        let docName = getDocFilename(prefix, unique: false)
+        return docNameExistsInObjects(docName)
+    }
+    
     static func addNewDesign(_ prefix: String = DEFPREFIX) -> LBDocument {
         // create a new document
-        let fileURL = Designs.getDocURL(Designs.getDocFilename(prefix, unique: true))
+        let fileURL = getDocURL(getDocFilename(prefix, unique: true))
         NSLog("Want to create a file at %@", [fileURL])
         
         let doc = LBDocument(fileURL: fileURL)
@@ -50,6 +55,23 @@ struct Designs {
         }
         list.insert(fileURL, at: 0)
         return doc
+    }
+    
+    static func renameDesign(_ existingPrefix: String, to newPrefix: String) {
+        let fileURL = getDocURL(getDocFilename(existingPrefix, unique: false))
+        let newURL = getDocURL(getDocFilename(newPrefix, unique: false))
+        if list.contains(fileURL) && !list.contains(newURL) {
+            do {
+                // rename the external file
+                try FileManager.default.moveItem(at: fileURL, to: newURL)
+                
+                // do the same for our internal link
+                let index = list.index(of: fileURL)!
+                list[index] = newURL
+            } catch let error as NSError {
+                print(error)
+            }
+        }
     }
     
     static func getDocFilename (_ prefix: String, unique: Bool) -> String {

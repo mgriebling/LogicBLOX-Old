@@ -221,6 +221,9 @@ class LBCanvasViewController: UIViewController {
                         self.saveActiveDoc()
                         self.document = self.loadDocAtURL(url)
                     }
+                    
+                    // update the title in case an existing design is renamed
+                    self.title = url.deletingPathExtension().lastPathComponent
                 }
             default: break
             }
@@ -236,7 +239,16 @@ extension LBCanvasViewController : UIScrollViewDelegate {
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        gateView.contentScaleFactor = scrollView.zoomScale
+        let x = scrollView.contentSize
+//        gateView.contentScaleFactor = scrollView.zoomScale
+        print("Zoom scale = \(scrollView.zoomScale), size = \(x)")
+        gateView.setNeedsDisplay()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let x = scrollView.contentOffset
+        print("Scrolled to = \(x)")
+        gateView.setNeedsDisplay()
     }
     
     func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
