@@ -146,6 +146,9 @@ extension LBDesignTableViewController : UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        editingItem = -1
+        let path = IndexPath(row: selectedItem, section: 0)
+        tableView.reloadRows(at: [path], with: .automatic)
         let original = Designs.list[selectedItem].deletingPathExtension().lastPathComponent
         if textField.text != original {
             print("Text changed from \"\(original)\" to \"\(textField.text!)\"")
