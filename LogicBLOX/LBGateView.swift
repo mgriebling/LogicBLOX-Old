@@ -33,12 +33,9 @@ class LBGateView: UIView {
         for gate in gates {
             let drawingBounds = gate.bounds
             if rect.intersects(drawingBounds) {
-                let drawSelectionPins = true
-                
                 gc?.saveGState()
                 gc?.clip(to: drawingBounds)
                 gate.draw(1)
-                if drawSelectionPins { gate.drawPins(1) }
                 gc?.restoreGState()
             }
         }

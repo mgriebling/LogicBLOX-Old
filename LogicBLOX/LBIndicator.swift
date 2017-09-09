@@ -10,6 +10,8 @@ import UIKit
 
 class LBIndicator: LBGate {
     
+    var name: String = "LED1"
+    
     override init(withDefaultSize size: CGSize) {
         super.init(withDefaultSize: size)
         nativeBounds = CGRect(x: 0, y: 0, width: 86, height: 61)
@@ -24,7 +26,7 @@ class LBIndicator: LBGate {
     override func draw(_ scale: CGFloat) {
         let scaled = CGSize(width: bounds.width*scale, height: bounds.height*scale)
         let sbounds = CGRect(origin: bounds.origin, size: scaled)
-        Gates.drawIndicator(frame: sbounds, highlight: highlighted, inputText: "0")
+        Gates.drawIndicator(frame: sbounds, highlight: highlighted, pinVisible: pinsVisible, state: 0, name: name)
     }
     
 }

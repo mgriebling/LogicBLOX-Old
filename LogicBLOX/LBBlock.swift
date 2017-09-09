@@ -9,6 +9,8 @@
 import UIKit
 
 class LBBlock: LBGate {
+    
+    var name: String = "Block"
 
     override init(withDefaultSize size: CGSize) {
         super.init(withDefaultSize: size)
@@ -25,7 +27,7 @@ class LBBlock: LBGate {
     override func draw(_ scale: CGFloat) {
         let scaled = CGSize(width: bounds.width*scale, height: bounds.height*scale)
         let sbounds = CGRect(origin: bounds.origin, size: scaled)
-        Gates.drawBlockGate(frame: sbounds, highlight: highlighted)
+        Gates.drawBlockGate(frame: sbounds, highlight: highlighted, pinVisible: pinsVisible, inputs: 1, name: name)
     }
     
 }

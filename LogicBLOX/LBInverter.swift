@@ -25,7 +25,7 @@ class LBInverter: LBGate {
     override func draw(_ scale: CGFloat) {
         let scaled = CGSize(width: bounds.width*scale, height: bounds.height*scale)
         let sbounds = CGRect(origin: bounds.origin, size: scaled)
-        Gates.drawInverterGate(frame: sbounds, highlight: highlighted)
+        Gates.drawBufferInverterGate(frame: sbounds, highlight: highlighted, pinVisible: pinsVisible, invert: true)
     }
     
 }

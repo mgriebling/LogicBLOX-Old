@@ -28,7 +28,7 @@ class LBXnor: LBGate {
     override func draw(_ scale: CGFloat) {
         let scaled = CGSize(width: bounds.width*scale, height: bounds.height*scale)
         let sbounds = CGRect(origin: bounds.origin, size: scaled)
-        Gates.drawXnorGate(frame: sbounds, highlight: highlighted, inputs: inputs)
+        Gates.drawXorXnorGate(frame: sbounds, highlight: highlighted, pinVisible: pinsVisible, inputs: inputs, invert: true)
     }
     
 }

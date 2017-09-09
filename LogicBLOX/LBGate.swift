@@ -35,14 +35,14 @@ struct LBPinType {
     }
     
     func draw(_ scale: CGFloat, pos: CGPoint) {
-        let path = UIBezierPath()
-        let ssize = scale * LBPinType.size
-        path.move(to: CGPoint(x: pos.x-ssize, y: pos.y-ssize))
-        path.addLine(to: CGPoint(x: pos.x+ssize, y: pos.y-ssize))
-        path.addLine(to: CGPoint(x: pos.x+ssize, y: pos.y+ssize))
-        path.addLine(to: CGPoint(x: pos.x-ssize, y: pos.y+ssize))
-        path.addLine(to: CGPoint(x: pos.x-ssize, y: pos.y-ssize))
-        path.stroke()
+//        let path = UIBezierPath()
+//        let ssize = scale * LBPinType.size
+//        path.move(to: CGPoint(x: pos.x-ssize, y: pos.y-ssize))
+//        path.addLine(to: CGPoint(x: pos.x+ssize, y: pos.y-ssize))
+//        path.addLine(to: CGPoint(x: pos.x+ssize, y: pos.y+ssize))
+//        path.addLine(to: CGPoint(x: pos.x-ssize, y: pos.y+ssize))
+//        path.addLine(to: CGPoint(x: pos.x-ssize, y: pos.y-ssize))
+//        path.stroke()
     }
 }
 
@@ -51,10 +51,10 @@ extension LBPinType: PropertyListReadable {
     init?(propertyListRepresentation: NSDictionary?) {
         guard let values = propertyListRepresentation else { return nil }
         if let posx = values["posx"] as? CGFloat,
-               let posy = values["posy"] as? CGFloat,
-               let rawtype = values["type"] as? Int,
-               let rawfacing = values["facing"] as? Int,
-               let rawstate = values["state"] as? Int {
+           let posy = values["posy"] as? CGFloat,
+           let rawtype = values["type"] as? Int,
+           let rawfacing = values["facing"] as? Int,
+           let rawstate = values["state"] as? Int {
             pos.x = posx; pos.y = posy
             type = PinType(rawValue: rawtype) ?? .input
             facing = Orientation(rawValue: rawfacing) ?? .left
@@ -99,6 +99,7 @@ class LBGate : NSObject, NSCoding {
     var bounds: CGRect
     
     var highlighted: Bool = false
+    var pinsVisible: Bool { return highlighted }
     static var highlightColour: UIColor = UIColor.blue
     static var pinColour: UIColor = UIColor.blue
     
@@ -157,22 +158,17 @@ class LBGate : NSObject, NSCoding {
     }
     
     func draw (_ scale: CGFloat) {
-        if highlighted {
-            LBGate.highlightColour.setStroke()
-        } else {
-            UIColor.black.setStroke()
-        }
+//        if highlighted {
+//            LBGate.highlightColour.setStroke()
+//        } else {
+//            UIColor.black.setStroke()
+//        }
     }
     
-    final func drawPins (_ scale: CGFloat) {
-        if !highlighted { return }
-        LBGate.pinColour.setStroke()
-        let pos = bounds.origin
-        for pin in pins {
-            let pinPos = CGPoint(x: pin.pos.x+pos.x, y: pin.pos.y+pos.y)
-            pin.draw(scale, pos:pinPos)
-        }
-    }
+//    final func drawPins (_ scale: CGFloat) {
+//        if !highlighted { return }
+//        pinsVisible = true
+//    }
     
     func evaluate () -> LogicState {
         return .undefined

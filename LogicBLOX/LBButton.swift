@@ -11,6 +11,7 @@ import UIKit
 class LBButton: LBGate {
     
     var state : LogicState = .zero
+    var name : String = "Input"
     
     override init(withDefaultSize size: CGSize) {
         super.init(withDefaultSize: size)
@@ -38,8 +39,8 @@ class LBButton: LBGate {
     override func draw(_ scale: CGFloat) {
         let scaled = CGSize(width: bounds.width*scale, height: bounds.height*scale)
         let sbounds = CGRect(origin: bounds.origin, size: scaled)
-        let text = state == .one ? "1" : "0"
-        Gates.drawButton(frame: sbounds, highlight: highlighted, inputText: text)
+        let state : CGFloat = self.state == .one ? 1 : 0
+        Gates.drawButton(frame: sbounds, highlight: highlighted, pinVisible: pinsVisible, state: state, name: name)
     }
     
 }

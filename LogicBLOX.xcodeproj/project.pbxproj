@@ -106,11 +106,11 @@
 		47244B941F5DF133006CB51D /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				47244B7F1F5D4AEE006CB51D /* Gates.swift */,
 				472BF9561F6410B70097DDDA /* UIImageExtras.swift */,
 				477BE0861F5B03B0006A8E3E /* LBGrid.swift */,
 				477BE0801F5AFC16006A8E3E /* LBZoomingCanvasView.swift */,
 				477BE06E1F5AD877006A8E3E /* AppDelegate.swift */,
-				47244B7F1F5D4AEE006CB51D /* Gates.swift */,
 				477BE0751F5AD877006A8E3E /* Assets.xcassets */,
 				477BE0771F5AD877006A8E3E /* LaunchScreen.storyboard */,
 				477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */,
