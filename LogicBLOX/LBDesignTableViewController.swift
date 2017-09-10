@@ -12,9 +12,13 @@ class LBDesignTableViewController: UITableViewController {
   
     @IBOutlet var openBarButton: UIBarButtonItem!
     @IBOutlet var AddItemBarButton: UIBarButtonItem!
+    
+    struct consts {
+        static let None = -1
+    }
 
     var selectedItem : Int = 0
-    var editingItem : Int = -1
+    var editingItem : Int = consts.None
     var callback : (_ selected: Int) -> () = { _ in }
     
     var editingText : String = ""   // design name being edited
@@ -75,21 +79,21 @@ class LBDesignTableViewController: UITableViewController {
     
     @IBAction func addNewDesign(_ sender: UIBarButtonItem) {
         let selectedPath = IndexPath(row: selectedItem, section: 0)
-        editingItem = -1
-        selectedItem = -1
+        editingItem = consts.None
+        selectedItem = consts.None
         tableView.reloadRows(at: [selectedPath], with: .automatic)
         
         _ = Designs.addNewDesign()
         selectedItem = 0
         let path = IndexPath(row: selectedItem, section: 0)
-        editingItem = tableView.isEditing ? -1 : selectedItem
+        editingItem = tableView.isEditing ? consts.None : selectedItem
         tableView.insertRows(at: [path], with: .automatic)
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         openBarButton.isEnabled = !editing
-        if editing && editingItem != -1 {
-            editingItem = -1
+        if editing && editingItem != consts.None {
+            editingItem = consts.None
             tableView.reloadRows(at: [IndexPath(row: selectedItem, section: 0)], with: .automatic)
         }
         super.setEditing(editing, animated: animated)
@@ -97,7 +101,7 @@ class LBDesignTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let prevPath = IndexPath(row: selectedItem, section: 0)
-        editingItem = -1
+        editingItem = consts.None
         if selectedItem == indexPath.row { editingItem = indexPath.row } // 2nd click we edit text field
         selectedItem = indexPath.row
         tableView.reloadRows(at: [indexPath, prevPath], with: .automatic)
@@ -160,10 +164,9 @@ extension LBDesignTableViewController : UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        editingItem = -1
+        editingItem = consts.None
         let newText = textField.text!
         if newText != editingText {
-            print("Text changed from \"\(editingText)\" to \"\(newText)\"")
             Designs.renameDesign(editingText, to: newText)   
         }
         let path = IndexPath(row: selectedItem, section: 0)
