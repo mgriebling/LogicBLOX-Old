@@ -15,7 +15,7 @@ class LBButton: LBGate {
     
     override init(withDefaultSize size: CGSize) {
         super.init(withDefaultSize: size)
-        nativeBounds = CGRect(x: 0, y: 0, width: 86, height: 61)
+        nativeBounds = CGRect(x: 0, y: 0, width: 95, height: 69)
         var pin1 = LBPinType(x: 86-LBPinType.size, y: 30.5); pin1.facing = .right; pin1.type = .output
         pins = [pin1]
     }

@@ -60,7 +60,7 @@
                 </barButtonItem>
                 <barButtonItem width="60" id="5S9-Mg-LXa">
                     <button key="customView" opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1pd-oc-fjd">
-                        <rect key="frame" x="334" y="5" width="60" height="34"/>
+                        <rect key="frame" x="334" y="5" width="67" height="34"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <state key="normal" image="Nand Gate"/>
                         <connections>
@@ -70,7 +70,7 @@
                         </connections>
                     </button>
                 </barButtonItem>
-                <barButtonItem systemItem="stop" id="KFp-8q-sWn">
+                <barButtonItem systemItem="trash" id="KFp-8q-sWn">
                     <connections>
                         <action selector="deleteGates:" destination="BYZ-38-t0r" id="pvf-vk-qNN"/>
                     </connections>

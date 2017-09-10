@@ -156,6 +156,7 @@ class LBCanvasViewController: UIViewController {
     
     @IBAction func toggleEdit(_ sender: UIBarButtonItem) {
         editingGates = true
+        deleteBarButton.isEnabled = gateView.selected.count > 0
         navigationItem.setLeftBarButtonItems([deleteBarButton], animated: true)
         navigationItem.setRightBarButtonItems([doneBarButton, imageBarButton], animated: true)
     }
@@ -163,6 +164,7 @@ class LBCanvasViewController: UIViewController {
     @IBAction func deleteGates(_ sender: UIBarButtonItem) {
         if editingGates {
             gateView.deleteSelected(sender)
+            deleteBarButton.isEnabled = false
         }
     }
     
@@ -175,6 +177,7 @@ class LBCanvasViewController: UIViewController {
             } else {
                 gateView.insertGate(lastGateType, withEvent: sender)
             }
+            deleteBarButton.isEnabled = gateView.selected.count > 0
         } else {
             // running simulation
             if let button = gateView.gateUnderPoint(sender.location(in: gateView)) as? LBButton {

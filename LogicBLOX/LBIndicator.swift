@@ -14,7 +14,7 @@ class LBIndicator: LBGate {
     
     override init(withDefaultSize size: CGSize) {
         super.init(withDefaultSize: size)
-        nativeBounds = CGRect(x: 0, y: 0, width: 86, height: 61)
+        nativeBounds = CGRect(x: 0, y: 0, width: 94, height: 73)
         var pin1 = LBPinType(x: 0, y: 24); pin1.facing = .left; pin1.type = .input
         pins = [pin1]
     }

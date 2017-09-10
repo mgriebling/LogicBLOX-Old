@@ -34,7 +34,7 @@ class LBGateView: UIView {
             let drawingBounds = gate.bounds
             if rect.intersects(drawingBounds) {
                 gc?.saveGState()
-                gc?.clip(to: drawingBounds)
+                gc?.clip(to: rect)
                 gate.draw(1)
                 gc?.restoreGState()
             }
@@ -68,20 +68,20 @@ class LBGateView: UIView {
         setNeedsDisplay()
     }
     
-    var initialDelta: CGPoint = CGPoint.zero
-    var selected : LBGate? = nil
+    private var initialDelta: CGPoint = CGPoint.zero
+    private var selected1 : LBGate? = nil
     
     func moveSelected(_ gesture: UIPanGestureRecognizer) {
         let position = gesture.location(in: self)
         if gesture.state == .began {
-            selected = gateUnderPoint(position)
-            if let selected = selected {
+            selected1 = gateUnderPoint(position)
+            if let selected = selected1 {
                 if !selected.highlighted { toggleSelection(selected); setNeedsDisplay() }
                 initialDelta.x = selected.bounds.origin.x - position.x
                 initialDelta.y = selected.bounds.origin.y - position.y
             }
         } else if gesture.state == .changed {
-            if let selected = selected {
+            if let selected = selected1 {
                 selected.bounds.origin = CGPoint(x: position.x + initialDelta.x, y: position.y + initialDelta.y)
                 setNeedsDisplay()
             }
@@ -91,19 +91,18 @@ class LBGateView: UIView {
     }
     
     func clearSelected() {
-        let selected = gates.filter { (gate) -> Bool in
-            return gate.highlighted
-        }
         for gate in selected {
             gate.highlighted = false
         }
         setNeedsDisplay()
     }
     
+    var selected : [LBGate] {
+        let selected = gates.filter { $0.highlighted }
+        return selected
+    }
+    
     func deleteSelected(_ sender: UIBarButtonItem) {
-        let selected = gates.filter { (gate) -> Bool in
-            return gate.highlighted
-        }
         for delete in selected {
             if let index = gates.index(of: delete) {
                 gates.remove(at: index)

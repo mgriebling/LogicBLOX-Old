@@ -14,7 +14,7 @@ class LBXnor: LBGate {
     
     override init(withDefaultSize size: CGSize) {
         super.init(withDefaultSize: size)
-        nativeBounds = CGRect(x: 0, y: 0, width: 123, height: 70)
+        nativeBounds = CGRect(x: 0, y: 0, width: 143, height: 67)
         var pin1 = LBPinType(x: 0, y: 24); pin1.facing = .left; pin1.type = .input
         var pin2 = pin1; pin2.pos = CGPoint(x: 0, y: 48)
         var pin3 = LBPinType(x: 70, y: 34); pin3.facing = .right; pin3.type = .output
