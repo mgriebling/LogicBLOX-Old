@@ -10,11 +10,11 @@ import UIKit
 
 class LBConnection: LBGate {
 
-    override init(withDefaultSize size: CGSize) {
+    override init(withDefaultSize size : CGSize = CGSize(width: 88, height: 57)) {
         super.init(withDefaultSize: size)
-        nativeBounds = CGRect(x: 0, y: 0, width: 88, height: 57)
-        var pin1 = LBPinType(x: 0, y: 24); pin1.facing = .left; pin1.type = .input
-        var pin2 = LBPinType(x: 70, y: 34); pin2.facing = .right; pin2.type = .output
+        nativeBounds = CGRect(origin: CGPoint.zero, size: size)
+        var pin1 = LBPin(x: 0, y: 0); pin1.facing = .left; pin1.type = .input
+        var pin2 = LBPin(x: 50, y: 0); pin2.facing = .right; pin2.type = .output
         pins = [pin1, pin2]
     }
     
@@ -23,9 +23,19 @@ class LBConnection: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-        let scaled = CGSize(width: bounds.width*scale, height: bounds.height*scale)
-        let sbounds = CGRect(origin: bounds.origin, size: scaled)
-        Gates.drawConnection(frame: sbounds, highlight: highlighted)
+        // draw a connection between pin1 and pin2
+        let path = UIBezierPath()
+        let pin1 = pins[0]
+        let pin2 = pins[1]
+        path.move(to: pin1.pos)
+        path.addLine(to: pin2.pos)
+        path.lineWidth = 2.5
+        if highlighted {
+            UIColor.red.setStroke()
+        } else {
+            UIColor.black.setStroke()
+        }
+        path.stroke()
     }
     
 }

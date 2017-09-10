@@ -20,7 +20,7 @@ enum Orientation: Int {
     case top, bottom, left, right
 }
 
-struct LBPinType {
+struct LBPin {
     
     static let size: CGFloat = 5.0
     var pos: CGPoint = CGPoint.zero
@@ -36,7 +36,7 @@ struct LBPinType {
     
     func draw(_ scale: CGFloat, pos: CGPoint) {
 //        let path = UIBezierPath()
-//        let ssize = scale * LBPinType.size
+//        let ssize = scale * LBPin.size
 //        path.move(to: CGPoint(x: pos.x-ssize, y: pos.y-ssize))
 //        path.addLine(to: CGPoint(x: pos.x+ssize, y: pos.y-ssize))
 //        path.addLine(to: CGPoint(x: pos.x+ssize, y: pos.y+ssize))
@@ -46,7 +46,7 @@ struct LBPinType {
     }
 }
 
-extension LBPinType: PropertyListReadable {
+extension LBPin: PropertyListReadable {
     
     init?(propertyListRepresentation: NSDictionary?) {
         guard let values = propertyListRepresentation else { return nil }
@@ -95,13 +95,11 @@ class LBGate : NSObject, NSCoding {
     let kHighlighted = "Highlighted"
     let kPins        = "Pins"
     
-    var pins: [LBPinType] = []
+    var pins: [LBPin] = []
     var bounds: CGRect
     
     var highlighted: Bool = false
-    var pinsVisible: Bool { return highlighted }
-    static var highlightColour: UIColor = UIColor.blue
-    static var pinColour: UIColor = UIColor.blue
+    var pinsVisible: Bool = false
     
     var nativeBounds: CGRect
     
@@ -144,7 +142,8 @@ class LBGate : NSObject, NSCoding {
         var distance = CGFloat.infinity
         var index : Int?
         for (pos, pin) in pins.enumerated() {
-            let range = pin.pos.distanceTo(point)
+            let pinPoint = CGPoint(x: pin.pos.x+bounds.origin.x, y: pin.pos.y+bounds.origin.y)
+            let range = pinPoint.distanceTo(point)
             if range < distance {
                 distance = range
                 index = pos
@@ -175,15 +174,12 @@ class LBGate : NSObject, NSCoding {
     }
     
     func getImageOfObject (_ rect: CGRect, scale: CGFloat) -> UIImage {
-        let size = rect.size
-        UIGraphicsBeginImageContext(size)
-        
-        // draw the image
+        if rect == CGRect.zero { return UIImage() }
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
         draw(scale)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        let image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-        
-        return image!
+        return image
     }
     
 }

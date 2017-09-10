@@ -18,11 +18,7 @@ class LBCanvasViewController: UIViewController {
     @IBOutlet var filesBarButton: UIBarButtonItem!
     
     var lastGateType : LBGateType = .nand
-    var editingGates = false {
-        didSet {
-            switchPanRecognizers()
-        }
-    }
+    var editingGates = false
     var panGesture : UIPanGestureRecognizer!
     
     @IBOutlet var canvasView: LBZoomingCanvasView! {
@@ -34,10 +30,16 @@ class LBCanvasViewController: UIViewController {
             canvasView.addSubview(gateView)
             canvasView.contentSize = gateView.frame.size
             
-            // install our own pan gesture recognizer -- later
+            // change scrollview to pan with two fingers
+            let panGR = canvasView.panGestureRecognizer
+            panGR.minimumNumberOfTouches = 2
+            panGR.maximumNumberOfTouches = 2
+            
+            // install our own pan gesture recognizer
             panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
             panGesture.minimumNumberOfTouches = 1
             panGesture.maximumNumberOfTouches = 1
+            canvasView.addGestureRecognizer(panGesture)
             
             // tap gesture for selecting and creating objects
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
@@ -50,7 +52,7 @@ class LBCanvasViewController: UIViewController {
     private var _gateView : LBGateView?
     var gateView : LBGateView! {
         if _gateView == nil {
-            _gateView = LBGateView(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000))
+            _gateView = LBGateView(frame: CGRect(x: 0, y: 0, width: 2000, height: 2000))
             _gateView?.contentMode = .redraw
             _gateView?.contentScaleFactor = 1
         }
@@ -104,30 +106,17 @@ class LBCanvasViewController: UIViewController {
     
     // MARK: - Support methods
     
-    /// We switch between the built-in and our pan gesture recognizer.  Our pan is used during edit mode
-    /// to move gates around.
-    func switchPanRecognizers() {
-        let panGR = canvasView.panGestureRecognizer
-        if editingGates {
-            panGR.minimumNumberOfTouches = 2
-            panGR.maximumNumberOfTouches = 2
-            canvasView.addGestureRecognizer(panGesture)
-        } else {
-            panGR.minimumNumberOfTouches = 1
-            panGR.maximumNumberOfTouches = 1
-            canvasView.removeGestureRecognizer(panGesture)
-        }
-    }
-    
-    func imageForGate(_ gateID: LBGateType) -> UIImage {
-        let gate = LBGateType.classForGate(gateID)
-        gate.defaultBounds()
-        gate.highlighted = true
-        return gate.getImageOfObject(gate.bounds, scale: 1)
-    }
-    
     func setButtonImage() {
-        let image = imageForGate(lastGateType).imageByBestFitForSize(imageButton.bounds.size)
+        let image : UIImage
+        if lastGateType == .line {
+            image = Gates.imageOfConnection(highlight: true).imageByBestFitForSize(imageButton.bounds.size)!
+        } else {
+            let gate = LBGateType.classForGate(lastGateType)
+            gate.highlighted = true
+            gate.pinsVisible = false
+            gate.defaultBounds()
+            image = gate.getImageOfObject(gate.bounds, scale: 1).imageByBestFitForSize(imageButton.bounds.size)!
+        }
         imageButton.setImage(image, for: .normal)
     }
 
@@ -170,14 +159,33 @@ class LBCanvasViewController: UIViewController {
     
     // MARK: - Gesture management
     
+    var sourceGate: LBGate?
+    var sourcePin: Int?
+    
     func didTap (_ sender: UITapGestureRecognizer) {
         if editingGates {
-            if let gate = gateView.gateUnderPoint(sender.location(in: gateView)) {
-                gateView.toggleSelection(gate)
-            } else {
+            let location = sender.location(in: gateView)
+            if let gate = gateView.gateUnderPoint(location) {
+                if lastGateType == .line {
+                    gate.pinsVisible = true
+                    gate.highlighted = true
+                    if sourceGate == nil {
+                        sourceGate = gate
+                        sourcePin = gate.getClosestPinIndex(location)
+                        gateView.setNeedsDisplay()
+                    } else {
+                        let destPin = gate.getClosestPinIndex(location)
+                        gateView.joinGates(sourceGate!, atPin:sourcePin, to: gate, atPin:destPin)
+                        sourceGate = nil
+                    }
+                } else {
+                    sourceGate = nil
+                    gateView.toggleSelection(gate)
+                }
+            } else if lastGateType != .line {
                 gateView.insertGate(lastGateType, withEvent: sender)
             }
-            deleteBarButton.isEnabled = gateView.selected.count > 0
+            deleteBarButton.isEnabled = gateView.selected.count > 0 || lastGateType == .line
         } else {
             // running simulation
             if let button = gateView.gateUnderPoint(sender.location(in: gateView)) as? LBButton {

@@ -84,10 +84,15 @@ class LBGateCollectionViewController: UICollectionViewController {
         let gate = LBGateType.classForGate(kind)
         gate.defaultBounds()
         gate.highlighted = indexPath.item == selectedItem
+        gate.pinsVisible = false
     
         // Configure the cell
         let image = cell.viewWithTag(10) as? UIImageView
-        image?.image = gate.getImageOfObject(gate.bounds, scale: 1)
+        if kind == .line {
+            image?.image  = Gates.imageOfConnection(highlight: true)
+        } else {
+            image?.image = gate.getImageOfObject(gate.bounds, scale: 1)
+        }
         let label = cell.viewWithTag(20) as? UILabel
         label?.text = kind == .line ? "Connection" : "\(kind) Gate"
         return cell

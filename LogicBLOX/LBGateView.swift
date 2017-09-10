@@ -69,23 +69,36 @@ class LBGateView: UIView {
     }
     
     private var initialDelta: CGPoint = CGPoint.zero
-    private var selected1 : LBGate? = nil
+
+    var selected : [LBGate] { return gates.filter { $0.highlighted } }
     
     func moveSelected(_ gesture: UIPanGestureRecognizer) {
         let position = gesture.location(in: self)
         if gesture.state == .began {
-            selected1 = gateUnderPoint(position)
-            if let selected = selected1 {
-                if !selected.highlighted { toggleSelection(selected); setNeedsDisplay() }
-                initialDelta.x = selected.bounds.origin.x - position.x
-                initialDelta.y = selected.bounds.origin.y - position.y
+            if let gate = gateUnderPoint(position) {
+                if !gate.highlighted { toggleSelection(gate); setNeedsDisplay() }
             }
+            initialDelta = position
         } else if gesture.state == .changed {
-            if let selected = selected1 {
-                selected.bounds.origin = CGPoint(x: position.x + initialDelta.x, y: position.y + initialDelta.y)
-                setNeedsDisplay()
-            }
+            let move = CGPoint(x: position.x - initialDelta.x, y: position.y - initialDelta.y)
+            initialDelta = position
+            LBGate.translateGates(selected, byX: move.x, y: move.y)
+            setNeedsDisplay()
         } else if gesture.state == .ended {
+            setNeedsDisplay()
+        }
+    }
+    
+    func joinGates (_ source: LBGate, atPin spin: Int?, to destination: LBGate, atPin dpin: Int?) {
+        // draw a connection between these gates
+        if let spin = spin, let dpin = dpin {
+            let connection = LBConnection()
+            let start = source.pins[spin].pos
+            let end = destination.pins[dpin].pos
+            connection.pins[0].pos = CGPoint(x: start.x+source.bounds.origin.x, y: start.y+source.bounds.origin.y)
+            connection.pins[1].pos = CGPoint(x: end.x+destination.bounds.origin.x, y: end.y+destination.bounds.origin.y)
+            gates.append(connection)
+            clearSelected()
             setNeedsDisplay()
         }
     }
@@ -93,13 +106,9 @@ class LBGateView: UIView {
     func clearSelected() {
         for gate in selected {
             gate.highlighted = false
+            gate.pinsVisible = false
         }
         setNeedsDisplay()
-    }
-    
-    var selected : [LBGate] {
-        let selected = gates.filter { $0.highlighted }
-        return selected
     }
     
     func deleteSelected(_ sender: UIBarButtonItem) {
@@ -114,6 +123,7 @@ class LBGateView: UIView {
     func gateUnderPoint(_ point: CGPoint) -> LBGate? {
         for gate in gates {
             if gate.bounds.contains(point) {
+                print("Found gate : \(gate)")
                 return gate
             }
         }

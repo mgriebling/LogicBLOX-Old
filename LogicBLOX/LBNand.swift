@@ -15,9 +15,9 @@ class LBNand: LBGate {
     override init(withDefaultSize size: CGSize) {
         super.init(withDefaultSize: size)
         nativeBounds = CGRect(x: 0, y: 0, width: 134, height: 68)
-        var pin1 = LBPinType(x: 0, y: 20); pin1.facing = .left; pin1.type = .input
+        var pin1 = LBPin(x: 0, y: 20); pin1.facing = .left; pin1.type = .input
         var pin2 = pin1; pin2.pos = CGPoint(x: 0, y: 50)
-        var pin3 = LBPinType(x: 118, y: 34); pin3.facing = .right; pin3.type = .output
+        var pin3 = LBPin(x: 118, y: 34); pin3.facing = .right; pin3.type = .output
         pins = [pin1, pin2, pin3]
     }
     

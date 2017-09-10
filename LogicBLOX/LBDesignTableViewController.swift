@@ -33,6 +33,7 @@ class LBDesignTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         navigationItem.rightBarButtonItem = editButtonItem
+        editButtonItem.isEnabled = Designs.list.count > 1
         tableView.selectRow(at: IndexPath(row: selectedItem, section: 0), animated: false, scrollPosition: .middle)
     }
     
@@ -88,6 +89,7 @@ class LBDesignTableViewController: UITableViewController {
         let path = IndexPath(row: selectedItem, section: 0)
         editingItem = tableView.isEditing ? consts.None : selectedItem
         tableView.insertRows(at: [path], with: .automatic)
+        editButtonItem.isEnabled = Designs.list.count > 1
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -123,6 +125,7 @@ class LBDesignTableViewController: UITableViewController {
             if indexPath.row == selectedItem {
                 selectedItem = 0
             }
+            editButtonItem.isEnabled = Designs.list.count > 1
         }    
     }
 
