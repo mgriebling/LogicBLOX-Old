@@ -41,7 +41,7 @@ class LBCanvasViewController: UIViewController {
             panGesture.maximumNumberOfTouches = 1
             canvasView.addGestureRecognizer(panGesture)
             
-            // tap gesture for selecting and creating objects
+            // tap gesture for selecting and creating objects .
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
             tapGesture.numberOfTapsRequired = 1
             tapGesture.numberOfTouchesRequired = 1
