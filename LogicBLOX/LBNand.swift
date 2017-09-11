@@ -14,36 +14,52 @@ class LBNand: LBGate {
     let xoff : CGFloat = 4
     
     var inputs : CGFloat { return 2 }
+    public var invert : Bool { return true }
 
-    override init(withDefaultSize size: CGSize) {
-        super.init(withDefaultSize: size)
+    override func localInit() {
+        super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 134, height: 68)
-
+        
         let pin1 = LBPin(x: xoff, y: 9+yoff)
         let pin2 = LBPin(x: xoff, y: 39+yoff)
-        let pin3 = LBPin(x: nativeBounds.width-xoff, y: 25+yoff-1)
+        let pin3 = LBPin(x: nativeBounds.width-xoff, y: 25+yoff-1) // output pin is shared
         pins = [pin3, pin1, pin2]
     }
     
-    required init?(coder decoder: NSCoder) {
-        super.init(coder: decoder)
-    }
-    
     override func draw(_ scale: CGFloat) {
-        Gates.drawAndNandGate(frame: bounds, highlight: highlighted, pinVisible: highlighted, inputs: inputs, invert: true)
+        Gates.drawAndNandGate(frame: bounds, highlight: highlighted, pinVisible: pinsVisible, inputs: inputs, invert: invert)
     }
     
 }
 
 class LBNand3 : LBNand {
     
-    
+    override func localInit() {
+        super.localInit()
+        
+        // replace last two pins with 3-input pins
+        let pin1 = LBPin(x: xoff, y: 4+yoff)
+        let pin2 = LBPin(x: xoff, y: 23+yoff)
+        let pin3 = LBPin(x: xoff, y: 43+yoff)
+        pins = pins.dropLast(2) + [pin1, pin2, pin3]
+    }
     
     override var inputs: CGFloat { return 3 }
     
 }
 
 class LBNand4 : LBNand {
+    
+    override func localInit() {
+        super.localInit()
+        
+        // replace last two pins with 3-input pins
+        let pin1 = LBPin(x: xoff, y: 4+yoff)
+        let pin2 = LBPin(x: xoff, y: 17+yoff)
+        let pin3 = LBPin(x: xoff, y: 30+yoff)
+        let pin4 = LBPin(x: xoff, y: 43+yoff)
+        pins = pins.dropLast(2) + [pin1, pin2, pin3, pin4]
+    }
     
     override var inputs: CGFloat { return 4 }
     

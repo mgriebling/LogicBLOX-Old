@@ -98,7 +98,6 @@ class LBGateView: UIView {
             let ept  = destination.pins[dpin].pos
             let epta = CGPoint(x: ept.x+destination.bounds.origin.x, y: ept.y+destination.bounds.origin.y)
             let mid = CGPoint(x: epta.x, y: spta.y)
-            print("Start = \(spt); end = \(ept)")
             
             connection.pins[0].pos = spta
             connection.pins[1].pos = mid

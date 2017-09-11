@@ -109,6 +109,7 @@ class LBGate : NSObject, NSCoding {
         nativeBounds = CGRect(origin: CGPoint.zero, size: size)
         bounds = nativeBounds
         super.init()
+        localInit()
     }
     
     required init? (coder decoder: NSCoder) {
@@ -132,6 +133,10 @@ class LBGate : NSObject, NSCoding {
     }
     
     // MARK: - Object Methods
+    
+    func localInit() {
+        // override to set up pins and nativeBounds
+    }
     
     final func isInBounds (_ point: CGPoint) -> Bool {
         return bounds.contains(point)

@@ -89,7 +89,7 @@ class LBGateCollectionViewController: UICollectionViewController {
         // Configure the cell
         let image = cell.viewWithTag(10) as? UIImageView
         if kind == .line {
-            image?.image  = Gates.imageOfConnection(highlight: true)
+            image?.image  = Gates.imageOfConnection(highlight: indexPath.item == selectedItem)
         } else {
             image?.image = gate.getImageOfObject(gate.bounds, scale: 1)
         }
