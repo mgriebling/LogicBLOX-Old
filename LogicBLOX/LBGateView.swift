@@ -102,8 +102,12 @@ class LBGateView: UIView {
             connection.pins[0].pos = spta
             connection.pins[1].pos = mid
             connection.pins[2].pos = epta
+            connection.highlighted = true
             gates.append(connection)
-            clearSelected()
+            source.highlighted = false
+            source.pinsVisible = false
+            destination.highlighted = false
+            destination.pinsVisible = false
             setNeedsDisplay()
         }
     }
@@ -128,7 +132,6 @@ class LBGateView: UIView {
     func gateUnderPoint(_ point: CGPoint) -> LBGate? {
         for gate in gates {
             if gate.bounds.contains(point) {
-//                print("Found gate : \(gate)")
                 return gate
             }
         }
