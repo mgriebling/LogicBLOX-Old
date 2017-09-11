@@ -10,15 +10,19 @@ import UIKit
 
 class LBNand: LBGate {
     
+    let yoff : CGFloat = 10
+    let xoff : CGFloat = 4
+    
     var inputs : CGFloat { return 2 }
 
     override init(withDefaultSize size: CGSize) {
         super.init(withDefaultSize: size)
         nativeBounds = CGRect(x: 0, y: 0, width: 134, height: 68)
-        var pin1 = LBPin(x: 3, y: 9+6+4); pin1.facing = .left; pin1.type = .input
-        var pin2 = pin1; pin2.pos = CGPoint(x: 3, y: 39+6+4)
-        var pin3 = LBPin(x: 134-3, y: 25+6+4); pin3.facing = .right; pin3.type = .output
-        pins = [pin1, pin2, pin3]
+
+        let pin1 = LBPin(x: xoff, y: 9+yoff)
+        let pin2 = LBPin(x: xoff, y: 39+yoff)
+        let pin3 = LBPin(x: nativeBounds.width-xoff, y: 25+yoff-1)
+        pins = [pin3, pin1, pin2]
     }
     
     required init?(coder decoder: NSCoder) {
@@ -26,15 +30,14 @@ class LBNand: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-        let scaled = CGSize(width: bounds.width*scale, height: bounds.height*scale)
-        let origin = bounds.origin // CGPoint(x: bounds.origin.x*scale, y: bounds.origin.y*scale)
-        let sbounds = CGRect(origin: origin, size: scaled)
-        Gates.drawAndNandGate(frame: sbounds, highlight: highlighted, pinVisible: pinsVisible, inputs: inputs, invert: true)
+        Gates.drawAndNandGate(frame: bounds, highlight: highlighted, pinVisible: highlighted, inputs: inputs, invert: true)
     }
     
 }
 
 class LBNand3 : LBNand {
+    
+    
     
     override var inputs: CGFloat { return 3 }
     
