@@ -22,7 +22,7 @@ enum Orientation: Int {
 
 struct LBPin {
     
-    static let size: CGFloat = 5.0
+    static let size: CGFloat = 6      // pin size to use as an offset
     var pos: CGPoint = CGPoint.zero
     var type: PinType = .input
     var facing: Orientation = .left

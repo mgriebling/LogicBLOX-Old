@@ -93,10 +93,16 @@ class LBGateView: UIView {
         // draw a connection between these gates
         if let spin = spin, let dpin = dpin {
             let connection = LBConnection()
-            let start = source.pins[spin].pos
-            let end = destination.pins[dpin].pos
-            connection.pins[0].pos = CGPoint(x: start.x+source.bounds.origin.x, y: start.y+source.bounds.origin.y)
-            connection.pins[1].pos = CGPoint(x: end.x+destination.bounds.origin.x, y: end.y+destination.bounds.origin.y)
+            let spt  = source.pins[spin].pos
+            let spta = CGPoint(x: spt.x+source.bounds.origin.x, y: spt.y+source.bounds.origin.y)
+            let ept  = destination.pins[dpin].pos
+            let epta = CGPoint(x: ept.x+destination.bounds.origin.x, y: ept.y+destination.bounds.origin.y)
+            let mid = CGPoint(x: epta.x, y: spta.y)
+            print("Start = \(spt); end = \(ept)")
+            
+            connection.pins[0].pos = spta
+            connection.pins[1].pos = mid
+            connection.pins[2].pos = epta
             gates.append(connection)
             clearSelected()
             setNeedsDisplay()
@@ -123,7 +129,7 @@ class LBGateView: UIView {
     func gateUnderPoint(_ point: CGPoint) -> LBGate? {
         for gate in gates {
             if gate.bounds.contains(point) {
-                print("Found gate : \(gate)")
+//                print("Found gate : \(gate)")
                 return gate
             }
         }

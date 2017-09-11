@@ -1001,7 +1001,6 @@ public class Gates : NSObject {
         bezier10Path.lineWidth = 2.5
         bezier10Path.stroke()
 
-
         if (hasInputs3or4) {
             //// Symbol Drawing
             let symbolRect = CGRect(x: 0, y: 4, width: 27, height: 8)
