@@ -9,33 +9,41 @@
 import UIKit
 
 class LBConnection: LBGate {
-
-    override init(withDefaultSize size : CGSize = CGSize(width: 88, height: 57)) {
-        super.init(withDefaultSize: size)
-        nativeBounds = CGRect(origin: CGPoint.zero, size: size)
+    
+    override var pins: [LBPin] {
+        didSet {
+            let path = bezierShape()
+            path.lineWidth = 10   // bigger to detect touches
+            bounds = path.bounds
+        }
+    }
+    
+    override func localInit() {
+        super.localInit()
         let pin1 = LBPin(x: 0, y: 0)
         pins = [pin1, pin1, pin1]  // these are initialized later
     }
     
-    required init?(coder decoder: NSCoder) {
-        super.init(coder: decoder)
+    override func draw(_ scale: CGFloat) {
+        // draw a connection joining all the pins
+        let path = bezierShape()
+        path.lineWidth = 2.5
+        if highlighted {
+            Gates.highlightColour.setStroke()
+        } else {
+            Gates.baseColor.setStroke()
+        }
+        path.stroke()
     }
     
-    override func draw(_ scale: CGFloat) {
-        // draw a connection between pin1 and pin2
+    func bezierShape() -> UIBezierPath {
         let path = UIBezierPath()
         let pin1 = pins[0]
         path.move(to: pin1.pos)
         for pin in pins.dropFirst() {
             path.addLine(to: pin.pos)
         }
-        path.lineWidth = 2.5
-        if highlighted {
-            UIColor.red.setStroke()
-        } else {
-            UIColor.black.setStroke()
-        }
-        path.stroke()
+        return path
     }
     
 }

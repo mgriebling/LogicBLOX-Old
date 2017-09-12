@@ -22,37 +22,37 @@ public enum LBGateType : Int {
     inverter,
     block,
 
-    MAX
+    MAX // last item indicator
     
     static func classForGate(_ gate: LBGateType) -> LBGate {
         switch gate {
-        case .or:       return LBOr(withDefaultSize: CGSize.zero)
-        case .or3:      return LBOr3(withDefaultSize: CGSize.zero)
-        case .or4:      return LBOr4(withDefaultSize: CGSize.zero)
-        case .nor:      return LBNor(withDefaultSize: CGSize.zero)
-        case .nor3:     return LBNor3(withDefaultSize: CGSize.zero)
-        case .nor4:     return LBNor4(withDefaultSize: CGSize.zero)
-        case .xor:      return LBXor(withDefaultSize: CGSize.zero)
-        case .xor3:     return LBXor3(withDefaultSize: CGSize.zero)
-        case .xor4:     return LBXor4(withDefaultSize: CGSize.zero)
-        case .xnor:     return LBXnor(withDefaultSize: CGSize.zero)
-        case .xnor3:    return LBXnor3(withDefaultSize: CGSize.zero)
-        case .xnor4:    return LBXnor4(withDefaultSize: CGSize.zero)
-        case .and:      return LBAnd(withDefaultSize: CGSize.zero)
-        case .and3:     return LBAnd3(withDefaultSize: CGSize.zero)
-        case .and4:     return LBAnd4(withDefaultSize: CGSize.zero)
-        case .nand:     return LBNand(withDefaultSize: CGSize.zero)
-        case .nand3:    return LBNand3(withDefaultSize: CGSize.zero)
-        case .nand4:    return LBNand4(withDefaultSize: CGSize.zero)
-        case .inverter: return LBInverter(withDefaultSize: CGSize.zero)
-        case .buffer:   return LBBuffer(withDefaultSize: CGSize.zero)
-        case .block:    return LBBlock(withDefaultSize: CGSize.zero)
-        case .line:     return LBConnection(withDefaultSize: CGSize.zero)
-        case .indicator: return LBIndicator(withDefaultSize: CGSize.zero)
-        case .button:   return LBButton(withDefaultSize: CGSize.zero)
+        case .or:       return LBOr()
+        case .or3:      return LBOr3()
+        case .or4:      return LBOr4()
+        case .nor:      return LBNor()
+        case .nor3:     return LBNor3()
+        case .nor4:     return LBNor4()
+        case .xor:      return LBXor()
+        case .xor3:     return LBXor3()
+        case .xor4:     return LBXor4()
+        case .xnor:     return LBXnor()
+        case .xnor3:    return LBXnor3()
+        case .xnor4:    return LBXnor4()
+        case .and:      return LBAnd()
+        case .and3:     return LBAnd3()
+        case .and4:     return LBAnd4()
+        case .nand:     return LBNand()
+        case .nand3:    return LBNand3()
+        case .nand4:    return LBNand4()
+        case .inverter: return LBInverter()
+        case .buffer:   return LBBuffer()
+        case .block:    return LBBlock()
+        case .line:     return LBConnection()
+        case .indicator: return LBIndicator()
+        case .button:   return LBButton()
         default: break
         }
-        return LBNand(withDefaultSize: CGSize.zero)
+        return LBNand()
     }
 }
 
@@ -105,19 +105,5 @@ class LBGateCollectionViewController: UICollectionViewController {
         collectionView.reloadData()
     }
 
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }

@@ -9,23 +9,23 @@
 import UIKit
 
 class LBInverter: LBGate {
-
-    override init(withDefaultSize size: CGSize) {
-        super.init(withDefaultSize: size)
+    
+    let yoff : CGFloat = 10
+    let xoff : CGFloat = 4
+    
+    public var invert : Bool { return true }
+    
+    override func localInit() {
+        super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 102, height: 57)
-        var pin1 = LBPin(x: 0, y: 24); pin1.facing = .left; pin1.type = .input
-        var pin2 = LBPin(x: 70, y: 34); pin2.facing = .right; pin2.type = .output
+        
+        let pin1 = LBPin(x: xoff, y: 28+yoff)
+        let pin2 = LBPin(x: nativeBounds.width-xoff, y: 28+yoff-1) // output pin is shared
         pins = [pin1, pin2]
     }
     
-    required init?(coder decoder: NSCoder) {
-        super.init(coder: decoder)
-    }
-    
     override func draw(_ scale: CGFloat) {
-        let scaled = CGSize(width: bounds.width*scale, height: bounds.height*scale)
-        let sbounds = CGRect(origin: bounds.origin, size: scaled)
-        Gates.drawBufferInverterGate(frame: sbounds, highlight: highlighted, pinVisible: pinsVisible, invert: true)
+        Gates.drawBufferInverterGate(frame: bounds, highlight: highlighted, pinVisible: pinsVisible, invert: invert)
     }
     
 }

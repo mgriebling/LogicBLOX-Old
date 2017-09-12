@@ -105,7 +105,7 @@ class LBGate : NSObject, NSCoding {
     
     // MARK: - Life cycle
     
-    init (withDefaultSize size: CGSize) {
+    init (withDefaultSize size: CGSize = CGSize.zero) {
         nativeBounds = CGRect(origin: CGPoint.zero, size: size)
         bounds = nativeBounds
         super.init()

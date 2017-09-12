@@ -22,7 +22,7 @@ class LBNor: LBGate {
         
         let pin1 = LBPin(x: xoff, y: 9+yoff)
         let pin2 = LBPin(x: xoff, y: 39+yoff)
-        let pin3 = LBPin(x: nativeBounds.width-xoff, y: 24+yoff-1) // output pin is shared
+        let pin3 = LBPin(x: nativeBounds.width-xoff, y: 34+yoff-1) // output pin is shared
         pins = [pin3, pin1, pin2]
     }
     

@@ -13,15 +13,11 @@ class LBButton: LBGate {
     var state : LogicState = .zero
     var name : String = "Input"
     
-    override init(withDefaultSize size: CGSize) {
-        super.init(withDefaultSize: size)
+    override func localInit() {
+        super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 95, height: 69)
-        var pin1 = LBPin(x: 86-LBPin.size, y: 30.5); pin1.facing = .right; pin1.type = .output
+        let pin1 = LBPin(x: 95-LBPin.size, y: 34.5)
         pins = [pin1]
-    }
-    
-    required init?(coder decoder: NSCoder) {
-        super.init(coder: decoder)
     }
     
     override func evaluate() -> LogicState {
@@ -37,10 +33,8 @@ class LBButton: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-        let scaled = CGSize(width: bounds.width*scale, height: bounds.height*scale)
-        let sbounds = CGRect(origin: bounds.origin, size: scaled)
         let state : CGFloat = self.state == .one ? 1 : 0
-        Gates.drawButton(frame: sbounds, highlight: highlighted, pinVisible: pinsVisible, state: state, name: name)
+        Gates.drawButton(frame: bounds, highlight: highlighted, pinVisible: pinsVisible, state: state, name: name)
     }
     
 }

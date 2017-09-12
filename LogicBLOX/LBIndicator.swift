@@ -12,15 +12,11 @@ class LBIndicator: LBGate {
     
     var name: String = "LED1"
     
-    override init(withDefaultSize size: CGSize) {
-        super.init(withDefaultSize: size)
+    override func localInit() {
+        super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 94, height: 73)
-        var pin1 = LBPin(x: 0, y: 24); pin1.facing = .left; pin1.type = .input
+        var pin1 = LBPin(x: LBPin.size, y: 36.5); pin1.facing = .left; pin1.type = .input
         pins = [pin1]
-    }
-    
-    required init?(coder decoder: NSCoder) {
-        super.init(coder: decoder)
     }
     
     override func draw(_ scale: CGFloat) {

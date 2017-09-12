@@ -8,39 +8,20 @@
 
 import UIKit
 
-class LBXor: LBGate {
+class LBXor: LBXnor {
 
-    var inputs : CGFloat { return 2 }
-    
-    override init(withDefaultSize size: CGSize) {
-        super.init(withDefaultSize: size)
-        nativeBounds = CGRect(x: 0, y: 0, width: 143, height: 67)
-        var pin1 = LBPin(x: 0, y: 24); pin1.facing = .left; pin1.type = .input
-        var pin2 = pin1; pin2.pos = CGPoint(x: 0, y: 48)
-        var pin3 = LBPin(x: 70, y: 34); pin3.facing = .right; pin3.type = .output
-        pins = [pin1, pin2, pin3]
-    }
-    
-    required init?(coder decoder: NSCoder) {
-        super.init(coder: decoder)
-    }
-    
-    override func draw(_ scale: CGFloat) {
-        let scaled = CGSize(width: bounds.width*scale, height: bounds.height*scale)
-        let sbounds = CGRect(origin: bounds.origin, size: scaled)
-        Gates.drawXorXnorGate(frame: sbounds, highlight: highlighted, pinVisible: pinsVisible, inputs: inputs, invert: false)
-    }
+    override var invert: Bool { return false }
     
 }
 
-class LBXor3 : LBXor {
+class LBXor3 : LBXnor3 {
     
-    override var inputs: CGFloat { return 3 }
+    override var invert: Bool { return false }
     
 }
 
-class LBXor4 : LBXor {
+class LBXor4 : LBXnor4 {
     
-    override var inputs: CGFloat { return 4 }
+    override var invert: Bool { return false }
     
 }
