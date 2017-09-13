@@ -18,7 +18,6 @@ class LBAnd3 : LBNand3 {
     
     override var invert: Bool { return false }
     
-    
 }
 
 class LBAnd4 : LBNand4 {

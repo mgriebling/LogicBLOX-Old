@@ -15,6 +15,10 @@ class LBInverter: LBGate {
     
     public var invert : Bool { return true }
     
+    override public var description: String {
+        return invert ? "Inverter" : "Buffer"
+    }
+    
     override func localInit() {
         super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 102, height: 57)

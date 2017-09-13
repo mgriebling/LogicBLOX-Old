@@ -16,6 +16,11 @@ class LBNor: LBGate {
     var inputs : CGFloat { return 2 }
     public var invert : Bool { return true }
     
+    override public var description: String {
+        let gate = invert ? "Nor" : "Or"
+        return "\(Int(inputs))-Input " + gate
+    }
+    
     override func localInit() {
         super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 135, height: 67)

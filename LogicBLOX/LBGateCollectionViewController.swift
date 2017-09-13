@@ -94,7 +94,7 @@ class LBGateCollectionViewController: UICollectionViewController {
             image?.image = gate.getImageOfObject(gate.bounds, scale: 1)
         }
         let label = cell.viewWithTag(20) as? UILabel
-        label?.text = kind == .line ? "Connection" : "\(kind) Gate"
+        label?.text = gate.description
         return cell
     }
 

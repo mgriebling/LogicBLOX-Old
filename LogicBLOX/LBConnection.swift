@@ -18,6 +18,10 @@ class LBConnection: LBGate {
         }
     }
     
+    override public var description: String {
+        return "Connection"
+    }
+    
     override func localInit() {
         super.localInit()
         let pin1 = LBPin(x: 0, y: 0)

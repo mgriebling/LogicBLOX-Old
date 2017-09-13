@@ -15,6 +15,11 @@ class LBNand: LBGate {
     
     var inputs : CGFloat { return 2 }
     public var invert : Bool { return true }
+    
+    override public var description: String {
+        let gate = invert ? "Nand" : "And"
+        return "\(Int(inputs))-Input " + gate
+    }
 
     override func localInit() {
         super.localInit()

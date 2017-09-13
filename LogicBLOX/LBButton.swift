@@ -13,6 +13,10 @@ class LBButton: LBGate {
     var state : LogicState = .zero
     var name : String = "Input"
     
+    override public var description: String {
+        return "Input"
+    }
+    
     override func localInit() {
         super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 95, height: 69)

@@ -12,6 +12,10 @@ class LBIndicator: LBGate {
     
     var name: String = "LED1"
     
+    override public var description: String {
+        return "Indicator"
+    }
+    
     override func localInit() {
         super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 94, height: 73)

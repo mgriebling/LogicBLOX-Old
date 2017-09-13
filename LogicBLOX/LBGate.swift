@@ -34,7 +34,7 @@ struct LBPin {
         pos.y = y
     }
     
-    func draw(_ scale: CGFloat, pos: CGPoint) {
+//    func draw(_ scale: CGFloat, pos: CGPoint) {
 //        let path = UIBezierPath()
 //        let ssize = scale * LBPin.size
 //        path.move(to: CGPoint(x: pos.x-ssize, y: pos.y-ssize))
@@ -43,7 +43,7 @@ struct LBPin {
 //        path.addLine(to: CGPoint(x: pos.x-ssize, y: pos.y+ssize))
 //        path.addLine(to: CGPoint(x: pos.x-ssize, y: pos.y-ssize))
 //        path.stroke()
-    }
+//    }
 }
 
 extension LBPin: PropertyListReadable {
@@ -102,6 +102,8 @@ class LBGate : NSObject, NSCoding {
     var pinsVisible: Bool = false
     
     var nativeBounds: CGRect
+    
+    override public var description: String { return "Gate" }
     
     // MARK: - Life cycle
     
@@ -162,17 +164,7 @@ class LBGate : NSObject, NSCoding {
     }
     
     func draw (_ scale: CGFloat) {
-//        if highlighted {
-//            LBGate.highlightColour.setStroke()
-//        } else {
-//            UIColor.black.setStroke()
-//        }
     }
-    
-//    final func drawPins (_ scale: CGFloat) {
-//        if !highlighted { return }
-//        pinsVisible = true
-//    }
     
     func evaluate () -> LogicState {
         return .undefined
@@ -209,5 +201,4 @@ extension LBGate  {
         return CGRect.zero
     }
 
-    
 }

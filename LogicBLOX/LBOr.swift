@@ -23,5 +23,5 @@ class LBOr3 : LBNor3 {
 class LBOr4 : LBNor4 {
     
     override var invert: Bool { return false }
-    
+  
 }
