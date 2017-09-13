@@ -46,25 +46,31 @@ class LBGateView: UIView {
         setNeedsDisplay()
     }
     
-    func insertGate (_ gateID: LBGateType, withEvent event: UIGestureRecognizer?) {
+    func insertGate (_ gateID: LBGateType, withEvent event: UITapGestureRecognizer?) {
         var gateOrigin : CGPoint
-        if let event = event {
-            gateOrigin = event.location(in: self)
+        if event != nil {
+            gateOrigin = event!.location(in: self)
         } else {
             gateOrigin = CGPoint(x: 10, y: 10)
         }
         gateOrigin = grid.constrainedPoint(gateOrigin)
         
-        let gate = LBGateType.classForGate(gateID)
-        gate.defaultBounds()
-        gate.bounds = CGRect(origin: gateOrigin, size: gate.bounds.size)
-        gate.highlighted = true
-        
-        gates.append(gate)
-        if creatingGate != nil {
+        if let gate = gateUnderPoint(gateOrigin) {
+            if gateID == .line {
+                createLine(fromGate: gate, withGesture: event!)
+            } else {
+                toggleSelection(gate)
+            }
+        } else if gateID != .line {
+            let gate = LBGateType.classForGate(gateID)
+            gate.defaultBounds()
+            gate.bounds = CGRect(origin: gateOrigin, size: gate.bounds.size)
+            gate.highlighted = true
+            
+            gates.append(gate)
             creatingGate?.highlighted = false
+            creatingGate = gate
         }
-        creatingGate = gate
         setNeedsDisplay()
     }
     
@@ -86,6 +92,23 @@ class LBGateView: UIView {
             setNeedsDisplay()
         } else if gesture.state == .ended {
             setNeedsDisplay()
+        }
+    }
+
+    func createLine(fromGate gate: LBGate, withGesture gesture: UITapGestureRecognizer) {
+        gate.pinsVisible = true
+        gate.highlighted = true
+        if editingGate == nil {
+            editingGate = gate
+            sourcePin = gate.getClosestPinIndex(location)
+        } else {
+            if let destPin = gate.getClosestPinIndex(location) {
+                joinGates(sourceGate!, atPin:sourcePin, to: gate, atPin:destPin)
+                editingGate = nil
+            } else {
+                // add a pin to the active line
+                editingGate?.pins.append(<#T##newElement: LBPin##LBPin#>)
+            }
         }
     }
     

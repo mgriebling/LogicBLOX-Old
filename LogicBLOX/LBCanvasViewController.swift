@@ -159,32 +159,9 @@ class LBCanvasViewController: UIViewController {
     
     // MARK: - Gesture management
     
-    var sourceGate: LBGate?
-    var sourcePin: Int?
-    
     func didTap (_ sender: UITapGestureRecognizer) {
         if editingGates {
-            let location = sender.location(in: gateView)
-            if let gate = gateView.gateUnderPoint(location) {
-                if lastGateType == .line {
-                    gate.pinsVisible = true
-                    gate.highlighted = true
-                    if sourceGate == nil {
-                        sourceGate = gate
-                        sourcePin = gate.getClosestPinIndex(location)
-                        gateView.setNeedsDisplay()
-                    } else {
-                        let destPin = gate.getClosestPinIndex(location)
-                        gateView.joinGates(sourceGate!, atPin:sourcePin, to: gate, atPin:destPin)
-                        sourceGate = nil
-                    }
-                } else {
-                    sourceGate = nil
-                    gateView.toggleSelection(gate)
-                }
-            } else if lastGateType != .line {
-                gateView.insertGate(lastGateType, withEvent: sender)
-            }
+            gateView.insertGate(lastGateType, withEvent: sender)
             deleteBarButton.isEnabled = gateView.selected.count > 0 || lastGateType == .line
         } else {
             // running simulation
