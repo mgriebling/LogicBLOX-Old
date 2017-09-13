@@ -47,21 +47,51 @@ class LBGateView: UIView {
     }
     
     func insertGate (_ gateID: LBGateType, withEvent event: UITapGestureRecognizer?) {
-        var gateOrigin : CGPoint
-        if event != nil {
-            gateOrigin = event!.location(in: self)
-        } else {
-            gateOrigin = CGPoint(x: 10, y: 10)
-        }
-        gateOrigin = grid.constrainedPoint(gateOrigin)
+        var gateOrigin = event?.location(in: self) ?? CGPoint(x: 10, y: 10)
         
         if let gate = gateUnderPoint(gateOrigin) {
             if gateID == .line {
-                createLine(fromGate: gate, withGesture: event!)
+                if creatingGate == nil {
+                    // create a line starting from this gate
+                    editingGate = gate
+                    editingGate?.highlighted = true
+                    editingGate?.pinsVisible = true
+                    
+                    // create the initial connection
+                    let connection = LBConnection()
+                    let sourcePin = gate.getClosestPin(gateOrigin)
+                    connection.pins = [LBPin(x: 0, y: 0)]
+                    connection.bounds = CGRect(origin: sourcePin.pos, size: CGSize.zero)
+                    connection.highlighted = true
+                    gates.append(connection)
+                    creatingGate = connection
+                } else {
+                    // finish the connection to this destination gate
+                    let destinationPin = gate.getClosestPin(gateOrigin)
+                    let deltaX = destinationPin.pos.x - creatingGate!.bounds.origin.x
+                    let deltaY = destinationPin.pos.y - creatingGate!.bounds.origin.y
+                    if creatingGate?.pins.count == 1 {
+                        // add an intermediate point
+                        let spt = creatingGate!.pins[0].pos
+                        creatingGate?.pins.append(LBPin(x: deltaX, y: spt.y))
+                    }
+                    creatingGate?.pins.append(LBPin(x: deltaX, y: deltaY))
+                    creatingGate = nil
+                    editingGate?.highlighted = false
+                    editingGate?.pinsVisible = false
+                    gate.highlighted = false
+                    gate.pinsVisible = false
+                }
             } else {
                 toggleSelection(gate)
             }
-        } else if gateID != .line {
+        } else if gateID == .line && creatingGate != nil {
+            // add a point to the line
+            let deltaX = gateOrigin.x - creatingGate!.bounds.origin.x
+            let deltaY = gateOrigin.y - creatingGate!.bounds.origin.y
+            creatingGate?.pins.append(LBPin(x: deltaX, y: deltaY))
+        } else {
+            gateOrigin = grid.constrainedPoint(gateOrigin)
             let gate = LBGateType.classForGate(gateID)
             gate.defaultBounds()
             gate.bounds = CGRect(origin: gateOrigin, size: gate.bounds.size)
@@ -94,46 +124,29 @@ class LBGateView: UIView {
             setNeedsDisplay()
         }
     }
-
-    func createLine(fromGate gate: LBGate, withGesture gesture: UITapGestureRecognizer) {
-        gate.pinsVisible = true
-        gate.highlighted = true
-        if editingGate == nil {
-            editingGate = gate
-            sourcePin = gate.getClosestPinIndex(location)
-        } else {
-            if let destPin = gate.getClosestPinIndex(location) {
-                joinGates(sourceGate!, atPin:sourcePin, to: gate, atPin:destPin)
-                editingGate = nil
-            } else {
-                // add a pin to the active line
-                editingGate?.pins.append(<#T##newElement: LBPin##LBPin#>)
-            }
-        }
-    }
     
-    func joinGates (_ source: LBGate, atPin spin: Int?, to destination: LBGate, atPin dpin: Int?) {
-        // draw a connection between these gates
-        if let spin = spin, let dpin = dpin {
-            let connection = LBConnection()
-            let spt  = source.pins[spin].pos
-            let spta = CGPoint(x: spt.x+source.bounds.origin.x, y: spt.y+source.bounds.origin.y)
-            let ept  = destination.pins[dpin].pos
-            let epta = CGPoint(x: ept.x+destination.bounds.origin.x, y: ept.y+destination.bounds.origin.y)
-            let mid = CGPoint(x: epta.x, y: spta.y)
-            
-            connection.pins[0].pos = spta
-            connection.pins[1].pos = mid
-            connection.pins[2].pos = epta
-            connection.highlighted = true
-            gates.append(connection)
-            source.highlighted = false
-            source.pinsVisible = false
-            destination.highlighted = false
-            destination.pinsVisible = false
-            setNeedsDisplay()
-        }
-    }
+//    func joinGates (_ source: LBGate, atPin spin: Int?, to destination: LBGate, atPin dpin: Int?) {
+//        // draw a connection between these gates
+//        if let spin = spin, let dpin = dpin {
+//            let connection = LBConnection()
+//            let spt  = source.pins[spin].pos
+//            let spta = CGPoint(x: spt.x+source.bounds.origin.x, y: spt.y+source.bounds.origin.y)
+//            let ept  = destination.pins[dpin].pos
+//            let epta = CGPoint(x: ept.x+destination.bounds.origin.x, y: ept.y+destination.bounds.origin.y)
+//            let mid = CGPoint(x: epta.x, y: spta.y)
+//            
+//            connection.pins[0].pos = spta
+//            connection.pins[1].pos = mid
+//            connection.pins[2].pos = epta
+//            connection.highlighted = true
+//            gates.append(connection)
+//            source.highlighted = false
+//            source.pinsVisible = false
+//            destination.highlighted = false
+//            destination.pinsVisible = false
+//            setNeedsDisplay()
+//        }
+//    }
     
     func clearSelected() {
         for gate in selected {

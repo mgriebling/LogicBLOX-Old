@@ -34,16 +34,6 @@ struct LBPin {
         pos.y = y
     }
     
-//    func draw(_ scale: CGFloat, pos: CGPoint) {
-//        let path = UIBezierPath()
-//        let ssize = scale * LBPin.size
-//        path.move(to: CGPoint(x: pos.x-ssize, y: pos.y-ssize))
-//        path.addLine(to: CGPoint(x: pos.x+ssize, y: pos.y-ssize))
-//        path.addLine(to: CGPoint(x: pos.x+ssize, y: pos.y+ssize))
-//        path.addLine(to: CGPoint(x: pos.x-ssize, y: pos.y+ssize))
-//        path.addLine(to: CGPoint(x: pos.x-ssize, y: pos.y-ssize))
-//        path.stroke()
-//    }
 }
 
 extension LBPin: PropertyListReadable {
@@ -144,19 +134,19 @@ class LBGate : NSObject, NSCoding {
         return bounds.contains(point)
     }
     
-    final func getClosestPinIndex (_ point: CGPoint) -> Int? {
-        if !isInBounds(point) { return nil }
+    final func getClosestPin (_ point: CGPoint) -> LBPin {
+//        if !isInBounds(point) { return nil }
         var distance = CGFloat.infinity
-        var index : Int?
-        for (pos, pin) in pins.enumerated() {
+        var fpin = CGPoint.zero
+        for pin in pins {
             let pinPoint = CGPoint(x: pin.pos.x+bounds.origin.x, y: pin.pos.y+bounds.origin.y)
             let range = pinPoint.distanceTo(point)
             if range < distance {
                 distance = range
-                index = pos
+                fpin = pinPoint
             }
         }
-        return index
+        return LBPin(x: fpin.x, y: fpin.y)
     }
     
     final func defaultBounds () {

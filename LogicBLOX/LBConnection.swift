@@ -24,8 +24,7 @@ class LBConnection: LBGate {
     
     override func localInit() {
         super.localInit()
-        let pin1 = LBPin(x: 0, y: 0)
-        pins = [pin1, pin1, pin1]  // these are initialized later
+        pins = []  // these are initialized later
     }
     
     override func draw(_ scale: CGFloat) {
@@ -43,9 +42,9 @@ class LBConnection: LBGate {
     func bezierShape() -> UIBezierPath {
         let path = UIBezierPath()
         let pin1 = pins[0]
-        path.move(to: pin1.pos)
+        path.move(to: bounds.offsetBy(dx: pin1.pos.x, dy: pin1.pos.y).origin)
         for pin in pins.dropFirst() {
-            path.addLine(to: pin.pos)
+            path.addLine(to: bounds.offsetBy(dx: pin.pos.x, dy: pin.pos.y).origin)
         }
         return path
     }
