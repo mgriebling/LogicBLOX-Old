@@ -60,8 +60,6 @@ class LBGateView: UIView {
                     // create the initial connection
                     let connection = LBConnection()
                     let sourcePin = gate.getClosestPin(gateOrigin)
-                    print("Source gate pins = \(gate.pins)")
-                    print("Source pin = \(sourcePin.pos)")
                     connection.pins = [LBPin(x: 0, y: 0)]
                     connection.bounds = CGRect(origin: sourcePin.pos, size: CGSize.zero)
                     connection.highlighted = true
@@ -89,7 +87,8 @@ class LBGateView: UIView {
             // add a point to the line
             let deltaX = gateOrigin.x - creatingGate!.bounds.origin.x
             let deltaY = gateOrigin.y - creatingGate!.bounds.origin.y
-            creatingGate?.pins.append(LBPin(x: deltaX, y: deltaY))
+            let newPoint = grid.constrainedPoint(CGPoint(x: deltaX, y: deltaY))
+            creatingGate!.pins.append(LBPin(x: newPoint.x, y: newPoint.y))
         } else {
             gateOrigin = grid.constrainedPoint(gateOrigin)
             let gate = LBGateType.classForGate(gateID)

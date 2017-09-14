@@ -10,14 +10,6 @@ import UIKit
 
 class LBConnection: LBGate {
     
-    override var pins: [LBPin] {
-        didSet {
-            let path = bezierShape()
-            path.lineWidth = 10   // bigger to detect touches
-            bounds = path.bounds
-        }
-    }
-    
     override public var description: String {
         return "Connection"
     }
@@ -44,10 +36,8 @@ class LBConnection: LBGate {
         let path = UIBezierPath()
         let pin1 = pins[0]
         let org = bounds.origin
-        print("Drawing line from \(CGPoint(x:org.x+pin1.pos.x, y: org.y+pin1.pos.y))", terminator: "")
         path.move(to: CGPoint(x:org.x+pin1.pos.x, y: org.y+pin1.pos.y))
         for pin in pins.dropFirst() {
-            print(" to \(CGPoint(x:org.x+pin.pos.x, y: org.y+pin.pos.y))")
             path.addLine(to: CGPoint(x:org.x+pin.pos.x, y: org.y+pin.pos.y))
         }
         return path

@@ -120,10 +120,15 @@ class LBDesignTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             let url = Designs.list.remove(at: indexPath.row)
-            try? FileManager.default.removeItem(at: url)
+            do {
+                try FileManager.default.removeItem(at: url)
+            } catch {
+                print("Couldn't delete \(url.lastPathComponent)")
+            }
             tableView.deleteRows(at: [indexPath], with: .fade)
             if indexPath.row == selectedItem {
                 selectedItem = 0
+                tableView.reloadRows(at: [IndexPath(row: selectedItem, section: 0)], with: .none)
             }
             editButtonItem.isEnabled = Designs.list.count > 1
         }    
