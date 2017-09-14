@@ -60,6 +60,8 @@ class LBGateView: UIView {
                     // create the initial connection
                     let connection = LBConnection()
                     let sourcePin = gate.getClosestPin(gateOrigin)
+                    print("Source gate pins = \(gate.pins)")
+                    print("Source pin = \(sourcePin.pos)")
                     connection.pins = [LBPin(x: 0, y: 0)]
                     connection.bounds = CGRect(origin: sourcePin.pos, size: CGSize.zero)
                     connection.highlighted = true
@@ -77,8 +79,6 @@ class LBGateView: UIView {
                     }
                     creatingGate?.pins.append(LBPin(x: deltaX, y: deltaY))
                     creatingGate = nil
-                    editingGate?.highlighted = false
-                    editingGate?.pinsVisible = false
                     gate.highlighted = false
                     gate.pinsVisible = false
                 }

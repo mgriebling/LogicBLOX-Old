@@ -40,11 +40,15 @@ class LBConnection: LBGate {
     }
     
     func bezierShape() -> UIBezierPath {
+        guard pins.count > 1 else { return UIBezierPath() }
         let path = UIBezierPath()
         let pin1 = pins[0]
-        path.move(to: bounds.offsetBy(dx: pin1.pos.x, dy: pin1.pos.y).origin)
+        let org = bounds.origin
+        print("Drawing line from \(CGPoint(x:org.x+pin1.pos.x, y: org.y+pin1.pos.y))", terminator: "")
+        path.move(to: CGPoint(x:org.x+pin1.pos.x, y: org.y+pin1.pos.y))
         for pin in pins.dropFirst() {
-            path.addLine(to: bounds.offsetBy(dx: pin.pos.x, dy: pin.pos.y).origin)
+            print(" to \(CGPoint(x:org.x+pin.pos.x, y: org.y+pin.pos.y))")
+            path.addLine(to: CGPoint(x:org.x+pin.pos.x, y: org.y+pin.pos.y))
         }
         return path
     }
