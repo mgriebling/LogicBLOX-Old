@@ -54,12 +54,13 @@ class LBGateView: UIView {
                 if creatingGate == nil {
                     // create a line starting from this gate
                     editingGate = gate
-                    editingGate?.highlighted = true
-                    editingGate?.pinsVisible = true
+                    gate.highlighted = true
                     
                     // create the initial connection
                     let connection = LBConnection()
                     let sourcePin = gate.getClosestPin(gateOrigin)
+                    if sourcePin.type == .output { gate.outputPinVisible = 1 }
+                    else { gate.inputPinVisible = 1 }
                     connection.pins = [LBPin(x: 0, y: 0)]
                     connection.bounds = CGRect(origin: sourcePin.pos, size: CGSize.zero)
                     connection.highlighted = true
@@ -78,7 +79,8 @@ class LBGateView: UIView {
                     creatingGate?.pins.append(LBPin(x: deltaX, y: deltaY))
                     creatingGate = nil
                     gate.highlighted = false
-                    gate.pinsVisible = false
+                    gate.inputPinVisible = 0
+                    gate.outputPinVisible = 0
                 }
             } else {
                 toggleSelection(gate)
@@ -150,7 +152,8 @@ class LBGateView: UIView {
     func clearSelected() {
         for gate in selected {
             gate.highlighted = false
-            gate.pinsVisible = false
+            gate.inputPinVisible = 0
+            gate.outputPinVisible = 0
         }
         setNeedsDisplay()
     }

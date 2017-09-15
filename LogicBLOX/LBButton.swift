@@ -38,7 +38,7 @@ class LBButton: LBGate {
     
     override func draw(_ scale: CGFloat) {
         let state : CGFloat = self.state == .one ? 1 : 0
-        Gates.drawButton(frame: bounds, highlight: highlighted, pinVisible: pinsVisible, state: state, name: name)
+        Gates.drawButton(frame: bounds, highlight: highlighted, pinVisible: outputPinVisible == 1, state: state, name: name)
     }
     
 }

@@ -29,7 +29,7 @@ class LBInverter: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-        Gates.drawBufferInverterGate(frame: bounds, highlight: highlighted, pinVisible: pinsVisible, invert: invert)
+        Gates.drawBufferInverterGate(frame: bounds, highlight: highlighted, inputPinVisible: CGFloat(inputPinVisible), outputPinVisible: outputPinVisible == 1, invert: invert)
     }
     
 }

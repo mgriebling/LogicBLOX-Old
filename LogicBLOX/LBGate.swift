@@ -80,16 +80,17 @@ class LBGate : NSObject, NSCoding {
     
     static let kVersionKey  = "Version"
     static let kNativeRect  = "NativeRect"
-    let kPosition    = "Position"
-    let kRect        = "Rect"
-    let kHighlighted = "Highlighted"
-    let kPins        = "Pins"
+    static let kPosition    = "Position"
+    static let kRect        = "Rect"
+    static let kHighlighted = "Highlighted"
+    static let kPins        = "Pins"
     
     var pins: [LBPin] = []
     var bounds: CGRect
     
-    var highlighted: Bool = false
-    var pinsVisible: Bool = false
+    var highlighted = false
+    var outputPinVisible = 0
+    var inputPinVisible = 0
     
     var nativeBounds: CGRect
     
@@ -108,9 +109,9 @@ class LBGate : NSObject, NSCoding {
         let _ = decoder.decodeCInt(forKey: LBGate.kVersionKey)
         let nBounds = decoder.decodeCGRect(forKey: LBGate.kNativeRect)
         nativeBounds = nBounds
-        bounds = decoder.decodeCGRect(forKey: kRect)
-        highlighted = decoder.decodeBool(forKey: kHighlighted)
-        let pinEncoding = decoder.decodeObject(forKey: kPins) as? [AnyObject]
+        bounds = decoder.decodeCGRect(forKey: LBGate.kRect)
+        highlighted = decoder.decodeBool(forKey: LBGate.kHighlighted)
+        let pinEncoding = decoder.decodeObject(forKey: LBGate.kPins) as? [AnyObject]
         pins = extractValuesFromPropertyListArray(pinEncoding)
         super.init()
     }
@@ -118,10 +119,10 @@ class LBGate : NSObject, NSCoding {
     func encode(with encoder: NSCoder) {
         encoder.encodeCInt(1, forKey: LBGate.kVersionKey)
         encoder.encode(nativeBounds, forKey: LBGate.kNativeRect)
-        encoder.encode(bounds, forKey: kRect)
-        encoder.encode(highlighted, forKey: kHighlighted)
+        encoder.encode(bounds, forKey: LBGate.kRect)
+        encoder.encode(highlighted, forKey: LBGate.kHighlighted)
         let pinEncoding = pins.map{$0.propertyListRepresentation()}
-        encoder.encode(pinEncoding, forKey: kPins)
+        encoder.encode(pinEncoding, forKey: LBGate.kPins)
     }
     
     // MARK: - Object Methods

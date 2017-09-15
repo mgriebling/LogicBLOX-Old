@@ -84,7 +84,8 @@ class LBGateCollectionViewController: UICollectionViewController {
         let gate = LBGateType.classForGate(kind)
         gate.defaultBounds()
         gate.highlighted = indexPath.item == selectedItem
-        gate.pinsVisible = false
+        gate.inputPinVisible = 0
+        gate.outputPinVisible = 0
     
         // Configure the cell
         let image = cell.viewWithTag(10) as? UIImageView

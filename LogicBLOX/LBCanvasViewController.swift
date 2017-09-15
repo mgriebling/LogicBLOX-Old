@@ -113,7 +113,8 @@ class LBCanvasViewController: UIViewController {
         } else {
             let gate = LBGateType.classForGate(lastGateType)
             gate.highlighted = true
-            gate.pinsVisible = false
+            gate.inputPinVisible = 0
+            gate.outputPinVisible = 0
             gate.defaultBounds()
             image = gate.getImageOfObject(gate.bounds, scale: 1).imageByBestFitForSize(imageButton.bounds.size)!
         }

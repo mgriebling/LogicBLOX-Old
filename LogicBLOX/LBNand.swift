@@ -32,7 +32,7 @@ class LBNand: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-        Gates.drawAndNandGate(frame: bounds, highlight: highlighted, pinVisible: pinsVisible, inputs: inputs, invert: invert)
+        Gates.drawAndNandGate(frame: bounds, highlight: highlighted, pinVisible: outputPinVisible == 1, inputs: inputs, inputPinVisible: CGFloat(inputPinVisible), invert: invert)
     }
     
 }

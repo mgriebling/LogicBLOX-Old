@@ -32,7 +32,7 @@ class LBNor: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-        Gates.drawOrNorGate(frame: bounds, highlight: highlighted, pinVisible: pinsVisible, inputs: inputs, invert: invert)
+        Gates.drawOrNorGate(frame: bounds, highlight: highlighted, inputs: inputs, inputPinVisible: CGFloat(inputPinVisible), outputPinVisible: outputPinVisible == 1, invert: invert)
     }
     
 }
