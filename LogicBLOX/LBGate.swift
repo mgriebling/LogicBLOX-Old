@@ -153,6 +153,7 @@ class LBGate : NSObject, NSCoding {
     }
     
     func draw (_ scale: CGFloat) {
+        _ = evaluate()  // evaluate states before drawing
     }
     
     func evaluate () -> LogicState {

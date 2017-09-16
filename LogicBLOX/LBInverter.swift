@@ -32,4 +32,11 @@ class LBInverter: LBGate {
         Gates.drawBufferInverterGate(frame: bounds, highlight: highlighted, inputPinVisible: CGFloat(inputPinVisible), outputPinVisible: outputPinVisible == 1, invert: invert)
     }
     
+    override func evaluate() -> LogicState {
+        var out = pins[1]
+        let state = pins[0].state            // Buffer
+        out.state = invert ? !state : state  // Not if inverted
+        return out.state
+    }
+    
 }

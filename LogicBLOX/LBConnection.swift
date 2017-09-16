@@ -31,6 +31,14 @@ class LBConnection: LBGate {
         path.stroke()
     }
     
+    override func evaluate() -> LogicState {
+        let state = pins[0].state
+        var last = pins.last!
+        last.state = state
+        print("Evaluating connection = \(state)")
+        return state
+    }
+    
     func bezierShape() -> UIBezierPath {
         guard pins.count > 1 else { return UIBezierPath() }
         let path = UIBezierPath()

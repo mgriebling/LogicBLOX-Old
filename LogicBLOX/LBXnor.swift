@@ -13,7 +13,7 @@ class LBXnor: LBGate {
     let yoff : CGFloat = 10
     let xoff : CGFloat = 4
     
-    var inputs : CGFloat { return 2 }
+    var inputs : Int { return 2 }
     public var invert : Bool { return true }
     
     override public var description: String {
@@ -32,14 +32,26 @@ class LBXnor: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-        Gates.drawXorXnorGate(frame: bounds, highlight: highlighted, inputs: inputs, inputPinVisible: CGFloat(inputPinVisible), outputPinVisible: outputPinVisible == 1, invert: invert)
+        Gates.drawXorXnorGate(frame: bounds, highlight: highlighted, inputs: CGFloat(inputs), inputPinVisible: CGFloat(inputPinVisible), outputPinVisible: outputPinVisible == 1, invert: invert)
+    }
+    
+    override func evaluate() -> LogicState {
+        if pins.count < self.inputs+1 { return .U }
+        var out = pins[0]
+        let inputStates = pins.dropFirst().map { $0.state }
+        var state = inputStates[0]
+        for input in inputStates.dropFirst() {
+            state = state ^ input            // Xor function
+        }
+        out.state = invert ? !state : state  // Xnor if inverted
+        return out.state
     }
     
 }
 
 class LBXnor3 : LBXnor {
     
-    override var inputs: CGFloat { return 3 }
+    override var inputs: Int { return 3 }
     
     override func localInit() {
         super.localInit()
@@ -54,7 +66,7 @@ class LBXnor3 : LBXnor {
 
 class LBXnor4 : LBXnor {
     
-    override var inputs: CGFloat { return 4 }
+    override var inputs: Int { return 4 }
 
     override func localInit() {
         super.localInit()

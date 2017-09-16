@@ -168,6 +168,11 @@ class LBCanvasViewController: UIViewController {
             // running simulation
             if let button = gateView.gateUnderPoint(sender.location(in: gateView)) as? LBButton {
                 button.toggleState()
+                print("gates = \(gateView.gates)")
+                for gate in gateView.gates {
+                    // simplistic evaluation of values
+                    _ = gate.evaluate()
+                }
                 gateView.setNeedsDisplay()
             }
         }

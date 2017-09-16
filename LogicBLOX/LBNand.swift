@@ -18,7 +18,7 @@ class LBNand: LBGate {
     
     override public var description: String {
         let gate = invert ? "Nand" : "And"
-        return "\(Int(inputs))-Input " + gate
+        return "\(inputs)-Input " + gate
     }
 
     override func localInit() {
@@ -36,12 +36,14 @@ class LBNand: LBGate {
     }
     
     override func evaluate() -> LogicState {
-        if pins.count < inputs+1 { return .U }
+        if pins.count < self.inputs+1 { return .U }
         var out = pins[0]
-        let in1 = pins[1]
-        let in2 = pins[2]
-        let state = in1.state & in2.state
-        out.state = invert ? !state : state
+        let inputStates = pins.dropFirst().map { $0.state }
+        var state = inputStates[0]
+        for input in inputStates.dropFirst() {
+            state = state & input            // And function
+        }
+        out.state = invert ? !state : state  // Nand if inverted
         return out.state
     }
     
