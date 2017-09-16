@@ -8,9 +8,7 @@
 
 import UIKit
 
-enum LogicState: Int {
-    case zero, one, pullUp, pullDown, highZ, undefined
-}
+
 
 enum PinType: Int {
     case input, output, bidirectional, tristate, openCollector
@@ -26,7 +24,7 @@ struct LBPin {
     var pos: CGPoint = CGPoint.zero
     var type: PinType = .input
     var facing: Orientation = .left
-    var state: LogicState = .undefined
+    var state: LogicState = .U
     var highlighted: Bool = false
     
     init(x: CGFloat, y:CGFloat) {
@@ -48,7 +46,7 @@ extension LBPin: PropertyListReadable {
             pos.x = posx; pos.y = posy
             type = PinType(rawValue: rawtype) ?? .input
             facing = Orientation(rawValue: rawfacing) ?? .left
-            state = LogicState(rawValue: rawstate) ?? .undefined
+            state = LogicState(rawValue: rawstate) ?? .U
         } else {
             return nil
         }
@@ -131,7 +129,7 @@ class LBGate : NSObject, NSCoding {
         // override to set up pins and nativeBounds
     }
     
-    final func isInBounds (_ point: CGPoint) -> Bool {
+    func isInBounds (_ point: CGPoint) -> Bool {
         return bounds.contains(point)
     }
     
@@ -158,7 +156,7 @@ class LBGate : NSObject, NSCoding {
     }
     
     func evaluate () -> LogicState {
-        return .undefined
+        return .U
     }
     
     func getImageOfObject (_ rect: CGRect, scale: CGFloat) -> UIImage {

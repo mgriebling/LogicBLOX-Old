@@ -33,6 +33,7 @@
 		477BE08B1F5C24FB006A8E3E /* PropertyListReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */; };
 		477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */; };
 		477BE0951F5C57EB006A8E3E /* LBNand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0941F5C57EB006A8E3E /* LBNand.swift */; };
+		479B7ADA1F6D46CF00116694 /* LogicState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B7AD91F6D46CF00116694 /* LogicState.swift */; };
 		47D642F01F5FF499005F2069 /* LBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642EF1F5FF499005F2069 /* LBDocument.swift */; };
 		47D642F21F6143D9005F2069 /* LBDesigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642F11F6143D9005F2069 /* LBDesigns.swift */; };
 		47D642F41F62A277005F2069 /* EditTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642F31F62A277005F2069 /* EditTableCell.swift */; };
@@ -67,6 +68,7 @@
 		477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListReadable.swift; sourceTree = "<group>"; };
 		477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateCollectionViewController.swift; sourceTree = "<group>"; };
 		477BE0941F5C57EB006A8E3E /* LBNand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNand.swift; sourceTree = "<group>"; };
+		479B7AD91F6D46CF00116694 /* LogicState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicState.swift; sourceTree = "<group>"; };
 		47D642EF1F5FF499005F2069 /* LBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDocument.swift; sourceTree = "<group>"; };
 		47D642F11F6143D9005F2069 /* LBDesigns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDesigns.swift; sourceTree = "<group>"; };
 		47D642F31F62A277005F2069 /* EditTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableCell.swift; sourceTree = "<group>"; };
@@ -93,12 +95,13 @@
 				47244B851F5D8E19006CB51D /* LBNor.swift */,
 				47244B871F5D8ECE006CB51D /* LBXor.swift */,
 				47244B891F5D8F03006CB51D /* LBXnor.swift */,
+				47244B8F1F5D90EB006CB51D /* LBBlock.swift */,
 				47244B8B1F5D90CC006CB51D /* LBBuffer.swift */,
 				47244B911F5D95F8006CB51D /* LBConnection.swift */,
 				47244B8D1F5D90DF006CB51D /* LBInverter.swift */,
-				47244B8F1F5D90EB006CB51D /* LBBlock.swift */,
 				47244B951F5EA03E006CB51D /* LBButton.swift */,
 				47244B971F5EA05A006CB51D /* LBIndicator.swift */,
+				479B7AD91F6D46CF00116694 /* LogicState.swift */,
 			);
 			name = "Logic Elements";
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				477BE08B1F5C24FB006A8E3E /* PropertyListReadable.swift in Sources */,
 				2FE3BD4C1F601853005B4BF0 /* LBDesignTableViewController.swift in Sources */,
 				477BE0811F5AFC16006A8E3E /* LBZoomingCanvasView.swift in Sources */,
+				479B7ADA1F6D46CF00116694 /* LogicState.swift in Sources */,
 				47244B961F5EA03E006CB51D /* LBButton.swift in Sources */,
 				47244B801F5D4AEE006CB51D /* Gates.swift in Sources */,
 				47244B921F5D95F8006CB51D /* LBConnection.swift in Sources */,

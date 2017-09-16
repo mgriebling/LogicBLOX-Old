@@ -13,7 +13,7 @@ class LBNand: LBGate {
     let yoff : CGFloat = 10
     let xoff : CGFloat = 4
     
-    var inputs : CGFloat { return 2 }
+    var inputs : Int { return 2 }
     public var invert : Bool { return true }
     
     override public var description: String {
@@ -27,12 +27,22 @@ class LBNand: LBGate {
         
         let pin1 = LBPin(x: xoff, y: 9+yoff)
         let pin2 = LBPin(x: xoff, y: 39+yoff)
-        let pin3 = LBPin(x: nativeBounds.width-xoff, y: 25+yoff-1) // output pin is shared
+        var pin3 = LBPin(x: nativeBounds.width-xoff, y: 25+yoff-1); pin3.type = .output
         pins = [pin3, pin1, pin2]
     }
     
     override func draw(_ scale: CGFloat) {
-        Gates.drawAndNandGate(frame: bounds, highlight: highlighted, pinVisible: outputPinVisible == 1, inputs: inputs, inputPinVisible: CGFloat(inputPinVisible), invert: invert)
+        Gates.drawAndNandGate(frame: bounds, highlight: highlighted, pinVisible: outputPinVisible == 1, inputs: CGFloat(inputs), inputPinVisible: CGFloat(inputPinVisible), invert: invert)
+    }
+    
+    override func evaluate() -> LogicState {
+        if pins.count < inputs+1 { return .U }
+        var out = pins[0]
+        let in1 = pins[1]
+        let in2 = pins[2]
+        let state = in1.state & in2.state
+        out.state = invert ? !state : state
+        return out.state
     }
     
 }
@@ -49,7 +59,7 @@ class LBNand3 : LBNand {
         pins = pins.dropLast(2) + [pin1, pin2, pin3]
     }
     
-    override var inputs: CGFloat { return 3 }
+    override var inputs: Int { return 3 }
     
 }
 
@@ -66,6 +76,6 @@ class LBNand4 : LBNand {
         pins = pins.dropLast(2) + [pin1, pin2, pin3, pin4]
     }
     
-    override var inputs: CGFloat { return 4 }
+    override var inputs: Int { return 4 }
     
 }
