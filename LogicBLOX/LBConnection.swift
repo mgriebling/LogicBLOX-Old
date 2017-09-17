@@ -120,10 +120,10 @@ class LBConnection: LBGate {
         var y = prev.y-bounds.origin.y
         if dx > LBConnection.MatchSize && dy > LBConnection.MatchSize {
             // need to generate an intermediate point
-            let newPt = CGPoint(x: point.x, y: prev.y)              // first move along x axis
+            let newPt = CGPoint(x: offset.x, y: y)                  // first move along x axis
             pins.append(LBPin(x: newPt.x, y: newPt.y))
             cpins.append(Connection(gate: self, index: pins.count)) // add another logical point
-            x = offset.x; y = offset.y                                // add current point
+            x = offset.x; y = offset.y                              // add current point
         } else if dx > LBConnection.MatchSize {
             // use the new x and previous y values
             x = offset.x
@@ -134,11 +134,37 @@ class LBConnection: LBGate {
         pins.append(LBPin(x: x, y: y))
     }
     
+    var input : Connection! {
+        // find the input connection and return it
+        for connection in cpins {
+            if let gate = connection.gate, let index = connection.index {
+                let pin = gate.pins[index]
+                if pin.type == .output && !(gate is LBConnection) {
+                    return connection
+                }
+            }
+        }
+        return nil
+    }
+    
+    var output : Connection! {
+        // find the input connection and return it
+        for connection in cpins {
+            if let gate = connection.gate, let index = connection.index {
+                let pin = gate.pins[index]
+                if pin.type == .input && !(gate is LBConnection) {
+                    return connection
+                }
+            }
+        }
+        return nil
+    }
+    
     override func evaluate() -> LogicState {
-        if let input = cpins.first, let output = cpins.last {
-            let state = input.gate!.pins[input.index!].state
-            output.gate?.pins[output.index!].state = state
-            print("Evaluating connection = \(state)")
+        if let output = self.output, let input = self.input {
+            let state = input.gate.pins[input.index].state
+            output.gate.pins[output.index].state = state
+            print("Evaluating connection from \(input.gate) to \(output.gate) = \(state)")
             return state
         }
         return .U

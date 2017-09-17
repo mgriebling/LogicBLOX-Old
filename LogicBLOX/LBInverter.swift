@@ -10,8 +10,8 @@ import UIKit
 
 class LBInverter: LBGate {
     
-    let yoff : CGFloat = 10
-    let xoff : CGFloat = 4
+    var yoff : CGFloat { return 0 }
+    var xoff : CGFloat { return 4 }
     
     public var invert : Bool { return true }
     
@@ -22,10 +22,11 @@ class LBInverter: LBGate {
     override func localInit() {
         super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 102, height: 57)
+        let xoff2 : CGFloat = invert ? 0 : 20   // account for inverter
         
         let pin1 = LBPin(x: xoff, y: 28+yoff)
-        var pin2 = LBPin(x: nativeBounds.width-xoff, y: 28+yoff-1); pin2.type = .output
-        pins = [pin1, pin2]
+        var pin2 = LBPin(x: nativeBounds.width-xoff-xoff2, y: 28+yoff); pin2.type = .output
+        pins = [pin2, pin1]
     }
     
     override func draw(_ scale: CGFloat) {
@@ -33,10 +34,10 @@ class LBInverter: LBGate {
     }
     
     override func evaluate() -> LogicState {
-        var out = pins[1]
-        let state = pins[0].state            // Buffer
-        out.state = invert ? !state : state  // Not if inverted
-        return out.state
+        var state = pins[1].state       // Buffer
+        state = invert ? !state : state // Not if inverted
+        pins[0].state = state
+        return state
     }
     
 }

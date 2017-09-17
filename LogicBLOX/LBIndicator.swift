@@ -12,7 +12,7 @@ class LBIndicator: LBGate {
     
     var name: String = "LED1"
     
-    let yoff : CGFloat = 6
+    let yoff : CGFloat = 6.5
     
     override public var description: String {
         return "Indicator"
@@ -27,7 +27,6 @@ class LBIndicator: LBGate {
     
     override func draw(_ scale: CGFloat) {
         let pin1 = pins.first!
-        print("Drawing indicator state = \(pin1.state)")
         let state : CGFloat = pin1.state.isOne ? 1 : 0
         Gates.drawIndicator(frame: bounds, highlight: highlighted, pinVisible: inputPinVisible == 1, state: state, name: name)
     }

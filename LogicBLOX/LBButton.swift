@@ -13,7 +13,7 @@ class LBButton: LBGate {
     var state = LogicState.zero
     var name : String = "Input"
     
-    let yoff : CGFloat = 6
+    let yoff : CGFloat = 5.5
     
     override public var description: String {
         return "Input"
