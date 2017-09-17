@@ -10,7 +10,7 @@ import UIKit
 
 class LBXnor: LBGate {
     
-    let yoff : CGFloat = 10
+    let yoff : CGFloat = 11
     let xoff : CGFloat = 4
     
     var inputs : Int { return 2 }
@@ -24,10 +24,11 @@ class LBXnor: LBGate {
     override func localInit() {
         super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 143, height: 67)
+        let xoff2 : CGFloat = invert ? 2 : 20   // account for inverter
         
         let pin1 = LBPin(x: xoff, y: 9+yoff)
         let pin2 = LBPin(x: xoff, y: 39+yoff)
-        var pin3 = LBPin(x: nativeBounds.width-xoff, y: 34+yoff-1); pin3.type = .output
+        var pin3 = LBPin(x: nativeBounds.width-xoff-xoff2, y: 34-1); pin3.type = .output
         pins = [pin3, pin1, pin2]
     }
     
@@ -37,14 +38,14 @@ class LBXnor: LBGate {
     
     override func evaluate() -> LogicState {
         if pins.count < self.inputs+1 { return .U }
-        var out = pins[0]
         let inputStates = pins.dropFirst().map { $0.state }
         var state = inputStates[0]
         for input in inputStates.dropFirst() {
             state = state ^ input            // Xor function
         }
-        out.state = invert ? !state : state  // Xnor if inverted
-        return out.state
+        state = invert ? !state : state      // Xnor if inverted
+        pins[0].state = state
+        return state
     }
     
 }

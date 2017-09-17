@@ -37,14 +37,14 @@ class LBNand: LBGate {
     
     override func evaluate() -> LogicState {
         if pins.count < self.inputs+1 { return .U }
-        var out = pins[0]
         let inputStates = pins.dropFirst().map { $0.state }
         var state = inputStates[0]
         for input in inputStates.dropFirst() {
             state = state & input            // And function
         }
-        out.state = invert ? !state : state  // Nand if inverted
-        return out.state
+        state = invert ? !state : state      // Nand if inverted
+        pins[0].state = state
+        return state
     }
     
 }

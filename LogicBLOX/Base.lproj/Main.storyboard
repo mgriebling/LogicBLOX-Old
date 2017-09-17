@@ -166,12 +166,12 @@
             </objects>
             <point key="canvasLocation" x="1708" y="806"/>
         </scene>
-        <!--Gate Selection-->
+        <!--Gate Collection View Controller-->
         <scene sceneID="agK-34-9aW">
             <objects>
                 <collectionViewController id="Kvt-iQ-ihW" customClass="LBGateCollectionViewController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="2C1-Nf-FJ6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" maximumZoomScale="3" dataMode="prototypes" id="2C1-Nf-FJ6">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="o2N-Ee-Dil">
@@ -217,12 +217,22 @@
                             <outlet property="delegate" destination="Kvt-iQ-ihW" id="f4n-vL-ob8"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Gate Selection" id="IGV-ga-Uuz">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="IGV-ga-Uuz">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="9Sr-SM-tQw">
                             <connections>
                                 <segue destination="zEr-ET-gFN" kind="unwind" identifier="UnwindSegue" unwindAction="exitFromPopupWithSegue:" id="KXH-qB-Feb"/>
                             </connections>
                         </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="JDX-cv-lX3">
+                            <rect key="frame" x="127" y="7.5" width="121" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                        </segmentedControl>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </collectionViewController>
@@ -255,6 +265,7 @@
         <scene sceneID="gHk-sK-3mx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eIz-j7-CJL" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XV7-sK-hl7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
