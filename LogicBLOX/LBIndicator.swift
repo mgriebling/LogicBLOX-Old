@@ -21,7 +21,7 @@ class LBIndicator: LBGate {
     override func localInit() {
         super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 94, height: 73)
-        var pin1 = LBPin(x: LBPin.size/2, y: 36.5+yoff); pin1.facing = .left; pin1.type = .input
+        let pin1 = LBPin(x: LBPin.size/2, y: 36.5+yoff); pin1.facing = .left; pin1.type = .input
         pins = [pin1]
     }
     

@@ -25,7 +25,7 @@ class LBInverter: LBGate {
         let xoff2 : CGFloat = invert ? 0 : 20   // account for inverter
         
         let pin1 = LBPin(x: xoff, y: 28+yoff)
-        var pin2 = LBPin(x: nativeBounds.width-xoff-xoff2, y: 28+yoff); pin2.type = .output
+        let pin2 = LBPin(x: nativeBounds.width-xoff-xoff2, y: 28+yoff); pin2.type = .output
         pins = [pin2, pin1]
     }
     

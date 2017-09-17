@@ -8,68 +8,64 @@
 
 import UIKit
 
-struct Connection : PropertyListReadable {
-    
-    weak var gate: LBGate!  // connection to parent
-    var index: Int!         // index in parent's pins
-    
-    init(gate: LBGate, index: Int) {
-        self.gate = gate
-        self.index = index
-    }
-    
-    init?(propertyListRepresentation: NSDictionary?) {
-        guard let values = propertyListRepresentation else { return nil }
-        if let index = values["index"] as? Int, let gate = values["gate"] as? LBGate {
-            self.index = index
-            self.gate = gate
-        } else {
-            return nil
-        }
-    }
-    
-    func propertyListRepresentation() -> NSDictionary {
-        let representation: [String:AnyObject] = [
-            "index":index as AnyObject,
-            "gate":gate as AnyObject
-        ]
-        return representation as NSDictionary
-    }
-}
+//struct Connection : PropertyListReadable {
+//    
+//    weak var gate: LBGate!  // connection to parent
+//    var index: Int!         // index in parent's pins
+//    
+//    init(gate: LBGate, index: Int) {
+//        self.gate = gate
+//        self.index = index
+//    }
+//    
+//    init?(propertyListRepresentation: NSDictionary?) {
+//        guard let values = propertyListRepresentation else { return nil }
+//        if let index = values["index"] as? Int, let gate = values["gate"] as? LBGate {
+//            self.index = index
+//            self.gate = gate
+//        } else {
+//            return nil
+//        }
+//    }
+//    
+//    func propertyListRepresentation() -> NSDictionary {
+//        let representation: [String:AnyObject] = [
+//            "index":index as AnyObject,
+//            "gate":gate as AnyObject
+//        ]
+//        return representation as NSDictionary
+//    }
+//}
 
 class LBConnection: LBGate {
     
     static let MatchSize : CGFloat = 10
     
-    var cpins : [Connection] = []   // logical connections to gates
-    
     var prevPoint : CGPoint {
-        if let connection = cpins.last, let gate = connection.gate {
-            let pos = gate.pins[connection.index!].pos
-            return gate.bounds.offsetBy(dx: pos.x, dy: pos.y).origin
-        }
-        return CGPoint.zero
+        let pindex = max(0, pins.count-2)
+        let pos = pins[pindex].pos
+        return bounds.offsetBy(dx: pos.x, dy: pos.y).origin
     }
     
     override public var description: String {
         return "Connection"
     }
     
-    override init (withDefaultSize size: CGSize = CGSize.zero) {
-        super.init()
-    }
+//    override init (withDefaultSize size: CGSize = CGSize.zero) {
+//        super.init()
+//    }
     
-    required init? (coder decoder: NSCoder) {
-        let cpinEncoding = decoder.decodeObject(forKey: "cPins") as? [AnyObject]
-        cpins = extractValuesFromPropertyListArray(cpinEncoding)
-        super.init()
-    }
-    
-    override func encode(with encoder: NSCoder) {
-        let cpinEncoding = pins.map{$0.propertyListRepresentation()}
-        encoder.encode(cpinEncoding, forKey: "cPins")
-        super.encode(with: encoder)
-    }
+//    required init? (coder decoder: NSCoder) {
+//        let cpinEncoding = decoder.decodeObject(forKey: "cPins") as? [AnyObject]
+//        cpins = extractValuesFromPropertyListArray(cpinEncoding)
+//        super.init()
+//    }
+//    
+//    override func encode(with encoder: NSCoder) {
+//        let cpinEncoding = pins.map{$0.propertyListRepresentation()}
+//        encoder.encode(cpinEncoding, forKey: "cPins")
+//        super.encode(with: encoder)
+//    }
     
     override func localInit() {
         super.localInit()
@@ -90,25 +86,24 @@ class LBConnection: LBGate {
     
     /// logical connection is made to the source gate
     func addPin(_ source: LBGate, index: Int) {
-        cpins.append(Connection(gate: source, index: index))
-        let pt = source.pins[index].pos
+        let pin = source.pins[index]
         if pins.count == 0 {
-            bounds.origin = source.bounds.offsetBy(dx: pt.x, dy: pt.y).origin
-            pins.append(LBPin(x: 0, y: 0))
+            bounds.origin = source.bounds.offsetBy(dx: pin.pos.x, dy: pin.pos.y).origin
+            pins.append(pin)
         } else {
-            let newPt = source.bounds.offsetBy(dx: pt.x, dy: pt.y).origin  // map point to view coordinates
-            addPoint(newPt)
+            let newPt = source.bounds.offsetBy(dx: pin.pos.x, dy: pin.pos.y).origin  // map point to view coordinates
+            addPoint(newPt, atPin: pin)
         }
     }
     
     /// drawing connection is added where position is in view coordinates
     func addPin(_ position: CGPoint) {
         // add a connection to ourselves
-        cpins.append(Connection(gate: self, index: pins.count))
-        addPoint(position)
+        let pin = LBPin(x: position.x, y: position.y); pin.type = .bidirectional  // so we can tell our own pins from others
+        addPoint(position, atPin: pin)
     }
     
-    func addPoint(_ point: CGPoint) {
+    func addPoint(_ point: CGPoint, atPin pin: LBPin) {
         // convert to view coordinates relative to path start
         let offset = CGPoint(x: point.x-bounds.origin.x, y: point.y-bounds.origin.y) // get pt relative to path start
         
@@ -122,7 +117,6 @@ class LBConnection: LBGate {
             // need to generate an intermediate point
             let newPt = CGPoint(x: offset.x, y: y)                  // first move along x axis
             pins.append(LBPin(x: newPt.x, y: newPt.y))
-            cpins.append(Connection(gate: self, index: pins.count)) // add another logical point
             x = offset.x; y = offset.y                              // add current point
         } else if dx > LBConnection.MatchSize {
             // use the new x and previous y values
@@ -134,27 +128,21 @@ class LBConnection: LBGate {
         pins.append(LBPin(x: x, y: y))
     }
     
-    var input : Connection! {
+    var input : LBPin! {
         // find the input connection and return it
-        for connection in cpins {
-            if let gate = connection.gate, let index = connection.index {
-                let pin = gate.pins[index]
-                if pin.type == .output && !(gate is LBConnection) {
-                    return connection
-                }
+        for pin in pins {
+            if pin.type == .output {
+                return pin
             }
         }
         return nil
     }
     
-    var output : Connection! {
+    var output : LBPin! {
         // find the input connection and return it
-        for connection in cpins {
-            if let gate = connection.gate, let index = connection.index {
-                let pin = gate.pins[index]
-                if pin.type == .input && !(gate is LBConnection) {
-                    return connection
-                }
+        for pin in pins {
+            if pin.type == .input {
+                return pin
             }
         }
         return nil
@@ -162,9 +150,9 @@ class LBConnection: LBGate {
     
     override func evaluate() -> LogicState {
         if let output = self.output, let input = self.input {
-            let state = input.gate.pins[input.index].state
-            output.gate.pins[output.index].state = state
-            print("Evaluating connection from \(input.gate) to \(output.gate) = \(state)")
+            let state = input.state
+            output.state = state
+            print("Evaluating connection from \(input) to \(output) = \(state)")
             return state
         }
         return .U

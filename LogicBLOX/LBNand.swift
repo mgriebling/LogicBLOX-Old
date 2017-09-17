@@ -27,7 +27,7 @@ class LBNand: LBGate {
         
         let pin1 = LBPin(x: xoff, y: 9+yoff)
         let pin2 = LBPin(x: xoff, y: 39+yoff)
-        var pin3 = LBPin(x: nativeBounds.width-xoff, y: 25+yoff-1); pin3.type = .output
+        let pin3 = LBPin(x: nativeBounds.width-xoff, y: 25+yoff-1); pin3.type = .output
         pins = [pin3, pin1, pin2]
     }
     

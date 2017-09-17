@@ -16,9 +16,16 @@ enum Orientation: Int {
     case top, bottom, left, right
 }
 
-struct LBPin {
+class LBPin : NSObject, NSCoding {
+    
+    static let kVersionKey  = "Version"
+    static let kType        = "Type"
+    static let kFacing      = "Facing"
+    static let kPosition    = "Position"
+    static let kHighlighted = "Highlighted"
     
     static let size: CGFloat = 6      // pin size to use as an offset
+    
     var pos: CGPoint = CGPoint.zero
     var type: PinType = .input
     var facing: Orientation = .left
@@ -30,37 +37,54 @@ struct LBPin {
         pos.y = y
     }
     
+    required init? (coder decoder: NSCoder) {
+        let _ = decoder.decodeCInt(forKey: LBPin.kVersionKey)
+        pos = decoder.decodeCGPoint(forKey: LBPin.kPosition)
+        type = PinType(rawValue: decoder.decodeInteger(forKey: LBPin.kType)) ?? .input
+        facing = Orientation(rawValue: decoder.decodeInteger(forKey: LBPin.kFacing)) ?? .left
+        highlighted = decoder.decodeBool(forKey: LBPin.kHighlighted)
+        super.init()
+    }
+    
+    func encode(with encoder: NSCoder) {
+        encoder.encodeCInt(1, forKey: LBPin.kVersionKey)
+        encoder.encode(pos, forKey: LBPin.kPosition)
+        encoder.encode(type.rawValue, forKey: LBPin.kType)
+        encoder.encode(facing.rawValue, forKey: LBPin.kFacing)
+        encoder.encode(highlighted, forKey: LBGate.kHighlighted)
+    }
+    
 }
 
-extension LBPin: PropertyListReadable {
-    
-    init?(propertyListRepresentation: NSDictionary?) {
-        guard let values = propertyListRepresentation else { return nil }
-        if let posx = values["posx"] as? CGFloat,
-           let posy = values["posy"] as? CGFloat,
-           let rawtype = values["type"] as? Int,
-           let rawfacing = values["facing"] as? Int,
-           let rawstate = values["state"] as? Int {
-            pos.x = posx; pos.y = posy
-            type = PinType(rawValue: rawtype) ?? .input
-            facing = Orientation(rawValue: rawfacing) ?? .left
-            state = LogicState(rawValue: rawstate) ?? .U
-        } else {
-            return nil
-        }
-    }
-    
-    func propertyListRepresentation() -> NSDictionary {
-        let representation: [String:AnyObject] = [
-            "posx":pos.x as AnyObject,
-            "posy":pos.y as AnyObject,
-            "type":type.rawValue as AnyObject,
-            "facing":facing.rawValue as AnyObject,
-            "state": state.rawValue as AnyObject
-        ]
-        return representation as NSDictionary
-    }
-}
+//extension LBPin: PropertyListReadable {
+//    
+//    init?(propertyListRepresentation: NSDictionary?) {
+//        guard let values = propertyListRepresentation else { return nil }
+//        if let posx = values["posx"] as? CGFloat,
+//           let posy = values["posy"] as? CGFloat,
+//           let rawtype = values["type"] as? Int,
+//           let rawfacing = values["facing"] as? Int,
+//           let rawstate = values["state"] as? Int {
+//            pos.x = posx; pos.y = posy
+//            type = PinType(rawValue: rawtype) ?? .input
+//            facing = Orientation(rawValue: rawfacing) ?? .left
+//            state = LogicState(rawValue: rawstate) ?? .U
+//        } else {
+//            return nil
+//        }
+//    }
+//    
+//    func propertyListRepresentation() -> NSDictionary {
+//        let representation: [String:AnyObject] = [
+//            "posx":pos.x as AnyObject,
+//            "posy":pos.y as AnyObject,
+//            "type":type.rawValue as AnyObject,
+//            "facing":facing.rawValue as AnyObject,
+//            "state": state.rawValue as AnyObject
+//        ]
+//        return representation as NSDictionary
+//    }
+//}
 
 extension CGPoint {
     
@@ -103,12 +127,10 @@ class LBGate : NSObject, NSCoding {
     
     required init? (coder decoder: NSCoder) {
         let _ = decoder.decodeCInt(forKey: LBGate.kVersionKey)
-        let nBounds = decoder.decodeCGRect(forKey: LBGate.kNativeRect)
-        nativeBounds = nBounds
+        nativeBounds = decoder.decodeCGRect(forKey: LBGate.kNativeRect)
         bounds = decoder.decodeCGRect(forKey: LBGate.kRect)
         highlighted = decoder.decodeBool(forKey: LBGate.kHighlighted)
-        let pinEncoding = decoder.decodeObject(forKey: LBGate.kPins) as? [AnyObject]
-        pins = extractValuesFromPropertyListArray(pinEncoding)
+        pins = decoder.decodeObject(forKey: LBGate.kPins) as! [LBPin]
         super.init()
     }
     
@@ -117,8 +139,7 @@ class LBGate : NSObject, NSCoding {
         encoder.encode(nativeBounds, forKey: LBGate.kNativeRect)
         encoder.encode(bounds, forKey: LBGate.kRect)
         encoder.encode(highlighted, forKey: LBGate.kHighlighted)
-        let pinEncoding = pins.map{$0.propertyListRepresentation()}
-        encoder.encode(pinEncoding, forKey: LBGate.kPins)
+        encoder.encode(pins, forKey: LBGate.kPins)
     }
     
     // MARK: - Object Methods
