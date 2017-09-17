@@ -28,7 +28,7 @@ class LBIndicator: LBGate {
     override func draw(_ scale: CGFloat) {
         let pin1 = pins.first!
         let state : CGFloat = pin1.state.isOne ? 1 : 0
-        Gates.drawIndicator(frame: bounds, highlight: highlighted, pinVisible: inputPinVisible == 1, state: state, name: name)
+        Gates.drawIndicator(frame: bounds, highlight: highlighted, state: state, inputPinVisible: CGFloat(inputPinVisible), name: name)
     }
     
 }
