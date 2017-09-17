@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 enum PinType: Int {
     case input, output, bidirectional, tristate, openCollector
 }
@@ -133,19 +131,19 @@ class LBGate : NSObject, NSCoding {
         return bounds.contains(point)
     }
     
-    final func getClosestPin (_ point: CGPoint) -> LBPin {
+    final func getClosestPinIndex (_ point: CGPoint) -> Int {
 //        if !isInBounds(point) { return nil }
         var distance = CGFloat.infinity
-        var fpin = CGPoint.zero
-        for pin in pins {
+        var fpin = 0
+        for (index, pin) in pins.enumerated() {
             let pinPoint = CGPoint(x: pin.pos.x+bounds.origin.x, y: pin.pos.y+bounds.origin.y)
             let range = pinPoint.distanceTo(point)
             if range < distance {
                 distance = range
-                fpin = pinPoint
+                fpin = index
             }
         }
-        return LBPin(x: fpin.x, y: fpin.y)
+        return fpin
     }
     
     final func defaultBounds () {

@@ -13,6 +13,8 @@ class LBButton: LBGate {
     var state = LogicState.zero
     var name : String = "Input"
     
+    let yoff : CGFloat = 6
+    
     override public var description: String {
         return "Input"
     }
@@ -20,13 +22,12 @@ class LBButton: LBGate {
     override func localInit() {
         super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 95, height: 69)
-        var pin1 = LBPin(x: 95-LBPin.size, y: 34.5); pin1.type = .output
+        var pin1 = LBPin(x: 95-LBPin.size, y: 34.5+yoff); pin1.type = .output
         pins = [pin1]
     }
     
     override func evaluate() -> LogicState {
-        var pin1 = pins[0]
-        pin1.state = self.state
+        pins[0].state = self.state
         print("Evaluating button = \(self.state)")
         return self.state
     }

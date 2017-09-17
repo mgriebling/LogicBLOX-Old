@@ -12,8 +12,8 @@ class LBGateView: UIView {
     
     var grid = LBGrid()
     
-    var creatingGate : LBGate?
-    var editingGate : LBGate?
+    private var creatingGate : LBGate?
+    private var editingGate : LBGate?
     
     var gates = [LBGate]() {
         didSet { setNeedsDisplay() }
@@ -58,25 +58,18 @@ class LBGateView: UIView {
                     
                     // create the initial connection
                     let connection = LBConnection()
-                    let sourcePin = gate.getClosestPin(gateOrigin)
-                    if sourcePin.type == .output { gate.outputPinVisible = 1 }
-                    else { gate.inputPinVisible = 1 }
-                    connection.pins = [LBPin(x: 0, y: 0)]
-                    connection.bounds = CGRect(origin: sourcePin.pos, size: CGSize.zero)
+                    let sourcePin = gate.getClosestPinIndex(gateOrigin)
+                    if gate.pins[sourcePin].type == .output { gate.outputPinVisible = 1 }
+                    else { gate.inputPinVisible = sourcePin }
+                    connection.addPin(gate, index: sourcePin)
                     connection.highlighted = true
                     gates.append(connection)
                     creatingGate = connection
                 } else {
                     // finish the connection to this destination gate
-                    let destinationPin = gate.getClosestPin(gateOrigin)
-                    let deltaX = destinationPin.pos.x - creatingGate!.bounds.origin.x
-                    let deltaY = destinationPin.pos.y - creatingGate!.bounds.origin.y
-                    if creatingGate?.pins.count == 1 {
-                        // add an intermediate point
-                        let spt = creatingGate!.pins[0].pos
-                        creatingGate?.pins.append(LBPin(x: deltaX, y: spt.y))
-                    }
-                    creatingGate?.pins.append(LBPin(x: deltaX, y: deltaY))
+                    let destinationPin = gate.getClosestPinIndex(gateOrigin)
+                    let connection = creatingGate as! LBConnection
+                    connection.addPin(gate, index: destinationPin)
                     creatingGate = nil
                     gate.highlighted = false
                     gate.inputPinVisible = 0
@@ -87,10 +80,8 @@ class LBGateView: UIView {
             }
         } else if gateID == .line && creatingGate != nil {
             // add a point to the line
-            let deltaX = gateOrigin.x - creatingGate!.bounds.origin.x
-            let deltaY = gateOrigin.y - creatingGate!.bounds.origin.y
-            let newPoint = grid.constrainedPoint(CGPoint(x: deltaX, y: deltaY))
-            creatingGate!.pins.append(LBPin(x: newPoint.x, y: newPoint.y))
+            let connection = creatingGate as! LBConnection
+            connection.addPin(gateOrigin)
         } else {
             gateOrigin = grid.constrainedPoint(gateOrigin)
             let gate = LBGateType.classForGate(gateID)
@@ -99,8 +90,8 @@ class LBGateView: UIView {
             gate.highlighted = true
             
             gates.append(gate)
-            creatingGate?.highlighted = false
-            creatingGate = gate
+            editingGate?.highlighted = false
+            editingGate = gate
         }
         setNeedsDisplay()
     }
@@ -125,29 +116,6 @@ class LBGateView: UIView {
             setNeedsDisplay()
         }
     }
-    
-//    func joinGates (_ source: LBGate, atPin spin: Int?, to destination: LBGate, atPin dpin: Int?) {
-//        // draw a connection between these gates
-//        if let spin = spin, let dpin = dpin {
-//            let connection = LBConnection()
-//            let spt  = source.pins[spin].pos
-//            let spta = CGPoint(x: spt.x+source.bounds.origin.x, y: spt.y+source.bounds.origin.y)
-//            let ept  = destination.pins[dpin].pos
-//            let epta = CGPoint(x: ept.x+destination.bounds.origin.x, y: ept.y+destination.bounds.origin.y)
-//            let mid = CGPoint(x: epta.x, y: spta.y)
-//            
-//            connection.pins[0].pos = spta
-//            connection.pins[1].pos = mid
-//            connection.pins[2].pos = epta
-//            connection.highlighted = true
-//            gates.append(connection)
-//            source.highlighted = false
-//            source.pinsVisible = false
-//            destination.highlighted = false
-//            destination.pinsVisible = false
-//            setNeedsDisplay()
-//        }
-//    }
     
     func clearSelected() {
         for gate in selected {

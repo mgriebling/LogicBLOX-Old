@@ -21,6 +21,8 @@ enum LogicState: Int {
          H, // Weak one for pull-up resistors
          一 // Don't care used for synthesis and advanced modelling
     
+    var isOne : Bool { return self == LogicState.𝟷 }
+    
     // convenient shortcuts for common symbols
     static let zero = LogicState.𝟶
     static let one  = LogicState.𝟷

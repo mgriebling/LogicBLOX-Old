@@ -173,6 +173,10 @@ class LBCanvasViewController: UIViewController {
                     // simplistic evaluation of values
                     _ = gate.evaluate()
                 }
+                for gate in gateView.gates {
+                    // simplistic evaluation of values
+                    _ = gate.evaluate()
+                }
                 gateView.setNeedsDisplay()
             }
         }
