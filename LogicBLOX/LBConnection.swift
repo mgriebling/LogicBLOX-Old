@@ -144,10 +144,22 @@ class LBConnection: LBGate {
     
     /// Override since connection bounds are rather tricky
     override func contains(_ point: CGPoint) -> Bool {
-        let path = bezierShape()
-        let state = path.bounds.contains(point)
-        print("Path \(path.bounds) has point\(point) = \(state)")
-        return state
+        let buffer = LBConnection.MatchSize // distance from the line that is still considered a match
+        var pta = bounds.offsetBy(dx: 0, dy: 0).origin   // first pt starts at origin
+        for pt in connections.dropFirst() {
+            let ptb = bounds.offsetBy(dx: pt.x, dy: pt.y).origin
+            let topLeft = CGPoint(x: min(pta.x, ptb.x), y: min(pta.y, ptb.y))
+            let bottomRight = CGPoint(x: max(pta.x, ptb.x), y: max(pta.y, ptb.y))
+            let box = CGRect(x: topLeft.x-buffer, y: topLeft.y-buffer,
+                             width: bottomRight.x-topLeft.x+2*buffer, height: bottomRight.y-topLeft.y+2*buffer)
+            if box.contains(point) {
+                return true
+            }
+            
+            // move on to the next line segment
+            pta = ptb
+        }
+        return false
     }
     
     // MARK: - Logic evaluation
