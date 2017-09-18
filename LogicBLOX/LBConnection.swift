@@ -16,23 +16,27 @@ class LBConnection: LBGate {
     static let kOutputs     = "Outputs"
     static let kConnections = "Connections"
     
-    /// output pins from other gates
+    // MARK: - Internal state
+    
+    /// Output pins from other gates
     var inputs = [LBPin]()
     
-    // input pins from other gates
+    // Input pins from other gates
     var outputs = [LBPin]()
     
     // wired connections relative to our origin
     var connections = [CGPoint]()
     
+    override public var description: String {
+        return "Connection"
+    }
+    
+    // MARK: - Support
+    
     var prevPoint : CGPoint {
         let pindex = max(0, connections.count-1)
         let pos = connections[pindex]
         return bounds.offsetBy(dx: pos.x, dy: pos.y).origin
-    }
-    
-    override public var description: String {
-        return "Connection"
     }
     
     // MARK: - Life cycle
@@ -60,6 +64,8 @@ class LBConnection: LBGate {
         inputs = []; outputs = []
     }
     
+    // MARK: - Drawing
+    
     override func draw(_ scale: CGFloat) {
         // draw a connection joining all the pins
         let path = bezierShape()
@@ -72,7 +78,21 @@ class LBConnection: LBGate {
         path.stroke()
     }
     
-    func addGatePin(_ pin: LBPin) {
+    func bezierShape() -> UIBezierPath {
+        guard connections.count > 1 else { return UIBezierPath() }
+        let path = UIBezierPath()
+        let pin1 = connections[0]
+        let org = bounds.origin
+        path.move(to: CGPoint(x:org.x+pin1.x, y: org.y+pin1.y))
+        for pin in connections.dropFirst() {
+            path.addLine(to: CGPoint(x:org.x+pin.x, y: org.y+pin.y))
+        }
+        return path
+    }
+    
+    // MARK: - Editing
+    
+    func addPin(_ pin: LBPin) {
         if pin.type == .input {
             // we drive gate inputs so they are outputs here
             outputs.append(pin)
@@ -85,9 +105,9 @@ class LBConnection: LBGate {
     }
     
     /// logical connection is made to the source gate
-    func addPin(_ source: LBGate, index: Int) {
+    func addGatePin(_ source: LBGate, index: Int) {
         let pin = source.pins[index]
-        addGatePin(pin)  // our connections to other gates
+        addPin(pin)  // our connections to other gates
         if connections.count == 0 {
             bounds.origin = source.bounds.offsetBy(dx: pin.pos.x, dy: pin.pos.y).origin
             connections.append(CGPoint.zero)
@@ -122,6 +142,16 @@ class LBConnection: LBGate {
         connections.append(CGPoint(x: x, y: y))
     }
     
+    /// Override since connection bounds are rather tricky
+    override func contains(_ point: CGPoint) -> Bool {
+        let path = bezierShape()
+        let state = path.bounds.contains(point)
+        print("Path \(path.bounds) has point\(point) = \(state)")
+        return state
+    }
+    
+    // MARK: - Logic evaluation
+    
     override func evaluate() -> LogicState {
         let state = LogicState.resolve(inputs.map { $0.state })  // combine all inputs -- more than one implies a bus
         for pin in outputs {                                     // drive all the outputs
@@ -129,18 +159,6 @@ class LBConnection: LBGate {
         }
         print("Evaluating connection from \(inputs) to \(outputs) = \(state)")
         return state
-    }
-    
-    func bezierShape() -> UIBezierPath {
-        guard connections.count > 1 else { return UIBezierPath() }
-        let path = UIBezierPath()
-        let pin1 = connections[0]
-        let org = bounds.origin
-        path.move(to: CGPoint(x:org.x+pin1.x, y: org.y+pin1.y))
-        for pin in connections.dropFirst() {
-            path.addLine(to: CGPoint(x:org.x+pin.x, y: org.y+pin.y))
-        }
-        return path
     }
     
 }

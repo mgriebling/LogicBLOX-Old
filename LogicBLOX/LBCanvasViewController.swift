@@ -193,6 +193,18 @@ class LBCanvasViewController: UIViewController {
     @IBAction func exitFromPopup(segue: UIStoryboardSegue) {
         // Dummy exit from popup window
     }
+    
+    func preparePopover(_ contentController: UIViewController, sender: Any?, delegate: UIPopoverPresentationControllerDelegate?) {
+        contentController.modalPresentationStyle = .popover
+        contentController.popoverPresentationController?.delegate = delegate
+        
+        if let view = sender as? UIView {
+            contentController.popoverPresentationController?.sourceView = view
+            contentController.popoverPresentationController?.sourceRect = view.bounds
+        } else {
+            contentController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
+        }
+    }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -202,6 +214,7 @@ class LBCanvasViewController: UIViewController {
             switch id {
             case "Show Gates" :
                 let vc = (segue.destination as! UINavigationController).viewControllers[0] as? LBGateCollectionViewController
+                preparePopover(segue.destination, sender: sender, delegate: self)
                 vc?.selectedItem = lastGateType.rawValue
                 vc?.callback = { selected in
                     self.lastGateType = selected
@@ -209,6 +222,7 @@ class LBCanvasViewController: UIViewController {
                 }
             case "Show Designs":
                 let vc = (segue.destination as! UINavigationController).viewControllers[0] as? LBDesignTableViewController
+                preparePopover(segue.destination, sender: sender, delegate: self)
                 vc?.selectedItem = Designs.list.index(of: document!.fileURL) ?? 0
                 vc?.callback = { selected in
                     let url = Designs.list[selected]
@@ -248,6 +262,15 @@ extension LBCanvasViewController : UIScrollViewDelegate {
     
     func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
         return false
+    }
+    
+}
+
+extension LBCanvasViewController : UIPopoverPresentationControllerDelegate {
+    
+    // Just so the iPhone shows pop-overs too
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
     }
     
 }
