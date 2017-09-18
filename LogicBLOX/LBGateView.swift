@@ -81,7 +81,7 @@ class LBGateView: UIView {
         } else if gateID == .line && creatingGate != nil {
             // add a point to the line
             let connection = creatingGate as! LBConnection
-            connection.addPin(gateOrigin)
+            connection.addPoint(gateOrigin)
         } else {
             gateOrigin = grid.constrainedPoint(gateOrigin)
             let gate = LBGateType.classForGate(gateID)

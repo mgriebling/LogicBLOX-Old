@@ -131,6 +131,7 @@ class LBDesignTableViewController: UITableViewController {
                 tableView.reloadRows(at: [IndexPath(row: selectedItem, section: 0)], with: .none)
             }
             editButtonItem.isEnabled = Designs.list.count > 1
+            selectedItem = min(selectedItem, max(Designs.list.count-1, 0))
         }    
     }
 
