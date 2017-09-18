@@ -26,7 +26,7 @@ class LBConnection: LBGate {
     var connections = [CGPoint]()
     
     var prevPoint : CGPoint {
-        let pindex = max(0, connections.count-2)
+        let pindex = max(0, connections.count-1)
         let pos = connections[pindex]
         return bounds.offsetBy(dx: pos.x, dy: pos.y).origin
     }
