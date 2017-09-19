@@ -166,11 +166,31 @@ class LBConnection: LBGate {
     // MARK: - Logic evaluation
     
     override func evaluate() -> LogicState {
-        let state = LogicState.resolve(inputs.map { $0.state })  // combine all inputs -- more than one implies a bus
-        for pin in outputs {                                     // drive all the outputs
-            pin.state = state
+        let state : LogicState
+        if inputs.count == 0 && outputs.count > 1 {
+            // no inputs so check if one of the outputs is driven and propagate this value
+            var pinState : LogicState?
+            for pin in outputs {
+                if pin.state.isOne || pin.state == .𝟶 {
+                    pinState = pin.state
+                    break
+                }
+            }
+            
+            // set all pins to the driven value
+            if let pinState = pinState {
+                for pin in outputs {
+                    pin.state = pinState
+                }
+            }
+            state = pinState ?? .U
+        } else {
+            state = LogicState.resolve(inputs.map { $0.state })  // combine all inputs -- more than one implies a bus
+            for pin in outputs {                                 // drive all the outputs
+                pin.state = state
+            }
         }
-        print("Evaluating connection from \(inputs) to \(outputs) = \(state)")
+//        print("Evaluating connection from \(inputs) to \(outputs) = \(state)")
         return state
     }
     

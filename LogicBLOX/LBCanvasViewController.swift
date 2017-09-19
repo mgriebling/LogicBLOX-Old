@@ -169,6 +169,16 @@ class LBCanvasViewController: UIViewController {
             if let button = gateView.gateUnderPoint(sender.location(in: gateView)) as? LBButton {
                 button.toggleState()
                 print("gates = \(gateView.gates)")
+                
+                // clear all connected gate input pins so drive signals on shorted inputs propagate properly
+                for gate in gateView.gates {
+                    if let connection = gate as? LBConnection {
+                        for pin in connection.outputs {
+                            pin.state = .U
+                        }
+                    }
+                }
+                
                 for gate in gateView.gates {
                     // simplistic evaluation of values
                     _ = gate.evaluate()

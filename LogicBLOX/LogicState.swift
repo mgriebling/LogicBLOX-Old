@@ -31,7 +31,7 @@ enum LogicState: Int {
     // Truth table for "not" function
     static let Not : [LogicState] =
       //---------------------------------
-      //  U  X  0  𝟷  Z  W  L  H 一      Input
+      //  U  X  0  𝟷  Z  W  L  H  一      Input
       //---------------------------------
         [ U, X, 𝟷, 𝟶, X, X, 𝟷, 𝟶, X ] // Output
     //
@@ -42,7 +42,7 @@ enum LogicState: Int {
     // Truth table for "xor" function
     static let Xor : [[LogicState]] = [
       //--------------------------------- Input
-      //  U  X  0  1  Z  W  L  H 一        A/B
+      //  U  X  0  1  Z  W  L  H  一       A/B
       //---------------------------------
         [ U, U, U, U, U, U, U, U, U ], // | U |
         [ U, X, X, X, X, X, X, X, X ], // | X |
@@ -61,7 +61,7 @@ enum LogicState: Int {
     // Truth table for "or" function
     static let Or : [[LogicState]] = [
       //--------------------------------- Input
-      //  U  X  0  1  Z  W  L  H 一        A/B
+      //  U  X  0  1  Z  W  L  H  一       A/B
       //---------------------------------
         [ U, U, U, 𝟷, U, U, U, 𝟷, U ], // | U |
         [ U, X, X, 𝟷, X, X, X, 𝟷, X ], // | X |
@@ -80,7 +80,7 @@ enum LogicState: Int {
     // Truth table for "and" function
     static let And : [[LogicState]] = [
       //--------------------------------- Input
-      //  U  X  0  1  Z  W  L  H 一        A/B
+      //  U  X  0  1  Z  W  L  H  一       A/B
       //---------------------------------
         [ U, U, 𝟶, U, U, U, 𝟶, U, U ], // | U |
         [ U, X, 𝟶, X, X, X, 𝟶, X, X ], // | X |
@@ -98,7 +98,7 @@ enum LogicState: Int {
     
     static let Resolution : [[LogicState]] = [
       //--------------------------------- Input
-      //  U  X  0  1  Z  W  L  H 一        A/B
+      //  U  X  0  1  Z  W  L  H  一       A/B
       //---------------------------------
         [ U, U, U, U, U, U, U, U, U ], // | U |
         [ U, X, X, X, X, X, X, X, X ], // | X |
