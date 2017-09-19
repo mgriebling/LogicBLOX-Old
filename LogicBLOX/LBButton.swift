@@ -42,7 +42,9 @@ class LBButton: LBGate {
     
     override func draw(_ scale: CGFloat) {
         let state : CGFloat = self.state == .one ? 1 : 0
+        NSLog("Start button drawing...")
         Gates.drawButton(frame: bounds, highlight: highlighted, state: state, outputPinVisible: outputPinVisible == 1)
+        NSLog("Done button drawing")
     }
     
 }

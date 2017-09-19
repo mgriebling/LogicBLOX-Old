@@ -171,6 +171,7 @@ class LBCanvasViewController: UIViewController {
                 print("gates = \(gateView.gates)")
                 
                 // clear all connected gate input pins so drive signals on shorted inputs propagate properly
+                NSLog("Started clearing inputs")
                 for gate in gateView.gates {
                     if let connection = gate as? LBConnection {
                         for pin in connection.outputs {
@@ -179,14 +180,17 @@ class LBCanvasViewController: UIViewController {
                     }
                 }
                 
+                NSLog("First evaluation pass...")
                 for gate in gateView.gates {
                     // simplistic evaluation of values
                     _ = gate.evaluate()
                 }
+                NSLog("Second evaluation pass...")
                 for gate in gateView.gates {
                     // do it twice to catch any changes
                     _ = gate.evaluate()
                 }
+                NSLog("Finished")
                 gateView.setNeedsDisplay()
             }
         }

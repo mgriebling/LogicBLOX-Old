@@ -28,7 +28,9 @@ class LBIndicator: LBGate {
     override func draw(_ scale: CGFloat) {
         let pin1 = pins.first!
         let state : CGFloat = pin1.state.isOne ? 1 : 0
+        NSLog("Start indicator drawing...")
         Gates.drawIndicator(frame: bounds, highlight: highlighted, state: state, inputPinVisible: CGFloat(inputPinVisible))
+        NSLog("Done indicator drawing")
     }
     
 }

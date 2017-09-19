@@ -682,13 +682,13 @@ public class Gates : NSObject {
         let ovalPath = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 49, height: 47))
         context.saveGState()
         context.setShadow(offset: CGSize(width: shadow.shadowOffset.width * resizedShadowScale, height: shadow.shadowOffset.height * resizedShadowScale), blur: shadow.shadowBlurRadius * resizedShadowScale, color: (shadow.shadowColor as! UIColor).cgColor)
-        context.beginTransparencyLayer(auxiliaryInfo: nil)
+//        context.beginTransparencyLayer(auxiliaryInfo: nil)
         ovalPath.addClip()
         context.drawRadialGradient(gradientFill,
             startCenter: CGPoint(x: 20.38, y: 15.04), startRadius: 5.1,
             endCenter: CGPoint(x: 24.5, y: 23.5), endRadius: 30.93,
             options: [.drawsBeforeStartLocation, .drawsAfterEndLocation])
-        context.endTransparencyLayer()
+//        context.endTransparencyLayer()
         context.restoreGState()
 
         colour.setStroke()
