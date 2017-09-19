@@ -61,7 +61,7 @@ class LBGateView: UIView {
                     let sourcePin = gate.getClosestPinIndex(gateOrigin)
                     if gate.pins[sourcePin].type == .output { gate.outputPinVisible = 1 }
                     else { gate.inputPinVisible = sourcePin }
-                    connection.addPin(gate, index: sourcePin)
+                    connection.addGatePin(gate, index: sourcePin)
                     connection.highlighted = true
                     gates.append(connection)
                     creatingGate = connection
@@ -69,7 +69,7 @@ class LBGateView: UIView {
                     // finish the connection to this destination gate
                     let destinationPin = gate.getClosestPinIndex(gateOrigin)
                     let connection = creatingGate as! LBConnection
-                    connection.addPin(gate, index: destinationPin)
+                    connection.addGatePin(gate, index: destinationPin)
                     creatingGate = nil
                     gate.highlighted = false
                     gate.inputPinVisible = 0
@@ -137,7 +137,7 @@ class LBGateView: UIView {
     
     func gateUnderPoint(_ point: CGPoint) -> LBGate? {
         for gate in gates {
-            if gate.bounds.contains(point) {
+            if gate.contains(point) {
                 return gate
             }
         }

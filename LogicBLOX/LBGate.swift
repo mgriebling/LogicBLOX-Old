@@ -148,7 +148,7 @@ class LBGate : NSObject, NSCoding {
         // override to set up pins and nativeBounds
     }
     
-    func isInBounds (_ point: CGPoint) -> Bool {
+    func contains (_ point: CGPoint) -> Bool {
         return bounds.contains(point)
     }
     
