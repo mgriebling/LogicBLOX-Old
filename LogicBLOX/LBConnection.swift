@@ -70,6 +70,7 @@ class LBConnection: LBGate {
         // draw a connection joining all the pins
         let path = bezierShape()
         path.lineWidth = 2.5
+//        path.lineCapStyle = .round
         if highlighted {
             Gates.highlightColour.setStroke()
         } else {

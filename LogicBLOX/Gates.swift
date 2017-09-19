@@ -189,7 +189,7 @@ public class Gates : NSObject {
         context.restoreGState()
     }
 
-    @objc dynamic public class func drawOrNorGate(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 135, height: 67), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, inputs: CGFloat = 3, inputPinVisible: CGFloat = 2, outputPinVisible: Bool = true, invert: Bool = true) {
+    @objc dynamic public class func drawOrNorGate(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 135, height: 67), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, inputs: CGFloat = 4, inputPinVisible: CGFloat = 0, outputPinVisible: Bool = true, invert: Bool = true) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -252,7 +252,7 @@ public class Gates : NSObject {
 
     }
 
-    @objc dynamic public class func drawXorXnorGate(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 143, height: 67), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, inputs: CGFloat = 3, inputPinVisible: CGFloat = 2, outputPinVisible: Bool = true, invert: Bool = true) {
+    @objc dynamic public class func drawXorXnorGate(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 143, height: 67), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, inputs: CGFloat = 4, inputPinVisible: CGFloat = 0, outputPinVisible: Bool = true, invert: Bool = true) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -315,7 +315,7 @@ public class Gates : NSObject {
 
     }
 
-    @objc dynamic public class func drawBufferInverterGate(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 102, height: 57), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, inputPinVisible: CGFloat = 2, outputPinVisible: Bool = true, invert: Bool = true) {
+    @objc dynamic public class func drawBufferInverterGate(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 102, height: 57), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, inputPinVisible: CGFloat = 0, outputPinVisible: Bool = true, invert: Bool = true) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -379,7 +379,7 @@ public class Gates : NSObject {
 
     }
 
-    @objc dynamic public class func drawAndNandGate(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 134, height: 68), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, pinVisible: Bool = true, inputs: CGFloat = 3, inputPinVisible: CGFloat = 2, invert: Bool = true) {
+    @objc dynamic public class func drawAndNandGate(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 134, height: 68), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, pinVisible: Bool = true, inputs: CGFloat = 4, inputPinVisible: CGFloat = 0, invert: Bool = true) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -442,7 +442,7 @@ public class Gates : NSObject {
 
     }
 
-    @objc dynamic public class func drawBlockGate(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 127, height: 121), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, pinVisible: Bool = true, inputs: CGFloat = 3, name: String = "Block Gate") {
+    @objc dynamic public class func drawBlockGate(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 127, height: 121), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, pinVisible: Bool = true, inputs: CGFloat = 4, name: String = "Block Gate") {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -570,16 +570,16 @@ public class Gates : NSObject {
 
     }
 
-    @objc dynamic public class func drawButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 150, height: 35), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, state: CGFloat = 0, outputPinVisible: Bool = true, name: String = "Block Gate") {
+    @objc dynamic public class func drawButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 57, height: 35), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, state: CGFloat = 0, outputPinVisible: Bool = true) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
         //// Resize to Target Frame
         context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 150, height: 35), target: targetFrame)
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 57, height: 35), target: targetFrame)
         context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 150, y: resizedFrame.height / 35)
-        let resizedShadowScale: CGFloat = min(resizedFrame.width / 150, resizedFrame.height / 35)
+        context.scaleBy(x: resizedFrame.width / 57, y: resizedFrame.height / 35)
+        let resizedShadowScale: CGFloat = min(resizedFrame.width / 57, resizedFrame.height / 35)
 
 
         //// Color Declarations
@@ -598,7 +598,7 @@ public class Gates : NSObject {
         //// Group
         //// Rectangle Drawing
         context.saveGState()
-        context.translateBy(x: 96.5, y: 5.5)
+        context.translateBy(x: 4.5, y: 5.5)
         context.scaleBy(x: 0.5, y: 0.5)
 
         let rectangleRect = CGRect(x: 0, y: 0, width: 49, height: 42)
@@ -630,45 +630,28 @@ public class Gates : NSObject {
 
 
         //// Symbol Drawing
-        let symbolRect = CGRect(x: 119, y: 12, width: 31, height: 8)
+        let symbolRect = CGRect(x: 27, y: 12, width: 31, height: 8)
         context.saveGState()
         context.clip(to: symbolRect)
         context.translateBy(x: symbolRect.minX, y: symbolRect.minY)
 
         Gates.drawOutputPin(frame: CGRect(origin: .zero, size: symbolRect.size), resizing: .stretch, highlight: highlight, pinVisible: outputPinVisible)
         context.restoreGState()
-
-
-        //// Text Drawing
-        let textRect = CGRect(x: 0, y: 6, width: 90, height: 19)
-        let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .right
-        let textFontAttributes = [
-            NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.systemFontSize),
-            NSForegroundColorAttributeName: UIColor.black,
-            NSParagraphStyleAttributeName: textStyle,
-        ]
-
-        let textTextHeight: CGFloat = name.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: textRect)
-        name.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
-        context.restoreGState()
         
         context.restoreGState()
 
     }
 
-    @objc dynamic public class func drawIndicator(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 140, height: 35), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, state: CGFloat = 0, inputPinVisible: CGFloat = 2, name: String = "Block Gate") {
+    @objc dynamic public class func drawIndicator(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 57, height: 35), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, state: CGFloat = 0, inputPinVisible: CGFloat = 0) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
         //// Resize to Target Frame
         context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 140, height: 35), target: targetFrame)
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 57, height: 35), target: targetFrame)
         context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 140, y: resizedFrame.height / 35)
-        let resizedShadowScale: CGFloat = min(resizedFrame.width / 140, resizedFrame.height / 35)
+        context.scaleBy(x: resizedFrame.width / 57, y: resizedFrame.height / 35)
+        let resizedShadowScale: CGFloat = min(resizedFrame.width / 57, resizedFrame.height / 35)
 
 
         //// Color Declarations
@@ -723,23 +706,6 @@ public class Gates : NSObject {
 
         Gates.drawInputPin(frame: CGRect(origin: .zero, size: symbolRect.size), resizing: .stretch, highlight: highlight, pinVisible: pin1Visible)
         context.restoreGState()
-
-
-        //// Text Drawing
-        let textRect = CGRect(x: 52, y: 8, width: 90, height: 19)
-        let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .left
-        let textFontAttributes = [
-            NSFontAttributeName: UIFont.systemFont(ofSize: UIFont.systemFontSize),
-            NSForegroundColorAttributeName: UIColor.black,
-            NSParagraphStyleAttributeName: textStyle,
-        ]
-
-        let textTextHeight: CGFloat = name.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: textRect)
-        name.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
-        context.restoreGState()
         
         context.restoreGState()
 
@@ -781,7 +747,7 @@ public class Gates : NSObject {
 
     }
 
-    @objc dynamic public class func drawOrPins(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 31, height: 56), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, inputs: CGFloat = 3, inputPinVisible: CGFloat = 2) {
+    @objc dynamic public class func drawOrPins(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 31, height: 56), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, inputs: CGFloat = 4, inputPinVisible: CGFloat = 0) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -915,7 +881,7 @@ public class Gates : NSObject {
             context.clip(to: symbol2Rect)
             context.translateBy(x: symbol2Rect.minX, y: symbol2Rect.minY)
 
-            Gates.drawInputPin(frame: CGRect(origin: .zero, size: symbol2Rect.size), resizing: .stretch, highlight: highlight, pinVisible: pin3or4Visible)
+            Gates.drawInputPin(frame: CGRect(origin: .zero, size: symbol2Rect.size), resizing: .stretch, highlight: highlight, pinVisible: pin2Visible)
             context.restoreGState()
         }
 
@@ -974,23 +940,12 @@ public class Gates : NSObject {
             Gates.drawInputPin(frame: CGRect(origin: .zero, size: symbol7Rect.size), resizing: .stretch, highlight: highlight, pinVisible: pin3Visible)
             context.restoreGState()
         }
-
-
-        if (hasInputs3or4) {
-            //// Bezier Drawing
-            let bezierPath = UIBezierPath()
-            bezierPath.move(to: CGPoint(x: 2, y: 8))
-            bezierPath.addLine(to: CGPoint(x: 25, y: 8))
-            colour.setStroke()
-            bezierPath.lineWidth = 2.5
-            bezierPath.stroke()
-        }
         
         context.restoreGState()
 
     }
 
-    @objc dynamic public class func drawAndPins(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 30, height: 56), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, inputs: CGFloat = 3, inputPinVisible: CGFloat = 2) {
+    @objc dynamic public class func drawAndPins(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 30, height: 56), resizing: ResizingBehavior = .aspectFit, highlight: Bool = false, inputs: CGFloat = 4, inputPinVisible: CGFloat = 0) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -1102,7 +1057,7 @@ public class Gates : NSObject {
             context.clip(to: symbol7Rect)
             context.translateBy(x: symbol7Rect.minX, y: symbol7Rect.minY)
 
-            Gates.drawInputPin(frame: CGRect(origin: .zero, size: symbol7Rect.size), resizing: .stretch, highlight: highlight, pinVisible: pin3or4Visible)
+            Gates.drawInputPin(frame: CGRect(origin: .zero, size: symbol7Rect.size), resizing: .stretch, highlight: highlight, pinVisible: pin2Visible)
             context.restoreGState()
         }
         
@@ -1296,338 +1251,9 @@ public class Gates : NSObject {
 
     }
 
-    @objc dynamic public class func drawIcon40x40(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 40, height: 40), resizing: ResizingBehavior = .aspectFit) {
-        //// General Declarations
-        let context = UIGraphicsGetCurrentContext()!
-        
-        //// Resize to Target Frame
-        context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 40, height: 40), target: targetFrame)
-        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 40, y: resizedFrame.height / 40)
-
-
-        //// Symbol Drawing
-        context.saveGState()
-        context.translateBy(x: 0, y: -0.2)
-        context.scaleBy(x: 0.67, y: 0.67)
-
-        let symbolRect = CGRect(x: 0, y: 0, width: 60, height: 60)
-        context.saveGState()
-        context.clip(to: symbolRect)
-        context.translateBy(x: symbolRect.minX, y: symbolRect.minY)
-
-        Gates.drawIcon60x60(frame: CGRect(origin: .zero, size: symbolRect.size), resizing: .stretch)
-        context.restoreGState()
-
-        context.restoreGState()
-        
-        context.restoreGState()
-
-    }
-
-    @objc dynamic public class func drawIcon60x60(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60), resizing: ResizingBehavior = .aspectFit) {
-        //// General Declarations
-        let context = UIGraphicsGetCurrentContext()!
-        
-        //// Resize to Target Frame
-        context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 60, height: 60), target: targetFrame)
-        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 60, y: resizedFrame.height / 60)
-        let resizedShadowScale: CGFloat = min(resizedFrame.width / 60, resizedFrame.height / 60)
-
-
-
-        //// Gradient Declarations
-        let gradient2 = CGGradient(colorsSpace: nil, colors: [UIColor.red.cgColor, UIColor.red.blended(withFraction: 0.5, of: UIColor.white).cgColor, UIColor.white.cgColor] as CFArray, locations: [0.01, 0.39, 1])!
-
-        //// Shadow Declarations
-        let shadow = NSShadow()
-        shadow.shadowColor = UIColor.black.withAlphaComponent(0.6)
-        shadow.shadowOffset = CGSize(width: 3, height: 3)
-        shadow.shadowBlurRadius = 7
-
-        //// Variable Declarations
-        let colour2 = false ? Gates.highlightColour : Gates.baseColor
-
-        //// Group 3
-        context.saveGState()
-        context.translateBy(x: 0.5, y: -0.5)
-        context.scaleBy(x: 0.44, y: 0.44)
-
-
-
-        //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 136.36, height: 136.36))
-        context.saveGState()
-        rectanglePath.addClip()
-        context.drawLinearGradient(gradient2, start: CGPoint(x: -0, y: 0), end: CGPoint(x: 136.36, y: 136.36), options: [])
-        context.restoreGState()
-
-
-
-        context.restoreGState()
-
-
-        //// Group
-        context.saveGState()
-        context.setShadow(offset: CGSize(width: shadow.shadowOffset.width * resizedShadowScale, height: shadow.shadowOffset.height * resizedShadowScale), blur: shadow.shadowBlurRadius * resizedShadowScale, color: (shadow.shadowColor as! UIColor).cgColor)
-        context.beginTransparencyLayer(auxiliaryInfo: nil)
-
-
-        //// Group 6
-        context.saveGState()
-        context.translateBy(x: 45.22, y: 27.18)
-        context.scaleBy(x: 0.44, y: 0.44)
-
-
-
-        //// Group 7
-        //// Group 8
-        //// Oval Drawing
-        let ovalPath = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 13.8, height: 13.8))
-        UIColor.white.setFill()
-        ovalPath.fill()
-        colour2.setStroke()
-        ovalPath.lineWidth = 5
-        ovalPath.stroke()
-
-
-
-
-        //// Bezier 16 Drawing
-        let bezier16Path = UIBezierPath()
-        bezier16Path.move(to: CGPoint(x: 13.5, y: 6.5))
-        bezier16Path.addLine(to: CGPoint(x: 29.5, y: 6.5))
-        colour2.setStroke()
-        bezier16Path.lineWidth = 4.5
-        bezier16Path.lineCapStyle = .round
-        bezier16Path.stroke()
-
-
-
-
-
-        context.restoreGState()
-
-
-        //// Group 9
-        context.saveGState()
-        context.translateBy(x: 2.32, y: 17.72)
-        context.scaleBy(x: 0.44, y: 0.44)
-
-
-
-        //// Group 10
-        //// Bezier 10 Drawing
-        let bezier10Path = UIBezierPath()
-        bezier10Path.move(to: CGPoint(x: 24, y: 56))
-        bezier10Path.addLine(to: CGPoint(x: 24, y: 0))
-        colour2.setStroke()
-        bezier10Path.lineWidth = 2.5
-        bezier10Path.stroke()
-
-
-        //// Group 11
-        context.saveGState()
-        context.translateBy(x: -3, y: 4)
-
-
-
-        //// Group 12
-        //// Bezier 2 Drawing
-        let bezier2Path = UIBezierPath()
-        bezier2Path.move(to: CGPoint(x: 3, y: 4))
-        bezier2Path.addLine(to: CGPoint(x: 26, y: 4))
-        colour2.setStroke()
-        bezier2Path.lineWidth = 5
-        bezier2Path.lineCapStyle = .round
-        bezier2Path.stroke()
-
-
-
-
-
-        context.restoreGState()
-
-
-        //// Group 13
-        context.saveGState()
-        context.translateBy(x: -3, y: 17)
-
-
-
-        //// Group 14
-        //// Bezier 3 Drawing
-        let bezier3Path = UIBezierPath()
-        bezier3Path.move(to: CGPoint(x: 3, y: 4))
-        bezier3Path.addLine(to: CGPoint(x: 26, y: 4))
-        colour2.setStroke()
-        bezier3Path.lineWidth = 5
-        bezier3Path.lineCapStyle = .round
-        bezier3Path.stroke()
-
-
-
-
-
-        context.restoreGState()
-
-
-        //// Group 15
-        context.saveGState()
-        context.translateBy(x: -3, y: 30)
-
-
-
-        //// Group 16
-        //// Bezier 4 Drawing
-        let bezier4Path = UIBezierPath()
-        bezier4Path.move(to: CGPoint(x: 3, y: 4))
-        bezier4Path.addLine(to: CGPoint(x: 26, y: 4))
-        colour2.setStroke()
-        bezier4Path.lineWidth = 5
-        bezier4Path.lineCapStyle = .round
-        bezier4Path.stroke()
-
-
-
-
-
-        context.restoreGState()
-
-
-        //// Group 17
-        context.saveGState()
-        context.translateBy(x: -3, y: 43)
-
-
-
-        //// Group 18
-        //// Bezier 5 Drawing
-        let bezier5Path = UIBezierPath()
-        bezier5Path.move(to: CGPoint(x: 3, y: 4))
-        bezier5Path.addLine(to: CGPoint(x: 26, y: 4))
-        colour2.setStroke()
-        bezier5Path.lineWidth = 5
-        bezier5Path.lineCapStyle = .round
-        bezier5Path.stroke()
-
-
-
-
-
-        context.restoreGState()
-
-
-
-
-
-        context.restoreGState()
-
-
-        //// Group 4
-        context.saveGState()
-        context.translateBy(x: 12.88, y: 17.71)
-        context.scaleBy(x: 0.44, y: 0.44)
-
-
-
-        //// Group 5
-        //// Bezier Drawing
-        let bezierPath = UIBezierPath()
-        bezierPath.move(to: CGPoint(x: 41.57, y: 0.03))
-        bezierPath.addCurve(to: CGPoint(x: 64.24, y: 8.23), controlPoint1: CGPoint(x: 49.72, y: -0.32), controlPoint2: CGPoint(x: 58.01, y: 2.4))
-        bezierPath.addCurve(to: CGPoint(x: 64.24, y: 47.83), controlPoint1: CGPoint(x: 75.92, y: 19.16), controlPoint2: CGPoint(x: 75.92, y: 36.89))
-        bezierPath.addCurve(to: CGPoint(x: 41.57, y: 55.99), controlPoint1: CGPoint(x: 58.01, y: 53.66), controlPoint2: CGPoint(x: 49.72, y: 56.38))
-        bezierPath.addLine(to: CGPoint(x: 0, y: 56.03))
-        bezierPath.addLine(to: CGPoint(x: 0, y: 0.03))
-        bezierPath.addLine(to: CGPoint(x: 41.57, y: 0.03))
-        bezierPath.addLine(to: CGPoint(x: 41.57, y: 0.03))
-        bezierPath.close()
-        UIColor.white.setFill()
-        bezierPath.fill()
-        colour2.setStroke()
-        bezierPath.lineWidth = 5
-        bezierPath.stroke()
-
-
-
-
-
-        context.restoreGState()
-
-
-        context.endTransparencyLayer()
-        context.restoreGState()
-        
-        context.restoreGState()
-
-    }
-
-    @objc dynamic public class func drawIcon29x29(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 29, height: 29), resizing: ResizingBehavior = .aspectFit) {
-        //// General Declarations
-        let context = UIGraphicsGetCurrentContext()!
-        
-        //// Resize to Target Frame
-        context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 29, height: 29), target: targetFrame)
-        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 29, y: resizedFrame.height / 29)
-
-
-        //// Symbol Drawing
-        context.saveGState()
-        context.scaleBy(x: 0.73, y: 0.73)
-
-        let symbolRect = CGRect(x: 0, y: 0, width: 40, height: 40)
-        context.saveGState()
-        context.clip(to: symbolRect)
-        context.translateBy(x: symbolRect.minX, y: symbolRect.minY)
-
-        Gates.drawIcon40x40(frame: CGRect(origin: .zero, size: symbolRect.size), resizing: .stretch)
-        context.restoreGState()
-
-        context.restoreGState()
-        
-        context.restoreGState()
-
-    }
-
-    @objc dynamic public class func drawIcon20x20(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 20, height: 20), resizing: ResizingBehavior = .aspectFit) {
-        //// General Declarations
-        let context = UIGraphicsGetCurrentContext()!
-        
-        //// Resize to Target Frame
-        context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 20, height: 20), target: targetFrame)
-        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 20, y: resizedFrame.height / 20)
-
-
-        //// Symbol Drawing
-        context.saveGState()
-        context.translateBy(x: 0, y: -0.4)
-        context.scaleBy(x: 0.34, y: 0.34)
-
-        let symbolRect = CGRect(x: 0, y: 0, width: 60, height: 60)
-        context.saveGState()
-        context.clip(to: symbolRect)
-        context.translateBy(x: symbolRect.minX, y: symbolRect.minY)
-
-        Gates.drawIcon60x60(frame: CGRect(origin: .zero, size: symbolRect.size), resizing: .stretch)
-        context.restoreGState()
-
-        context.restoreGState()
-        
-        context.restoreGState()
-
-    }
-
     //// Generated Images
 
-    @objc dynamic public class func imageOfOrNorGate(highlight: Bool = false, inputs: CGFloat = 3, inputPinVisible: CGFloat = 2, outputPinVisible: Bool = true, invert: Bool = true) -> UIImage {
+    @objc dynamic public class func imageOfOrNorGate(highlight: Bool = false, inputs: CGFloat = 4, inputPinVisible: CGFloat = 0, outputPinVisible: Bool = true, invert: Bool = true) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 135, height: 67), false, 0)
             Gates.drawOrNorGate(highlight: highlight, inputs: inputs, inputPinVisible: inputPinVisible, outputPinVisible: outputPinVisible, invert: invert)
 
@@ -1637,7 +1263,7 @@ public class Gates : NSObject {
         return imageOfOrNorGate
     }
 
-    @objc dynamic public class func imageOfXorXnorGate(highlight: Bool = false, inputs: CGFloat = 3, inputPinVisible: CGFloat = 2, outputPinVisible: Bool = true, invert: Bool = true) -> UIImage {
+    @objc dynamic public class func imageOfXorXnorGate(highlight: Bool = false, inputs: CGFloat = 4, inputPinVisible: CGFloat = 0, outputPinVisible: Bool = true, invert: Bool = true) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 143, height: 67), false, 0)
             Gates.drawXorXnorGate(highlight: highlight, inputs: inputs, inputPinVisible: inputPinVisible, outputPinVisible: outputPinVisible, invert: invert)
 
@@ -1647,7 +1273,7 @@ public class Gates : NSObject {
         return imageOfXorXnorGate
     }
 
-    @objc dynamic public class func imageOfBufferInverterGate(highlight: Bool = false, inputPinVisible: CGFloat = 2, outputPinVisible: Bool = true, invert: Bool = true) -> UIImage {
+    @objc dynamic public class func imageOfBufferInverterGate(highlight: Bool = false, inputPinVisible: CGFloat = 0, outputPinVisible: Bool = true, invert: Bool = true) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 102, height: 57), false, 0)
             Gates.drawBufferInverterGate(highlight: highlight, inputPinVisible: inputPinVisible, outputPinVisible: outputPinVisible, invert: invert)
 
@@ -1657,7 +1283,7 @@ public class Gates : NSObject {
         return imageOfBufferInverterGate
     }
 
-    @objc dynamic public class func imageOfAndNandGate(highlight: Bool = false, pinVisible: Bool = true, inputs: CGFloat = 3, inputPinVisible: CGFloat = 2, invert: Bool = true) -> UIImage {
+    @objc dynamic public class func imageOfAndNandGate(highlight: Bool = false, pinVisible: Bool = true, inputs: CGFloat = 4, inputPinVisible: CGFloat = 0, invert: Bool = true) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 134, height: 68), false, 0)
             Gates.drawAndNandGate(highlight: highlight, pinVisible: pinVisible, inputs: inputs, inputPinVisible: inputPinVisible, invert: invert)
 
@@ -1667,7 +1293,7 @@ public class Gates : NSObject {
         return imageOfAndNandGate
     }
 
-    @objc dynamic public class func imageOfBlockGate(highlight: Bool = false, pinVisible: Bool = true, inputs: CGFloat = 3, name: String = "Block Gate") -> UIImage {
+    @objc dynamic public class func imageOfBlockGate(highlight: Bool = false, pinVisible: Bool = true, inputs: CGFloat = 4, name: String = "Block Gate") -> UIImage {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 127, height: 121), false, 0)
             Gates.drawBlockGate(highlight: highlight, pinVisible: pinVisible, inputs: inputs, name: name)
 
@@ -1687,9 +1313,9 @@ public class Gates : NSObject {
         return imageOfConnection
     }
 
-    @objc dynamic public class func imageOfButton(highlight: Bool = false, state: CGFloat = 0, outputPinVisible: Bool = true, name: String = "Block Gate") -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 150, height: 35), false, 0)
-            Gates.drawButton(highlight: highlight, state: state, outputPinVisible: outputPinVisible, name: name)
+    @objc dynamic public class func imageOfButton(highlight: Bool = false, state: CGFloat = 0, outputPinVisible: Bool = true) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 57, height: 35), false, 0)
+            Gates.drawButton(highlight: highlight, state: state, outputPinVisible: outputPinVisible)
 
         let imageOfButton = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
@@ -1697,9 +1323,9 @@ public class Gates : NSObject {
         return imageOfButton
     }
 
-    @objc dynamic public class func imageOfIndicator(highlight: Bool = false, state: CGFloat = 0, inputPinVisible: CGFloat = 2, name: String = "Block Gate") -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 140, height: 35), false, 0)
-            Gates.drawIndicator(highlight: highlight, state: state, inputPinVisible: inputPinVisible, name: name)
+    @objc dynamic public class func imageOfIndicator(highlight: Bool = false, state: CGFloat = 0, inputPinVisible: CGFloat = 0) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 57, height: 35), false, 0)
+            Gates.drawIndicator(highlight: highlight, state: state, inputPinVisible: inputPinVisible)
 
         let imageOfIndicator = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()

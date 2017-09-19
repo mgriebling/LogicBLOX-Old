@@ -51,6 +51,8 @@ class LBGateView: UIView {
         
         if let gate = gateUnderPoint(gateOrigin) {
             if gateID == .line {
+                gate.inputPinVisible = 0
+                gate.outputPinVisible = 0
                 if creatingGate == nil {
                     // create a line starting from this gate
                     editingGate = gate
@@ -60,7 +62,8 @@ class LBGateView: UIView {
                     let connection = LBConnection()
                     let sourcePin = gate.getClosestPinIndex(gateOrigin)
                     if gate.pins[sourcePin].type == .output { gate.outputPinVisible = 1 }
-                    else { gate.inputPinVisible = sourcePin }
+                    else { gate.inputPinVisible = max(1, sourcePin) }  // max in case of single pins
+                    print("Pin = \(sourcePin)")
                     connection.addGatePin(gate, index: sourcePin)
                     connection.highlighted = true
                     gates.append(connection)
@@ -70,10 +73,11 @@ class LBGateView: UIView {
                     let destinationPin = gate.getClosestPinIndex(gateOrigin)
                     let connection = creatingGate as! LBConnection
                     connection.addGatePin(gate, index: destinationPin)
+                    editingGate?.highlighted = false
+                    editingGate?.inputPinVisible = 0
+                    editingGate?.outputPinVisible = 0
                     creatingGate = nil
                     gate.highlighted = false
-                    gate.inputPinVisible = 0
-                    gate.outputPinVisible = 0
                 }
             } else {
                 toggleSelection(gate)

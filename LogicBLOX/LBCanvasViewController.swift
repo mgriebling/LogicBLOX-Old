@@ -163,7 +163,7 @@ class LBCanvasViewController: UIViewController {
     func didTap (_ sender: UITapGestureRecognizer) {
         if editingGates {
             gateView.insertGate(lastGateType, withEvent: sender)
-            deleteBarButton.isEnabled = gateView.selected.count > 0 || lastGateType == .line
+            deleteBarButton.isEnabled = gateView.selected.count > 0
         } else {
             // running simulation
             if let button = gateView.gateUnderPoint(sender.location(in: gateView)) as? LBButton {
@@ -174,7 +174,7 @@ class LBCanvasViewController: UIViewController {
                     _ = gate.evaluate()
                 }
                 for gate in gateView.gates {
-                    // simplistic evaluation of values
+                    // do it twice to catch any changes
                     _ = gate.evaluate()
                 }
                 gateView.setNeedsDisplay()
