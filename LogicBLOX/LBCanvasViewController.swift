@@ -16,9 +16,10 @@ class LBCanvasViewController: UIViewController {
     @IBOutlet var editBarButton: UIBarButtonItem!
     @IBOutlet var deleteBarButton: UIBarButtonItem!
     @IBOutlet var filesBarButton: UIBarButtonItem!
+    @IBOutlet weak var iconView: UIView!
     
     var lastGateType : LBGateType = .nand
-    var editingGates = false
+    var editingGates = true
     var panGesture : UIPanGestureRecognizer!
     
     @IBOutlet var canvasView: LBZoomingCanvasView! {
@@ -145,10 +146,22 @@ class LBCanvasViewController: UIViewController {
     }
     
     @IBAction func toggleEdit(_ sender: UIBarButtonItem) {
-        editingGates = true
-        deleteBarButton.isEnabled = gateView.selected.count > 0
-        navigationItem.setLeftBarButtonItems([deleteBarButton], animated: true)
-        navigationItem.setRightBarButtonItems([doneBarButton, imageBarButton], animated: true)
+        editingGates = !editingGates
+        if editingGates {
+            deleteBarButton.isEnabled = gateView.selected.count > 0
+            navigationItem.setLeftBarButtonItems([deleteBarButton], animated: true)
+            sender.image = UIImage(named: "Gate Icon 2")
+//            navigationItem.setRightBarButtonItems([doneBarButton, imageBarButton], animated: true)
+        } else {
+            gateView.clearSelected()
+            saveActiveDoc()
+            navigationItem.setLeftBarButtonItems([filesBarButton], animated: true)
+            sender.image = UIImage(named: "Gate Icon 1")
+//            navigationItem.setRightBarButtonItems([editBarButton], animated: true)
+        }
+        UIView.animate(withDuration: 0.5) { 
+            self.iconView.isHidden = !self.editingGates
+        }
     }
     
     @IBAction func deleteGates(_ sender: UIBarButtonItem) {

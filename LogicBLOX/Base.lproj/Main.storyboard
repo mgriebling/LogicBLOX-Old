@@ -6,7 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,32 +21,26 @@
                     </layoutGuides>
                     <stackView key="view" opaque="NO" contentMode="scaleToFill" id="A2A-rn-rPD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="s1X-LX-XiB" customClass="LBZoomingCanvasView" customModule="LogicBLOX" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="280" height="667"/>
                                 <color key="backgroundColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="te0-mL-Nzi"/>
+                                    <constraint firstAttribute="width" secondItem="s1X-LX-XiB" secondAttribute="height" multiplier="280:667" id="IgW-0K-uSR"/>
                                 </constraints>
                             </scrollView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XM-Z3-hLZ">
                                 <rect key="frame" x="280" y="0.0" width="95" height="667"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8XM-Z3-hLZ" secondAttribute="height" multiplier="95:667" id="AqI-YW-BB8"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="Kvt-iQ-ihW" kind="embed" id="QNK-Ch-edY"/>
                                 </connections>
                             </containerView>
                         </subviews>
-                        <constraints>
-                            <constraint firstItem="s1X-LX-XiB" firstAttribute="leading" secondItem="A2A-rn-rPD" secondAttribute="leading" id="2xI-15-eN1"/>
-                            <constraint firstItem="s1X-LX-XiB" firstAttribute="top" secondItem="A2A-rn-rPD" secondAttribute="top" id="3W4-T3-cvQ"/>
-                            <constraint firstItem="CVS-0z-j4S" firstAttribute="top" secondItem="8XM-Z3-hLZ" secondAttribute="bottom" id="6Ph-0t-yZW"/>
-                            <constraint firstItem="8XM-Z3-hLZ" firstAttribute="leading" secondItem="s1X-LX-XiB" secondAttribute="trailing" id="S6R-i3-csB"/>
-                            <constraint firstAttribute="trailing" secondItem="8XM-Z3-hLZ" secondAttribute="trailing" id="V4x-cH-mKl"/>
-                            <constraint firstItem="CVS-0z-j4S" firstAttribute="top" secondItem="s1X-LX-XiB" secondAttribute="bottom" id="YBP-yY-BUG"/>
-                            <constraint firstItem="8XM-Z3-hLZ" firstAttribute="top" secondItem="A2A-rn-rPD" secondAttribute="top" id="cNu-p3-qrK"/>
-                        </constraints>
                     </stackView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="LogicBLOX" id="Vdm-gx-hT9">
@@ -57,7 +51,7 @@
                                 </segue>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="Gate Icon 1" id="HDr-yu-SAf">
+                        <barButtonItem key="rightBarButtonItem" image="Gate Icon 2" id="HDr-yu-SAf">
                             <connections>
                                 <action selector="toggleEdit:" destination="BYZ-38-t0r" id="hfB-ub-5GJ"/>
                             </connections>
@@ -69,6 +63,7 @@
                         <outlet property="doneBarButton" destination="pQq-wY-PsX" id="jhg-E6-ZZA"/>
                         <outlet property="editBarButton" destination="HDr-yu-SAf" id="cRX-Qz-IHZ"/>
                         <outlet property="filesBarButton" destination="CMy-5T-rxq" id="Q5R-73-fVX"/>
+                        <outlet property="iconView" destination="8XM-Z3-hLZ" id="lBM-Ku-gEb"/>
                         <outlet property="imageBarButton" destination="5S9-Mg-LXa" id="Wwe-5M-eW0"/>
                         <outlet property="imageButton" destination="1pd-oc-fjd" id="rHK-hp-dGL"/>
                     </connections>
@@ -188,46 +183,38 @@
         <scene sceneID="agK-34-9aW">
             <objects>
                 <collectionViewController id="Kvt-iQ-ihW" customClass="LBGateCollectionViewController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" maximumZoomScale="3" dataMode="prototypes" id="2C1-Nf-FJ6">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="3" dataMode="prototypes" id="2C1-Nf-FJ6">
                         <rect key="frame" x="0.0" y="0.0" width="95" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="o2N-Ee-Dil">
-                            <size key="itemSize" width="99" height="83"/>
+                            <size key="itemSize" width="90" height="60"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GateCell" id="Hqe-AU-P34">
-                                <rect key="frame" x="-2" y="0.0" width="99" height="83"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="2.5" y="0.0" width="90" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="99" height="83"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="20" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="And Gate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHy-ju-LRO">
-                                            <rect key="frame" x="0.0" y="62" width="99" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="APt-FZ-vJg">
+                                            <rect key="frame" x="7.5" y="8" width="74.5" height="38.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="20" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="And Gate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PHy-ju-LRO">
+                                            <rect key="frame" x="0.0" y="47" width="90" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="APt-FZ-vJg">
-                                            <rect key="frame" x="9" y="10" width="79" height="53"/>
-                                        </imageView>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="PHy-ju-LRO" secondAttribute="bottom" id="G0L-V4-Ign"/>
-                                    <constraint firstItem="PHy-ju-LRO" firstAttribute="top" secondItem="Hqe-AU-P34" secondAttribute="topMargin" constant="54" id="J8V-Zs-EeY"/>
-                                    <constraint firstItem="APt-FZ-vJg" firstAttribute="top" secondItem="Hqe-AU-P34" secondAttribute="topMargin" constant="2" id="P2S-Nd-Svx"/>
-                                    <constraint firstItem="APt-FZ-vJg" firstAttribute="leading" secondItem="Hqe-AU-P34" secondAttribute="leadingMargin" constant="1" id="Z8y-1W-SRI"/>
-                                    <constraint firstItem="PHy-ju-LRO" firstAttribute="leading" secondItem="Hqe-AU-P34" secondAttribute="leading" id="cN5-OI-3zT"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="APt-FZ-vJg" secondAttribute="trailing" constant="3" id="mWh-QC-LhZ"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="APt-FZ-vJg" secondAttribute="bottom" constant="12" id="nOa-bf-v5o"/>
-                                    <constraint firstAttribute="trailing" secondItem="PHy-ju-LRO" secondAttribute="trailing" id="zbA-uI-Oh6"/>
-                                </constraints>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -240,7 +227,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rle-8g-IAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1594" y="1"/>
+            <point key="canvasLocation" x="1592.8" y="0.44977511244377816"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ux1-GV-Odq">
@@ -283,7 +270,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Gate Icon 1" width="47" height="31"/>
+        <image name="Gate Icon 2" width="47" height="31"/>
         <image name="Nand Gate" width="123" height="70"/>
     </resources>
 </document>
