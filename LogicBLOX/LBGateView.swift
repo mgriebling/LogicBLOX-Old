@@ -104,7 +104,7 @@ class LBGateView: UIView {
 
     var selected : [LBGate] { return gates.filter { $0.highlighted } }
     
-    func moveSelected(_ gesture: UIPanGestureRecognizer) {
+    func moveSelected(_ gesture: UIGestureRecognizer) {
         let position = gesture.location(in: self)
         if gesture.state == .began {
             if let gate = gateUnderPoint(position) {
@@ -117,6 +117,7 @@ class LBGateView: UIView {
             LBGate.translateGates(selected, byX: move.x, y: move.y)
             setNeedsDisplay()
         } else if gesture.state == .ended {
+            clearSelected()
             setNeedsDisplay()
         }
     }

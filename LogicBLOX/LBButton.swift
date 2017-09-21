@@ -28,7 +28,7 @@ class LBButton: LBGate {
     
     override func evaluate() -> LogicState {
         pins[0].state = self.state
-        print("Evaluating button = \(self.state)")
+//        print("Evaluating button = \(self.state)")
         return self.state
     }
     

@@ -32,15 +32,19 @@ class LBCanvasViewController: UIViewController {
             canvasView.contentSize = gateView.frame.size
             
             // change scrollview to pan with two fingers
-            let panGR = canvasView.panGestureRecognizer
-            panGR.minimumNumberOfTouches = 2
-            panGR.maximumNumberOfTouches = 2
+//            let panGR = canvasView.panGestureRecognizer
+//            panGR.minimumNumberOfTouches = 2
+//            panGR.maximumNumberOfTouches = 2
+//            
+//            // install our own pan gesture recognizer
+//            panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
+//            panGesture.minimumNumberOfTouches = 1
+//            panGesture.maximumNumberOfTouches = 1
+//            canvasView.addGestureRecognizer(panGesture)
             
-            // install our own pan gesture recognizer
-            panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
-            panGesture.minimumNumberOfTouches = 1
-            panGesture.maximumNumberOfTouches = 1
-            canvasView.addGestureRecognizer(panGesture)
+            // long press gesture for selecting objects and moving objects
+            let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(didPress(_:)))
+            canvasView.addGestureRecognizer(pressGesture)
             
             // tap gesture for selecting and creating objects .
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
@@ -126,7 +130,6 @@ class LBCanvasViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setButtonImage()
         loadInitialDoc()
     }
     
@@ -173,6 +176,15 @@ class LBCanvasViewController: UIViewController {
     
     // MARK: - Gesture management
     
+    func didPress(_ sender: UILongPressGestureRecognizer) {
+        if let gate = gateView.gateUnderPoint(sender.location(in: gateView)) {
+            print("Long pressed on gate \(gate)")
+        } else {
+            print("Long pressed on point \(sender.location(in: gateView))")
+        }
+        gateView.moveSelected(sender)
+    }
+    
     func didTap (_ sender: UITapGestureRecognizer) {
         if editingGates {
             gateView.insertGate(lastGateType, withEvent: sender)
@@ -181,7 +193,7 @@ class LBCanvasViewController: UIViewController {
             // running simulation
             if let button = gateView.gateUnderPoint(sender.location(in: gateView)) as? LBButton {
                 button.toggleState()
-                print("gates = \(gateView.gates)")
+//                print("gates = \(gateView.gates)")
                 
                 // clear all connected gate input pins so drive signals on shorted inputs propagate properly
                 NSLog("Started clearing inputs")
@@ -193,12 +205,12 @@ class LBCanvasViewController: UIViewController {
                     }
                 }
                 
-                NSLog("First evaluation pass...")
+//                NSLog("First evaluation pass...")
                 for gate in gateView.gates {
                     // simplistic evaluation of values
                     _ = gate.evaluate()
                 }
-                NSLog("Second evaluation pass...")
+//                NSLog("Second evaluation pass...")
                 for gate in gateView.gates {
                     // do it twice to catch any changes
                     _ = gate.evaluate()

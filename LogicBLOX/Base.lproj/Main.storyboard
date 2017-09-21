@@ -28,14 +28,11 @@
                                 <color key="backgroundColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="s1X-LX-XiB" secondAttribute="height" multiplier="280:667" id="IgW-0K-uSR"/>
+                                    <constraint firstAttribute="width" secondItem="s1X-LX-XiB" secondAttribute="height" multiplier="280:667" priority="750" id="IgW-0K-uSR"/>
                                 </constraints>
                             </scrollView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XM-Z3-hLZ">
                                 <rect key="frame" x="280" y="0.0" width="95" height="667"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="8XM-Z3-hLZ" secondAttribute="height" multiplier="95:667" id="AqI-YW-BB8"/>
-                                </constraints>
                                 <connections>
                                     <segue destination="Kvt-iQ-ihW" kind="embed" id="QNK-Ch-edY"/>
                                 </connections>
