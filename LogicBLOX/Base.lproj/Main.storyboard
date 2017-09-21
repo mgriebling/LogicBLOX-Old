@@ -51,10 +51,15 @@
                                 </segue>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="Gate Icon 2" id="HDr-yu-SAf">
-                            <connections>
-                                <action selector="toggleEdit:" destination="BYZ-38-t0r" id="hfB-ub-5GJ"/>
-                            </connections>
+                        <barButtonItem key="rightBarButtonItem" id="5S9-Mg-LXa">
+                            <button key="customView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1pd-oc-fjd">
+                                <rect key="frame" x="292" y="5" width="67" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Gate Icon 2"/>
+                                <connections>
+                                    <action selector="toggleEdit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eS7-2u-Bl7"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -69,17 +74,15 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <barButtonItem image="Gate Icon 2" id="HDr-yu-SAf">
+                    <connections>
+                        <action selector="toggleEdit:" destination="BYZ-38-t0r" id="hfB-ub-5GJ"/>
+                    </connections>
+                </barButtonItem>
                 <barButtonItem systemItem="done" id="pQq-wY-PsX">
                     <connections>
                         <action selector="doneAction:" destination="BYZ-38-t0r" id="lJb-eu-gj5"/>
                     </connections>
-                </barButtonItem>
-                <barButtonItem width="60" id="5S9-Mg-LXa">
-                    <button key="customView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1pd-oc-fjd">
-                        <rect key="frame" x="334" y="5" width="67" height="34"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="Nand Gate"/>
-                    </button>
                 </barButtonItem>
                 <barButtonItem systemItem="trash" id="KFp-8q-sWn">
                     <connections>
@@ -270,7 +273,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Gate Icon 2" width="47" height="31"/>
+        <image name="Gate Icon 2" width="45" height="31"/>
         <image name="Nand Gate" width="123" height="70"/>
     </resources>
 </document>

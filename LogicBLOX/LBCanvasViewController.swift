@@ -107,26 +107,26 @@ class LBCanvasViewController: UIViewController {
     
     // MARK: - Support methods
     
-    func setButtonImage() {
-        let image : UIImage
-        if lastGateType == .line {
-            image = Gates.imageOfConnection(highlight: true).imageByBestFitForSize(imageButton.bounds.size)!
-        } else {
-            let gate = LBGateType.classForGate(lastGateType)
-            gate.highlighted = true
-            gate.inputPinVisible = 0
-            gate.outputPinVisible = 0
-            gate.defaultBounds()
-            image = gate.getImageOfObject(gate.bounds, scale: 1).imageByBestFitForSize(imageButton.bounds.size)!
-        }
-        imageButton.setImage(image, for: .normal)
-    }
+//    func setButtonImage() {
+//        let image : UIImage
+//        if lastGateType == .line {
+//            image = Gates.imageOfConnection(highlight: true).imageByBestFitForSize(imageButton.bounds.size)!
+//        } else {
+//            let gate = LBGateType.classForGate(lastGateType)
+//            gate.highlighted = true
+//            gate.inputPinVisible = 0
+//            gate.outputPinVisible = 0
+//            gate.defaultBounds()
+//            image = gate.getImageOfObject(gate.bounds, scale: 1).imageByBestFitForSize(imageButton.bounds.size)!
+//        }
+//        imageButton.setImage(image, for: .normal)
+//    }
 
     // MARK: - Viewcontroller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setButtonImage()
+//        setButtonImage()
         loadInitialDoc()
     }
     
@@ -145,18 +145,18 @@ class LBCanvasViewController: UIViewController {
         navigationItem.setRightBarButtonItems([editBarButton], animated: true)
     }
     
-    @IBAction func toggleEdit(_ sender: UIBarButtonItem) {
+    @IBAction func toggleEdit(_ sender: Any) {
         editingGates = !editingGates
         if editingGates {
             deleteBarButton.isEnabled = gateView.selected.count > 0
             navigationItem.setLeftBarButtonItems([deleteBarButton], animated: true)
-            sender.image = UIImage(named: "Gate Icon 2")
+            imageButton.setImage(UIImage(named: "Gate Icon 2"), for: .normal)
 //            navigationItem.setRightBarButtonItems([doneBarButton, imageBarButton], animated: true)
         } else {
             gateView.clearSelected()
             saveActiveDoc()
             navigationItem.setLeftBarButtonItems([filesBarButton], animated: true)
-            sender.image = UIImage(named: "Gate Icon 1")
+            imageButton.setImage(UIImage(named: "Gate Icon 1"), for: .normal)
 //            navigationItem.setRightBarButtonItems([editBarButton], animated: true)
         }
         UIView.animate(withDuration: 0.5) { 
@@ -245,7 +245,8 @@ class LBCanvasViewController: UIViewController {
                 vc?.selectedItem = lastGateType.rawValue
                 vc?.callback = { selected in
                     self.lastGateType = selected
-                    self.setButtonImage()
+                    self.gateView.insertGate(selected, withEvent: nil)
+//                    self.setButtonImage()
                 }
             case "Show Designs":
                 let vc = (segue.destination as! UINavigationController).viewControllers[0] as? LBDesignTableViewController
