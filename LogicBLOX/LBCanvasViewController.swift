@@ -31,25 +31,18 @@ class LBCanvasViewController: UIViewController {
             canvasView.addSubview(gateView)
             canvasView.contentSize = gateView.frame.size
             
-            // change scrollview to pan with two fingers
-//            let panGR = canvasView.panGestureRecognizer
-//            panGR.minimumNumberOfTouches = 2
-//            panGR.maximumNumberOfTouches = 2
-//            
-//            // install our own pan gesture recognizer
-//            panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
-//            panGesture.minimumNumberOfTouches = 1
-//            panGesture.maximumNumberOfTouches = 1
-//            canvasView.addGestureRecognizer(panGesture)
-            
             // long press gesture for selecting objects and moving objects
             let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(didPress(_:)))
             canvasView.addGestureRecognizer(pressGesture)
             
+            // double-tap to edit object
+            let doubleTap = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap(_:)))
+            doubleTap.numberOfTapsRequired = 2
+            canvasView.addGestureRecognizer(doubleTap)
+            
             // tap gesture for selecting and creating objects .
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
             tapGesture.numberOfTapsRequired = 1
-            tapGesture.numberOfTouchesRequired = 1
             canvasView.addGestureRecognizer(tapGesture)
         }
     }
@@ -130,6 +123,7 @@ class LBCanvasViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateState()
         loadInitialDoc()
     }
     
@@ -142,29 +136,30 @@ class LBCanvasViewController: UIViewController {
     
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
         editingGates = false
+        updateState()
         gateView.clearSelected()
         saveActiveDoc()
-        navigationItem.setLeftBarButtonItems([filesBarButton], animated: true)
-        navigationItem.setRightBarButtonItems([editBarButton], animated: true)
     }
     
-    @IBAction func toggleEdit(_ sender: Any) {
-        editingGates = !editingGates
+    func updateState() {
         if editingGates {
             deleteBarButton.isEnabled = gateView.selected.count > 0
             navigationItem.setLeftBarButtonItems([deleteBarButton], animated: true)
             imageButton.setImage(UIImage(named: "Gate Icon 2"), for: .normal)
-//            navigationItem.setRightBarButtonItems([doneBarButton, imageBarButton], animated: true)
         } else {
             gateView.clearSelected()
             saveActiveDoc()
             navigationItem.setLeftBarButtonItems([filesBarButton], animated: true)
             imageButton.setImage(UIImage(named: "Gate Icon 1"), for: .normal)
-//            navigationItem.setRightBarButtonItems([editBarButton], animated: true)
         }
-        UIView.animate(withDuration: 0.5) { 
+        UIView.animate(withDuration: 0.5) {
             self.iconView.isHidden = !self.editingGates
         }
+    }
+    
+    @IBAction func toggleEdit(_ sender: Any) {
+        editingGates = !editingGates
+        updateState()
     }
     
     @IBAction func deleteGates(_ sender: UIBarButtonItem) {
@@ -177,12 +172,14 @@ class LBCanvasViewController: UIViewController {
     // MARK: - Gesture management
     
     func didPress(_ sender: UILongPressGestureRecognizer) {
-        if let gate = gateView.gateUnderPoint(sender.location(in: gateView)) {
-            print("Long pressed on gate \(gate)")
-        } else {
-            print("Long pressed on point \(sender.location(in: gateView))")
-        }
         gateView.moveSelected(sender)
+    }
+    
+    func didDoubleTap(_ sender: UITapGestureRecognizer) {
+        if let gate = gateView.gateUnderPoint(sender.location(in: gateView)) {
+            print("Double tapped gate \(gate)")
+            performSegue(withIdentifier: "Show Menu", sender: gate)
+        }
     }
     
     func didTap (_ sender: UITapGestureRecognizer) {
@@ -251,9 +248,10 @@ class LBCanvasViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if let id = segue.identifier {
             switch id {
-            case "Show Gates" :
-                let vc = (segue.destination as! UINavigationController).viewControllers[0] as? LBGateCollectionViewController
+            case "Show Menu" :
                 preparePopover(segue.destination, sender: sender, delegate: self)
+            case "Show Gates" :
+                let vc = segue.destination as? LBGateCollectionViewController
                 vc?.selectedItem = lastGateType.rawValue
                 vc?.callback = { selected in
                     self.lastGateType = selected

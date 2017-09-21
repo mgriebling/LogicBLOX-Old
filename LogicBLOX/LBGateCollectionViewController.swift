@@ -61,10 +61,10 @@ class LBGateCollectionViewController: UICollectionViewController {
     var selectedItem : Int = LBGateType.nand.rawValue
     var callback : (_ selected: LBGateType) -> () = { _ in }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        callback(LBGateType(rawValue: selectedItem)!)
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        callback(LBGateType(rawValue: selectedItem)!)
+//    }
 
     // MARK: UICollectionViewDataSource
 
@@ -103,6 +103,7 @@ class LBGateCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedItem = indexPath.item
+        callback(LBGateType(rawValue: selectedItem)!)
         collectionView.reloadData()
     }
 

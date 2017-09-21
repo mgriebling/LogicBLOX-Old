@@ -47,7 +47,7 @@ class LBGateView: UIView {
     }
     
     func insertGate (_ gateID: LBGateType, withEvent event: UITapGestureRecognizer?) {
-        var gateOrigin = event?.location(in: self) ?? CGPoint(x: 10, y: 10)
+        var gateOrigin = event?.location(in: self) ?? CGPoint(x: 100, y: 100)
         
         if let gate = gateUnderPoint(gateOrigin) {
             if gateID == .line {
