@@ -171,18 +171,18 @@ class LBCanvasViewController: UIViewController {
     
     // MARK: - Gesture management
     
-    func didPress(_ sender: UILongPressGestureRecognizer) {
+    @objc func didPress(_ sender: UILongPressGestureRecognizer) {
         gateView.moveSelected(sender)
     }
     
-    func didDoubleTap(_ sender: UITapGestureRecognizer) {
+    @objc func didDoubleTap(_ sender: UITapGestureRecognizer) {
         if let gate = gateView.gateUnderPoint(sender.location(in: gateView)) {
             print("Double tapped gate \(gate)")
             performSegue(withIdentifier: "Show Menu", sender: gate)
         }
     }
     
-    func didTap (_ sender: UITapGestureRecognizer) {
+    @objc func didTap (_ sender: UITapGestureRecognizer) {
         if editingGates {
             gateView.insertGate(lastGateType, withEvent: sender)
             deleteBarButton.isEnabled = gateView.selected.count > 0

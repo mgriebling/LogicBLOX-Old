@@ -467,9 +467,9 @@ public class Gates : NSObject {
         let rectangleStyle = NSMutableParagraphStyle()
         rectangleStyle.alignment = .center
         let rectangleFontAttributes = [
-            NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 12)!,
-            NSForegroundColorAttributeName: UIColor.black,
-            NSParagraphStyleAttributeName: rectangleStyle,
+            NSAttributedStringKey.font: UIFont(name: "HelveticaNeue", size: 12)!,
+            NSAttributedStringKey.foregroundColor: UIColor.black,
+            NSAttributedStringKey.paragraphStyle: rectangleStyle,
         ]
 
         let rectangleTextHeight: CGFloat = name.boundingRect(with: CGSize(width: rectangleRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: rectangleFontAttributes, context: nil).height
@@ -611,9 +611,9 @@ public class Gates : NSObject {
         let rectangleStyle = NSMutableParagraphStyle()
         rectangleStyle.alignment = .center
         let rectangleFontAttributes = [
-            NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 19)!,
-            NSForegroundColorAttributeName: UIColor.black,
-            NSParagraphStyleAttributeName: rectangleStyle,
+            NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 19)!,
+            NSAttributedStringKey.foregroundColor: UIColor.black,
+            NSAttributedStringKey.paragraphStyle: rectangleStyle,
         ]
 
         let rectangleTextHeight: CGFloat = stateText.boundingRect(with: CGSize(width: rectangleRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: rectangleFontAttributes, context: nil).height
