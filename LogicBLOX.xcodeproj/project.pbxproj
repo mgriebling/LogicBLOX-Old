@@ -30,7 +30,6 @@
 		477BE0851F5AFEBD006A8E3E /* LBGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0841F5AFEBD006A8E3E /* LBGateView.swift */; };
 		477BE0871F5B03B0006A8E3E /* LBGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0861F5B03B0006A8E3E /* LBGrid.swift */; };
 		477BE0891F5C24C9006A8E3E /* LBGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0881F5C24C9006A8E3E /* LBGate.swift */; };
-		477BE08B1F5C24FB006A8E3E /* PropertyListReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */; };
 		477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */; };
 		477BE0951F5C57EB006A8E3E /* LBNand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0941F5C57EB006A8E3E /* LBNand.swift */; };
 		479B7ADA1F6D46CF00116694 /* LogicState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B7AD91F6D46CF00116694 /* LogicState.swift */; };
@@ -65,7 +64,6 @@
 		477BE0841F5AFEBD006A8E3E /* LBGateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateView.swift; sourceTree = "<group>"; };
 		477BE0861F5B03B0006A8E3E /* LBGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGrid.swift; sourceTree = "<group>"; };
 		477BE0881F5C24C9006A8E3E /* LBGate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGate.swift; sourceTree = "<group>"; };
-		477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyListReadable.swift; sourceTree = "<group>"; };
 		477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateCollectionViewController.swift; sourceTree = "<group>"; };
 		477BE0941F5C57EB006A8E3E /* LBNand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNand.swift; sourceTree = "<group>"; };
 		479B7AD91F6D46CF00116694 /* LogicState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicState.swift; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 				477BE06E1F5AD877006A8E3E /* AppDelegate.swift */,
 				477BE0751F5AD877006A8E3E /* Assets.xcassets */,
 				477BE0771F5AD877006A8E3E /* LaunchScreen.storyboard */,
-				477BE08A1F5C24FB006A8E3E /* PropertyListReadable.swift */,
 				477BE07A1F5AD877006A8E3E /* Info.plist */,
 			);
 			name = Support;
@@ -230,7 +227,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				47D642F41F62A277005F2069 /* EditTableCell.swift in Sources */,
-				477BE08B1F5C24FB006A8E3E /* PropertyListReadable.swift in Sources */,
 				2FE3BD4C1F601853005B4BF0 /* LBDesignTableViewController.swift in Sources */,
 				477BE0811F5AFC16006A8E3E /* LBZoomingCanvasView.swift in Sources */,
 				479B7ADA1F6D46CF00116694 /* LogicState.swift in Sources */,
