@@ -17,8 +17,6 @@ class LBCanvasViewController: UIViewController {
     @IBOutlet var deleteBarButton: UIBarButtonItem!
     @IBOutlet var filesBarButton: UIBarButtonItem!
     @IBOutlet weak var iconView: UIView!
-    @IBOutlet weak var mainStacks: UIStackView!
-    @IBOutlet weak var iconViewWidth: NSLayoutConstraint!
     
     var lastGateType : LBGateType = .nand
     var editingGates = true
@@ -156,6 +154,7 @@ class LBCanvasViewController: UIViewController {
         }
         UIView.animate(withDuration: 0.5) {
             self.iconView.isHidden = !self.editingGates
+            self.view.layoutIfNeeded()
         }
     }
     
