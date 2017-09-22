@@ -61,10 +61,12 @@ class LBGateCollectionViewController: UICollectionViewController {
     var selectedItem : Int = LBGateType.nand.rawValue
     var callback : (_ selected: LBGateType) -> () = { _ in }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        callback(LBGateType(rawValue: selectedItem)!)
-//    }
+    // MARK: Life cycle methods
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView?.scrollToItem(at: IndexPath(item: selectedItem, section: 0), at: UICollectionViewScrollPosition.centeredVertically, animated: false)
+    }
 
     // MARK: UICollectionViewDataSource
 
