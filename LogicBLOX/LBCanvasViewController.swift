@@ -237,8 +237,13 @@ class LBCanvasViewController: UIViewController {
         if let view = sender as? UIView {
             contentController.popoverPresentationController?.sourceView = view
             contentController.popoverPresentationController?.sourceRect = view.bounds
-        } else {
-            contentController.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
+        } else if let button = sender as? UIBarButtonItem {
+            contentController.popoverPresentationController?.barButtonItem = button
+        } else if let gate = sender as? LBGate {
+            // position pop-up in the middle of a view
+            contentController.popoverPresentationController?.backgroundColor = UIColor.darkGray
+            contentController.popoverPresentationController?.sourceView = gateView
+            contentController.popoverPresentationController?.sourceRect = gate.bounds
         }
     }
 
