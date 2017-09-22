@@ -20,23 +20,30 @@
                         <viewControllerLayoutGuide type="bottom" id="CVS-0z-j4S"/>
                     </layoutGuides>
                     <stackView key="view" opaque="NO" contentMode="redraw" spacing="1" id="A2A-rn-rPD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView verifyAmbiguity="off" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="s1X-LX-XiB" customClass="LBZoomingCanvasView" customModule="LogicBLOX" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="266.5" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="267" height="603"/>
                                 <color key="backgroundColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                 <gestureRecognizers/>
                             </scrollView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XM-Z3-hLZ">
-                                <rect key="frame" x="267.5" y="0.0" width="107.5" height="603"/>
+                            <containerView verifyAmbiguity="off" opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="745" verticalCompressionResistancePriority="745" translatesAutoresizingMaskIntoConstraints="NO" id="8XM-Z3-hLZ">
+                                <rect key="frame" x="268" y="0.0" width="107" height="603"/>
                                 <connections>
                                     <segue destination="Kvt-iQ-ihW" kind="embed" identifier="Show Gates" id="QNK-Ch-edY"/>
                                 </connections>
                             </containerView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="8XM-Z3-hLZ" firstAttribute="leading" secondItem="s1X-LX-XiB" secondAttribute="trailing" id="8kf-XY-ypl"/>
+                            <constraint firstItem="s1X-LX-XiB" firstAttribute="leading" secondItem="A2A-rn-rPD" secondAttribute="leading" id="Cq6-78-XSz"/>
+                            <constraint firstItem="s1X-LX-XiB" firstAttribute="top" secondItem="KrH-mB-wSu" secondAttribute="bottom" id="Qaj-ph-rVD"/>
+                            <constraint firstItem="8XM-Z3-hLZ" firstAttribute="top" secondItem="KrH-mB-wSu" secondAttribute="bottom" id="RLf-SC-JWz"/>
                             <constraint firstItem="8XM-Z3-hLZ" firstAttribute="width" secondItem="s1X-LX-XiB" secondAttribute="width" multiplier="0.4" id="duS-XP-klg"/>
+                            <constraint firstItem="CVS-0z-j4S" firstAttribute="top" secondItem="s1X-LX-XiB" secondAttribute="bottom" id="lA6-uy-zU8"/>
+                            <constraint firstAttribute="trailing" secondItem="8XM-Z3-hLZ" secondAttribute="trailing" id="rrB-Ex-6UA"/>
+                            <constraint firstItem="CVS-0z-j4S" firstAttribute="top" secondItem="8XM-Z3-hLZ" secondAttribute="bottom" id="tJG-nY-1QF"/>
                         </constraints>
                     </stackView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
@@ -67,9 +74,11 @@
                         <outlet property="editBarButton" destination="HDr-yu-SAf" id="cRX-Qz-IHZ"/>
                         <outlet property="filesBarButton" destination="CMy-5T-rxq" id="Q5R-73-fVX"/>
                         <outlet property="iconView" destination="8XM-Z3-hLZ" id="lBM-Ku-gEb"/>
+                        <outlet property="iconViewWidth" destination="duS-XP-klg" id="EXW-HD-Eet"/>
                         <outlet property="imageBarButton" destination="5S9-Mg-LXa" id="Wwe-5M-eW0"/>
                         <outlet property="imageButton" destination="1pd-oc-fjd" id="rHK-hp-dGL"/>
-                        <segue destination="28I-Jb-fOo" kind="popoverPresentation" identifier="Show Menu" popoverAnchorBarButtonItem="CMy-5T-rxq" id="FsI-IC-crd">
+                        <outlet property="mainStacks" destination="A2A-rn-rPD" id="NEl-r6-LS6"/>
+                        <segue destination="28I-Jb-fOo" kind="popoverPresentation" identifier="Show Menu" popoverAnchorView="s1X-LX-XiB" id="FsI-IC-crd">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                     </connections>
@@ -195,10 +204,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9wE-Dj-rrL">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="bar" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9wE-Dj-rrL">
                                 <rect key="frame" x="16" y="6" width="168" height="29"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <segments>
                                     <segment title="Edit"/>
                                     <segment title="Copy"/>
@@ -222,11 +231,11 @@
         <!--Gate Collection View Controller-->
         <scene sceneID="agK-34-9aW">
             <objects>
-                <collectionViewController id="Kvt-iQ-ihW" customClass="LBGateCollectionViewController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" maximumZoomScale="3" dataMode="prototypes" id="2C1-Nf-FJ6">
-                        <rect key="frame" x="0.0" y="0.0" width="107.5" height="603"/>
+                <collectionViewController definesPresentationContext="YES" modalPresentationStyle="currentContext" id="Kvt-iQ-ihW" customClass="LBGateCollectionViewController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" misplaced="YES" maximumZoomScale="3" dataMode="prototypes" id="2C1-Nf-FJ6">
+                        <rect key="frame" x="0.0" y="0.0" width="107" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="o2N-Ee-Dil">
                             <size key="itemSize" width="88" height="60"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -235,7 +244,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GateCell" id="Hqe-AU-P34">
-                                <rect key="frame" x="10" y="0.0" width="88" height="60"/>
+                                <rect key="frame" x="9.5" y="0.0" width="88" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="88" height="60"/>
@@ -254,7 +263,7 @@
                                         </label>
                                     </subviews>
                                 </view>
-                                <color key="backgroundColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -264,6 +273,7 @@
                     </collectionView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rle-8g-IAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
