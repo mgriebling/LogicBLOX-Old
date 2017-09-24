@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class LBDocument: UIDocument {
+class LBDocument: UIDocument {
     
     // MARK: - Data storage
     
@@ -16,10 +16,10 @@ public class LBDocument: UIDocument {
     
     // MARK: - Document loading override
     
-    public override func load(fromContents contents: Any, ofType typeName: String?) throws {
+    override func load(fromContents contents: Any, ofType typeName: String?) throws {
         if let data = contents as? Data {
-            let unarchiver = PropertyListDecoder()
-            if let gates = try? unarchiver.decode([LBGate].self, from: data) {
+            let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
+            if let gates = unarchiver.decodeObject(forKey: "LBGates") as? [LBGate] {
                 self.gates = gates
             } else {
                 self.gates = []
@@ -29,15 +29,11 @@ public class LBDocument: UIDocument {
     
     // MARK: - Document saving override
     
-    public override func contents(forType typeName: String) throws -> Any {
-        let encoder = PropertyListEncoder()
-        do {
-            let data = try encoder.encode(gates)
-            return data
-        } catch let error {
-            print(error)
-            return Data()
-        }
+    override func contents(forType typeName: String) throws -> Any {
+        let archiver = NSKeyedArchiver()
+        archiver.encode(gates, forKey: "LBGates")
+        archiver.finishEncoding()
+        return archiver.encodedData
     }
 
 }

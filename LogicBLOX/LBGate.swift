@@ -68,7 +68,13 @@ public enum LBGateType : Int, Codable {
 // MARK: -
 // MARK: - LBPin
 
-public class LBPin : Codable {
+public class LBPin : NSObject, NSCoding {
+    
+    static let kVersionKey  = "Version"
+    static let kType        = "Type"
+    static let kFacing      = "Facing"
+    static let kPosition    = "Position"
+    static let kHighlighted = "Highlighted"
     
     static let size: CGFloat = 6      // pin size to use as an offset
     
@@ -81,6 +87,23 @@ public class LBPin : Codable {
     public init(x: CGFloat, y:CGFloat) {
         pos.x = x
         pos.y = y
+    }
+    
+    public required init? (coder decoder: NSCoder) {
+        let _ = decoder.decodeCInt(forKey: LBPin.kVersionKey)
+        pos = decoder.decodeCGPoint(forKey: LBPin.kPosition)
+        type = PinType(rawValue: decoder.decodeInteger(forKey: LBPin.kType)) ?? .input
+        facing = Orientation(rawValue: decoder.decodeInteger(forKey: LBPin.kFacing)) ?? .left
+        highlighted = decoder.decodeBool(forKey: LBPin.kHighlighted)
+        super.init()
+    }
+    
+    public func encode(with encoder: NSCoder) {
+        encoder.encodeCInt(1, forKey: LBPin.kVersionKey)
+        encoder.encode(pos, forKey: LBPin.kPosition)
+        encoder.encode(type.rawValue, forKey: LBPin.kType)
+        encoder.encode(facing.rawValue, forKey: LBPin.kFacing)
+        encoder.encode(highlighted, forKey: LBGate.kHighlighted)
     }
     
 }
@@ -100,46 +123,60 @@ extension CGPoint {
 // MARK: - LBGateType
 /// The mother of all gates: basic gate object with default properties & methods.
 
-public class LBGate : Codable, CustomStringConvertible {
-
+class LBGate : NSObject, NSCoding {
+    
+    static let kVersionKey  = "Version"
+    static let kNativeRect  = "NativeRect"
+    static let kPosition    = "Position"
+    static let kRect        = "Rect"
+    static let kHighlighted = "Highlighted"
+    static let kPins        = "Pins"
+    static let kKind        = "Kind"
+    
     var pins: [LBPin] = []
     var bounds: CGRect
-    var nativeBounds: CGRect
-
+    var kind: LBGateType
+    
     var highlighted = false
     var outputPinVisible : CGFloat = 0
-    var inputPinVisible  : CGFloat = 0
-    var joinedInputs  : CGFloat = 0
+    var inputPinVisible : CGFloat = 0
+    
+    var joinedInputs : CGFloat = 0
     var joinedOutputs : CGFloat = 0
     
-    var kind : LBGateType = .MAX  // nothing
+    var nativeBounds: CGRect
     
-    public var description: String { return "Gate" }
-
+    override public var description: String { return "Gate" }
+    
     // MARK: - Life cycle
-
-    public convenience init (kind: LBGateType, withDefaultSize size: CGSize = CGSize.zero) {
-        let b = CGRect(origin: CGPoint.zero, size: size)
-        self.init(kind: kind, bounds: b, nativeBounds: b)
-    }
-
-    public init (kind: LBGateType, bounds: CGRect, nativeBounds: CGRect, pins: [LBPin] = [], highlighted: Bool = false) {
-        self.nativeBounds = nativeBounds
-        self.bounds = bounds
-        self.highlighted = highlighted
+    
+    init (kind: LBGateType, withDefaultSize size: CGSize = CGSize.zero) {
+        nativeBounds = CGRect(origin: CGPoint.zero, size: size)
+        bounds = nativeBounds
         self.kind = kind
-
-        // clone the pins
-        self.pins = []
-        for pin in pins {
-            let newPin = LBPin(x: pin.pos.x, y: pin.pos.y)
-            newPin.facing = pin.facing
-            newPin.type = pin.type
-            self.pins.append(newPin)
-        }
-        localInit() 
+        super.init()
+        localInit()
     }
-
+    
+    required init? (coder decoder: NSCoder) {
+        let _ = decoder.decodeCInt(forKey: LBGate.kVersionKey)
+        kind = LBGateType(rawValue: decoder.decodeInteger(forKey: LBGate.kKind)) ?? .nand
+        nativeBounds = decoder.decodeCGRect(forKey: LBGate.kNativeRect)
+        bounds = decoder.decodeCGRect(forKey: LBGate.kRect)
+        highlighted = decoder.decodeBool(forKey: LBGate.kHighlighted)
+        pins = decoder.decodeObject(forKey: LBGate.kPins) as! [LBPin]
+        super.init()
+    }
+    
+    func encode(with encoder: NSCoder) {
+        encoder.encodeCInt(1, forKey: LBGate.kVersionKey)
+        encoder.encode(kind.rawValue, forKey: LBGate.kKind)
+        encoder.encode(nativeBounds, forKey: LBGate.kNativeRect)
+        encoder.encode(bounds, forKey: LBGate.kRect)
+        encoder.encode(highlighted, forKey: LBGate.kHighlighted)
+        encoder.encode(pins, forKey: LBGate.kPins)
+    }
+    
     // MARK: - Object Methods
 
     func localInit() {
@@ -216,7 +253,7 @@ extension LBGate  {
 // Note: For some reason PropertyListEncoder() can't encode these gates when they are in a separate file ???
 //       Smells like a bug.
 
-public class LBNand : LBGate {
+class LBNand : LBGate {
 
     fileprivate var inputs : Int { return 2 }
     fileprivate var invert : Bool { return true }
@@ -256,7 +293,7 @@ public class LBNand : LBGate {
 
 }
 
-public class LBNand3 : LBNand {
+class LBNand3 : LBNand {
     
     override fileprivate var inputs : Int { return 3 }
 

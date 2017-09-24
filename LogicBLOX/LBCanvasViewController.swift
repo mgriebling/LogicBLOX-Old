@@ -310,13 +310,13 @@ extension LBCanvasViewController : UIScrollViewDelegate {
 //        let x = scrollView.contentSize
 //        gateView.contentScaleFactor = scrollView.zoomScale
 //        print("Zoom scale = \(scrollView.zoomScale), size = \(x)")
-        gateView.setNeedsDisplay()
+//        gateView.setNeedsDisplay()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        let x = scrollView.contentOffset
 //        print("Scrolled to = \(x)")
-        gateView.setNeedsDisplay()
+//        gateView.setNeedsDisplay()
     }
     
     func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {

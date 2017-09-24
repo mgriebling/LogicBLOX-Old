@@ -12,6 +12,10 @@ class LBConnection: LBGate {
     
     static let MatchSize : CGFloat = 10
     
+    static let kInputs      = "Inputs"
+    static let kOutputs     = "Outputs"
+    static let kConnections = "Connections"
+    
     // MARK: - Internal state
     
     /// Output pins from other gates
@@ -36,31 +40,23 @@ class LBConnection: LBGate {
     }
     
     // MARK: - Life cycle
-
-    override init(kind: LBGateType, bounds: CGRect, nativeBounds: CGRect, pins: [LBPin], highlighted: Bool) {
-        super.init(kind: kind, bounds: bounds, nativeBounds: nativeBounds, pins: pins, highlighted: highlighted)
+    
+    override init (kind: LBGateType, withDefaultSize size: CGSize = CGSize.zero) {
+        super.init(kind: kind, withDefaultSize: size)
     }
     
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        inputs = try values.decode([LBPin].self, forKey: .inputs)
-        outputs = try values.decode([LBPin].self, forKey: .outputs)
-        connections = try values.decode([CGPoint].self, forKey: .connections)
+    required init? (coder decoder: NSCoder) {
+        super.init(coder: decoder)
+        inputs = decoder.decodeObject(forKey: LBConnection.kInputs) as! [LBPin]
+        outputs = decoder.decodeObject(forKey: LBConnection.kOutputs) as! [LBPin]
+        connections = decoder.decodeObject(forKey: LBConnection.kConnections) as! [CGPoint]
     }
     
-    enum CodingKeys: String, CodingKey {
-        case inputs
-        case outputs
-        case connections
-    }
-    
-    override func encode(to encoder: Encoder) throws {
-        try super.encode(to: encoder)
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(inputs, forKey: .inputs)
-        try container.encode(outputs, forKey: .outputs)
-        try container.encode(connections, forKey: .connections)
+    override func encode(with encoder: NSCoder) {
+        super.encode(with: encoder)
+        encoder.encode(inputs, forKey: LBConnection.kInputs)
+        encoder.encode(outputs, forKey: LBConnection.kOutputs)
+        encoder.encode(connections, forKey: LBConnection.kConnections)
     }
     
     deinit {
