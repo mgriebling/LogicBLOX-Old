@@ -10,10 +10,8 @@ import UIKit
 
 class LBCanvasViewController: UIViewController {
     
-    @IBOutlet weak var imageButton: UIButton!
-    @IBOutlet var imageBarButton: UIBarButtonItem!
-    @IBOutlet var doneBarButton: UIBarButtonItem!
-    @IBOutlet var editBarButton: UIBarButtonItem!
+    @IBOutlet var gateSelectedBarButton: UIBarButtonItem!
+    @IBOutlet var gateBarButton: UIBarButtonItem!
     @IBOutlet var deleteBarButton: UIBarButtonItem!
     @IBOutlet var filesBarButton: UIBarButtonItem!
     @IBOutlet weak var iconView: UIView!
@@ -145,12 +143,14 @@ class LBCanvasViewController: UIViewController {
         if editingGates {
             deleteBarButton.isEnabled = gateView.selected.count > 0
             navigationItem.setLeftBarButtonItems([deleteBarButton], animated: true)
-            imageButton.setImage(UIImage(named: "Gate Icon 2"), for: .normal)
+            navigationItem.setRightBarButtonItems([gateSelectedBarButton], animated: true)
+//            imageButton.setImage(UIImage(named: "Gate Icon 2"), for: .normal)
         } else {
             gateView.clearSelected()
             saveActiveDoc()
             navigationItem.setLeftBarButtonItems([filesBarButton], animated: true)
-            imageButton.setImage(UIImage(named: "Gate Icon 1"), for: .normal)
+            navigationItem.setRightBarButtonItems([gateBarButton], animated: true)
+//            imageButton.setImage(UIImage(named: "Gate Icon 1"), for: .normal)
         }
         UIView.animate(withDuration: 0.5) {
             self.iconView.isHidden = !self.editingGates
@@ -255,7 +255,22 @@ class LBCanvasViewController: UIViewController {
         if let id = segue.identifier {
             switch id {
             case "Show Menu" :
-                preparePopover(segue.destination, sender: sender, delegate: self)
+                let vc = segue.destination as! LBPopUpController
+                let gate = sender as! LBGate
+                // These are the pop-up menu actions
+                vc.actions = [
+                    { print("Editing \(gate)") },
+                    {
+                        print("Cloning \(sender!)")
+                        self.gateView.cloneGate(gate)
+                        print("Gates = \(self.gateView.gates)")
+                    },
+                    {
+                        print("Deleting \(gate)")
+                        self.gateView.deleteGate(gate)
+                    }
+                ]
+                preparePopover(vc, sender: sender, delegate: self)
             case "Show Gates" :
                 let vc = segue.destination as? LBGateCollectionViewController
                 vc?.selectedItem = lastGateType.rawValue

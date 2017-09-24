@@ -51,6 +51,7 @@ struct Designs {
                 return
             }
         }
+        doc.close(completionHandler: nil)
         list.insert(fileURL, at: 0)
         return doc
     }

@@ -61,13 +61,13 @@
                                 </segue>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="5S9-Mg-LXa">
-                            <button key="customView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1pd-oc-fjd">
+                        <barButtonItem key="rightBarButtonItem" id="5S9-Mg-LXa" userLabel="Gate Highlighted">
+                            <button key="customView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="1pd-oc-fjd">
                                 <rect key="frame" x="292" y="5" width="67" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Gate Icon 2"/>
                                 <connections>
-                                    <action selector="toggleEdit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eS7-2u-Bl7"/>
+                                    <action selector="toggleEdit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cHa-LI-q71"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -75,32 +75,30 @@
                     <connections>
                         <outlet property="canvasView" destination="s1X-LX-XiB" id="hAs-w7-h3h"/>
                         <outlet property="deleteBarButton" destination="KFp-8q-sWn" id="lzH-bK-EkI"/>
-                        <outlet property="doneBarButton" destination="pQq-wY-PsX" id="jhg-E6-ZZA"/>
-                        <outlet property="editBarButton" destination="HDr-yu-SAf" id="cRX-Qz-IHZ"/>
                         <outlet property="filesBarButton" destination="CMy-5T-rxq" id="Q5R-73-fVX"/>
+                        <outlet property="gateBarButton" destination="4Cm-Cr-76e" id="daz-tP-hvp"/>
+                        <outlet property="gateSelectedBarButton" destination="5S9-Mg-LXa" id="azp-S7-IKp"/>
                         <outlet property="iconView" destination="8XM-Z3-hLZ" id="YWI-TJ-meO"/>
-                        <outlet property="imageBarButton" destination="5S9-Mg-LXa" id="Wwe-5M-eW0"/>
-                        <outlet property="imageButton" destination="1pd-oc-fjd" id="rHK-hp-dGL"/>
                         <segue destination="28I-Jb-fOo" kind="popoverPresentation" identifier="Show Menu" popoverAnchorView="s1X-LX-XiB" id="FsI-IC-crd">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <barButtonItem image="Gate Icon 2" id="HDr-yu-SAf">
-                    <connections>
-                        <action selector="toggleEdit:" destination="BYZ-38-t0r" id="hfB-ub-5GJ"/>
-                    </connections>
-                </barButtonItem>
-                <barButtonItem systemItem="done" id="pQq-wY-PsX">
-                    <connections>
-                        <action selector="doneAction:" destination="BYZ-38-t0r" id="lJb-eu-gj5"/>
-                    </connections>
-                </barButtonItem>
                 <barButtonItem systemItem="trash" id="KFp-8q-sWn">
                     <connections>
                         <action selector="deleteGates:" destination="BYZ-38-t0r" id="pvf-vk-qNN"/>
                     </connections>
+                </barButtonItem>
+                <barButtonItem id="4Cm-Cr-76e" userLabel="Gate Select">
+                    <button key="customView" opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="DIc-fO-uYo">
+                        <rect key="frame" x="56" y="6.5" width="45" height="31"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="Gate Icon 1"/>
+                        <connections>
+                            <action selector="toggleEdit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="98f-g2-0Ip"/>
+                        </connections>
+                    </button>
                 </barButtonItem>
             </objects>
             <point key="canvasLocation" x="952.79999999999995" y="0.44977511244377816"/>
@@ -198,7 +196,7 @@
         <!--Popup Menu-->
         <scene sceneID="Lk5-8g-Cxu">
             <objects>
-                <viewController storyboardIdentifier="Popup Menu" modalPresentationStyle="overCurrentContext" id="28I-Jb-fOo" userLabel="Popup Menu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Popup Menu" modalPresentationStyle="overCurrentContext" id="28I-Jb-fOo" userLabel="Popup Menu" customClass="LBPopUpController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sr1-BR-D1G"/>
                         <viewControllerLayoutGuide type="bottom" id="IXu-nx-fpw"/>
@@ -213,10 +211,13 @@
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <segments>
                                     <segment title="Edit"/>
-                                    <segment title="Copy"/>
+                                    <segment title="Clone"/>
                                     <segment title="Delete"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="performAction:" destination="28I-Jb-fOo" eventType="valueChanged" id="PXU-oc-Pdr"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -239,7 +240,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="107" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="o2N-Ee-Dil">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="o2N-Ee-Dil">
                             <size key="itemSize" width="88" height="60"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -277,6 +278,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rle-8g-IAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -323,6 +325,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Gate Icon 1" width="45" height="31"/>
         <image name="Gate Icon 2" width="45" height="31"/>
         <image name="Nand Gate" width="123" height="70"/>
     </resources>

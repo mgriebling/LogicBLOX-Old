@@ -25,7 +25,7 @@ class LBBlock: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-        Gates.drawBlockGate(frame: bounds, highlight: highlighted, pinVisible: inputPinVisible > 0, inputs: 1, name: name)
+//        Gates.drawBlockGate(frame: bounds, pinVisible: inputPinVisible > 0, highlight: highlighted, inputs: 1, name: name)
     }
     
 }

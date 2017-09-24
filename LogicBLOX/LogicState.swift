@@ -9,7 +9,7 @@
 import Foundation
 
 /// Based on IEEE 1164.
-enum LogicState: Int {
+enum LogicState: Int, Codable {
     
     case U, // Uninitialized state used as a default value
          X, // Forcing unknown for bus contentions, error conditions, etc.

@@ -23,7 +23,7 @@ class LBGateView: UIView {
         UIColor.white.setFill()
         UIRectFill(rect)
         
-//        print("Drawing gates in \(rect)")
+        print("Drawing gates : \(gates)")
         
         // draw the grid
         grid.drawRect(rect, inView: self)
@@ -59,10 +59,10 @@ class LBGateView: UIView {
                     gate.highlighted = true
                     
                     // create the initial connection
-                    let connection = LBConnection()
+                    let connection = LBConnection(kind: .line)
                     let sourcePin = gate.getClosestPinIndex(gateOrigin)
                     if gate.pins[sourcePin].type == .output { gate.outputPinVisible = 1 }
-                    else { gate.inputPinVisible = max(1, sourcePin) }  // max in case of single pins
+                    else { gate.inputPinVisible = CGFloat(max(1, sourcePin)) }  // max in case of single pins
                     print("Pin = \(sourcePin)")
                     connection.addGatePin(gate, index: sourcePin)
                     connection.highlighted = true
@@ -131,12 +131,24 @@ class LBGateView: UIView {
         setNeedsDisplay()
     }
     
+    func deleteGate (_ gate: LBGate) {
+        if let index = gates.index(where: { $0 === gate }) {
+            gates.remove(at: index)
+            setNeedsDisplay()
+        }
+    }
+    
+    func cloneGate (_ gate: LBGate) {
+        let newGate = LBGateType.classForGate(gate.kind)
+        newGate.bounds = gate.bounds.offsetBy(dx: 10, dy: 10)
+        print("Cloned gate : \(newGate)")
+        gates.append(newGate)
+        setNeedsDisplay()
+    }
+    
     func deleteSelected(_ sender: UIBarButtonItem) {
         for delete in selected {
-            if let index = gates.index(of: delete) {
-                gates.remove(at: index)
-                setNeedsDisplay()
-            }
+            deleteGate(delete)
         }
     }
     

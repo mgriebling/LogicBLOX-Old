@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2FE3BD4C1F601853005B4BF0 /* LBDesignTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */; };
 		47244B801F5D4AEE006CB51D /* Gates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B7F1F5D4AEE006CB51D /* Gates.swift */; };
-		47244B821F5D8C86006CB51D /* LBAnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B811F5D8C86006CB51D /* LBAnd.swift */; };
 		47244B841F5D8D59006CB51D /* LBOr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B831F5D8D59006CB51D /* LBOr.swift */; };
 		47244B861F5D8E19006CB51D /* LBNor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B851F5D8E19006CB51D /* LBNor.swift */; };
 		47244B881F5D8ECE006CB51D /* LBXor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B871F5D8ECE006CB51D /* LBXor.swift */; };
@@ -31,8 +30,8 @@
 		477BE0871F5B03B0006A8E3E /* LBGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0861F5B03B0006A8E3E /* LBGrid.swift */; };
 		477BE0891F5C24C9006A8E3E /* LBGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0881F5C24C9006A8E3E /* LBGate.swift */; };
 		477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */; };
-		477BE0951F5C57EB006A8E3E /* LBNand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0941F5C57EB006A8E3E /* LBNand.swift */; };
 		479B7ADA1F6D46CF00116694 /* LogicState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B7AD91F6D46CF00116694 /* LogicState.swift */; };
+		47B7C0381F7662D100EF8014 /* LBPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B7C0371F7662D100EF8014 /* LBPopUpController.swift */; };
 		47D642F01F5FF499005F2069 /* LBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642EF1F5FF499005F2069 /* LBDocument.swift */; };
 		47D642F21F6143D9005F2069 /* LBDesigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642F11F6143D9005F2069 /* LBDesigns.swift */; };
 		47D642F41F62A277005F2069 /* EditTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642F31F62A277005F2069 /* EditTableCell.swift */; };
@@ -41,7 +40,6 @@
 /* Begin PBXFileReference section */
 		2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDesignTableViewController.swift; sourceTree = "<group>"; };
 		47244B7F1F5D4AEE006CB51D /* Gates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gates.swift; sourceTree = "<group>"; };
-		47244B811F5D8C86006CB51D /* LBAnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBAnd.swift; sourceTree = "<group>"; };
 		47244B831F5D8D59006CB51D /* LBOr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBOr.swift; sourceTree = "<group>"; };
 		47244B851F5D8E19006CB51D /* LBNor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNor.swift; sourceTree = "<group>"; };
 		47244B871F5D8ECE006CB51D /* LBXor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXor.swift; sourceTree = "<group>"; };
@@ -65,8 +63,8 @@
 		477BE0861F5B03B0006A8E3E /* LBGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGrid.swift; sourceTree = "<group>"; };
 		477BE0881F5C24C9006A8E3E /* LBGate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGate.swift; sourceTree = "<group>"; };
 		477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateCollectionViewController.swift; sourceTree = "<group>"; };
-		477BE0941F5C57EB006A8E3E /* LBNand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNand.swift; sourceTree = "<group>"; };
 		479B7AD91F6D46CF00116694 /* LogicState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicState.swift; sourceTree = "<group>"; };
+		47B7C0371F7662D100EF8014 /* LBPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBPopUpController.swift; sourceTree = "<group>"; };
 		47D642EF1F5FF499005F2069 /* LBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDocument.swift; sourceTree = "<group>"; };
 		47D642F11F6143D9005F2069 /* LBDesigns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDesigns.swift; sourceTree = "<group>"; };
 		47D642F31F62A277005F2069 /* EditTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableCell.swift; sourceTree = "<group>"; };
@@ -87,8 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				477BE0881F5C24C9006A8E3E /* LBGate.swift */,
-				477BE0941F5C57EB006A8E3E /* LBNand.swift */,
-				47244B811F5D8C86006CB51D /* LBAnd.swift */,
 				47244B831F5D8D59006CB51D /* LBOr.swift */,
 				47244B851F5D8E19006CB51D /* LBNor.swift */,
 				47244B871F5D8ECE006CB51D /* LBXor.swift */,
@@ -140,6 +136,7 @@
 			children = (
 				477BE0821F5AFDC4006A8E3E /* LBCanvasViewController.swift */,
 				477BE0721F5AD877006A8E3E /* Main.storyboard */,
+				47B7C0371F7662D100EF8014 /* LBPopUpController.swift */,
 				2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */,
 				477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */,
 				47D642EF1F5FF499005F2069 /* LBDocument.swift */,
@@ -241,17 +238,16 @@
 				47244B8E1F5D90DF006CB51D /* LBInverter.swift in Sources */,
 				47244B861F5D8E19006CB51D /* LBNor.swift in Sources */,
 				477BE0851F5AFEBD006A8E3E /* LBGateView.swift in Sources */,
-				477BE0951F5C57EB006A8E3E /* LBNand.swift in Sources */,
 				477BE0831F5AFDC4006A8E3E /* LBCanvasViewController.swift in Sources */,
 				477BE0871F5B03B0006A8E3E /* LBGrid.swift in Sources */,
 				477BE06F1F5AD877006A8E3E /* AppDelegate.swift in Sources */,
 				477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */,
+				47B7C0381F7662D100EF8014 /* LBPopUpController.swift in Sources */,
 				47244B8A1F5D8F03006CB51D /* LBXnor.swift in Sources */,
 				47244B981F5EA05A006CB51D /* LBIndicator.swift in Sources */,
 				47244B841F5D8D59006CB51D /* LBOr.swift in Sources */,
 				472BF9581F6417900097DDDA /* UIImageExtras.swift in Sources */,
 				47D642F01F5FF499005F2069 /* LBDocument.swift in Sources */,
-				47244B821F5D8C86006CB51D /* LBAnd.swift in Sources */,
 				47244B881F5D8ECE006CB51D /* LBXor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
