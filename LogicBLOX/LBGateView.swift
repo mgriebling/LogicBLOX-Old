@@ -60,24 +60,26 @@ class LBGateView: UIView {
                     
                     // create the initial connection
                     let connection = LBConnection(kind: .line)
-                    let sourcePin = gate.getClosestPinIndex(gateOrigin)
-                    if gate.pins[sourcePin].type == .output { gate.outputPinVisible = 1 }
-                    else { gate.inputPinVisible = CGFloat(max(1, sourcePin)) }  // max in case of single pins
-                    print("Pin = \(sourcePin)")
-                    connection.addGatePin(gate, index: sourcePin)
-                    connection.highlighted = true
-                    gates.append(connection)
-                    creatingGate = connection
+                    if let sourcePin = gate.getClosestPinIndex(gateOrigin) {
+                        if gate.pins[sourcePin].type == .output { gate.outputPinVisible = 1 }
+                        else { gate.inputPinVisible = CGFloat(max(1, sourcePin)) }  // max in case of single pins
+                        print("Pin = \(sourcePin)")
+                        connection.addGatePin(gate, index: sourcePin)
+                        connection.highlighted = true
+                        gates.append(connection)
+                        creatingGate = connection
+                    }
                 } else {
                     // finish the connection to this destination gate
-                    let destinationPin = gate.getClosestPinIndex(gateOrigin)
-                    let connection = creatingGate as! LBConnection
-                    connection.addGatePin(gate, index: destinationPin)
-                    editingGate?.highlighted = false
-                    editingGate?.inputPinVisible = 0
-                    editingGate?.outputPinVisible = 0
-                    creatingGate = nil
-                    gate.highlighted = false
+                    if let destinationPin = gate.getClosestPinIndex(gateOrigin) {
+                        let connection = creatingGate as! LBConnection
+                        connection.addGatePin(gate, index: destinationPin)
+                        editingGate?.highlighted = false
+                        editingGate?.inputPinVisible = 0
+                        editingGate?.outputPinVisible = 0
+                        creatingGate = nil
+                        gate.highlighted = false
+                    }
                 }
             } else {
                 toggleSelection(gate)

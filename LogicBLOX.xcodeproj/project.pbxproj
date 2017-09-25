@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F3743E51F7941A5007AD1E3 /* LBNand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3743E41F7941A4007AD1E3 /* LBNand.swift */; };
 		2FE3BD4C1F601853005B4BF0 /* LBDesignTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */; };
 		47244B801F5D4AEE006CB51D /* Gates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B7F1F5D4AEE006CB51D /* Gates.swift */; };
 		47244B841F5D8D59006CB51D /* LBOr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B831F5D8D59006CB51D /* LBOr.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F3743E41F7941A4007AD1E3 /* LBNand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBNand.swift; sourceTree = "<group>"; };
 		2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDesignTableViewController.swift; sourceTree = "<group>"; };
 		47244B7F1F5D4AEE006CB51D /* Gates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gates.swift; sourceTree = "<group>"; };
 		47244B831F5D8D59006CB51D /* LBOr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBOr.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				477BE0881F5C24C9006A8E3E /* LBGate.swift */,
+				2F3743E41F7941A4007AD1E3 /* LBNand.swift */,
 				47244B831F5D8D59006CB51D /* LBOr.swift */,
 				47244B851F5D8E19006CB51D /* LBNor.swift */,
 				47244B871F5D8ECE006CB51D /* LBXor.swift */,
@@ -238,6 +241,7 @@
 				47244B8E1F5D90DF006CB51D /* LBInverter.swift in Sources */,
 				47244B861F5D8E19006CB51D /* LBNor.swift in Sources */,
 				477BE0851F5AFEBD006A8E3E /* LBGateView.swift in Sources */,
+				2F3743E51F7941A5007AD1E3 /* LBNand.swift in Sources */,
 				477BE0831F5AFDC4006A8E3E /* LBCanvasViewController.swift in Sources */,
 				477BE0871F5B03B0006A8E3E /* LBGrid.swift in Sources */,
 				477BE06F1F5AD877006A8E3E /* AppDelegate.swift in Sources */,

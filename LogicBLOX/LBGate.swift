@@ -19,7 +19,7 @@ enum Orientation: Int, Codable {
 // MARK: -
 // MARK: - LBGateType
 
-public enum LBGateType : Int, Codable {
+public enum LBGateType : Int {
     case line = 0, button, indicator,
     or, or3, or4,
     nor, nor3, nor4,
@@ -187,10 +187,10 @@ class LBGate : NSObject, NSCoding {
         return bounds.contains(point)
     }
 
-    final func getClosestPinIndex (_ point: CGPoint) -> Int {
+    final func getClosestPinIndex (_ point: CGPoint) -> Int? {
 //        if !isInBounds(point) { return nil }
         var distance = CGFloat.infinity
-        var fpin = 0
+        var fpin : Int?
         for (index, pin) in pins.enumerated() {
             let pinPoint = CGPoint(x: pin.pos.x+bounds.origin.x, y: pin.pos.y+bounds.origin.y)
             let range = pinPoint.distanceTo(point)
@@ -247,104 +247,6 @@ extension LBGate  {
 
 }
 
-// MARK: -
-// MARK: - Nand Gates
 
-// Note: For some reason PropertyListEncoder() can't encode these gates when they are in a separate file ???
-//       Smells like a bug.
-
-class LBNand : LBGate {
-
-    fileprivate var inputs : Int { return 2 }
-    fileprivate var invert : Bool { return true }
-    fileprivate let yoff : CGFloat = 10
-    fileprivate let xoff : CGFloat = 4
-
-    override public var description: String {
-        let gate = invert ? "Nand" : "And"
-        return "\(inputs)-Input " + gate
-    }
-
-    override func localInit() {
-        super.localInit()
-        nativeBounds = CGRect(x: 0, y: 0, width: 134, height: 68)
-
-        let pin1 = LBPin(x: xoff, y: 9+yoff)
-        let pin2 = LBPin(x: xoff, y: 39+yoff)
-        let pin3 = LBPin(x: nativeBounds.width-xoff, y: 25+yoff-1); pin3.type = .output
-        pins = [pin3, pin1, pin2]
-    }
-
-    override func draw(_ scale: CGFloat) {
-        Gates.drawAndNandGate(frame: bounds, highlight: highlighted, inputs: CGFloat(inputs), joinedPin: joinedInputs, joinedOutputPin: joinedOutputs, inputPinVisible: inputPinVisible, outputPinVisible: outputPinVisible, invert: invert)
-    }
-
-    override func evaluate() -> LogicState {
-        if pins.count < inputs+1 { return .U }
-        let inputStates = pins.dropFirst().map { $0.state }
-        var state = inputStates[0]
-        for input in inputStates.dropFirst() {
-            state = state & input            // And function
-        }
-        state = invert ? !state : state      // Nand if inverted
-        pins[0].state = state
-        return state
-    }
-
-}
-
-class LBNand3 : LBNand {
-    
-    override fileprivate var inputs : Int { return 3 }
-
-    override func localInit() {
-        super.localInit()
-
-        // replace last two pins with 3-input pins
-        let pin1 = LBPin(x: xoff, y: 4+yoff)
-        let pin2 = LBPin(x: xoff, y: 23+yoff)
-        let pin3 = LBPin(x: xoff, y: 43+yoff)
-        pins = pins.dropLast(2) + [pin1, pin2, pin3]
-    }
-
-}
-
-class LBNand4 : LBNand {
-
-    override fileprivate var inputs : Int { return 4 }
-
-    override func localInit() {
-        super.localInit()
-
-        // replace last two pins with 3-input pins
-        let pin1 = LBPin(x: xoff, y: 4+yoff)
-        let pin2 = LBPin(x: xoff, y: 17+yoff)
-        let pin3 = LBPin(x: xoff, y: 30+yoff)
-        let pin4 = LBPin(x: xoff, y: 43+yoff)
-        pins = pins.dropLast(2) + [pin1, pin2, pin3, pin4]
-    }
-
-}
-
-// MARK: -
-// MARK: - And Gates
-
-class LBAnd: LBNand {
-
-    override var invert: Bool { return false }
-
-}
-
-class LBAnd3 : LBNand3 {
-
-    override var invert: Bool { return false }
-
-}
-
-class LBAnd4 : LBNand4 {
-
-    override var invert: Bool { return false }
-
-}
 
 
