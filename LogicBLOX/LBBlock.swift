@@ -14,7 +14,7 @@ class LBBlock: LBGate {
     
     override func localInit() {
         super.localInit()
-        nativeBounds = CGRect(x: 0, y: 0, width: 146, height: 141)
+        nativeBounds = CGRect(x: 0, y: 0, width: 127, height: 121)
         let pin1 = LBPin(x: 0, y: 24); pin1.facing = .left; pin1.type = .input
         let pin2 = LBPin(x: 70, y: 34); pin2.facing = .right; pin2.type = .output
         pins = [pin1, pin2]
@@ -25,7 +25,7 @@ class LBBlock: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-//        Gates.drawBlockGate(frame: bounds, pinVisible: inputPinVisible > 0, highlight: highlighted, inputs: 1, name: name)
+        Gates.drawBlockGate(frame: bounds, highlight: highlighted, inputs: 4, outputs: 1, joinedPin: joinedInputs, joinedOutputPin: joinedOutputs, inputPinVisible: inputPinVisible, outputPinVisible: outputPinVisible, name: name)
     }
     
 }

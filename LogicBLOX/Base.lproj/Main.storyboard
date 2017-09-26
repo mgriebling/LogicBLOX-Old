@@ -76,11 +76,13 @@
                         <outlet property="canvasView" destination="s1X-LX-XiB" id="hAs-w7-h3h"/>
                         <outlet property="deleteBarButton" destination="KFp-8q-sWn" id="lzH-bK-EkI"/>
                         <outlet property="filesBarButton" destination="CMy-5T-rxq" id="Q5R-73-fVX"/>
-                        <outlet property="gateBarButton" destination="4Cm-Cr-76e" id="daz-tP-hvp"/>
-                        <outlet property="gateSelectedBarButton" destination="5S9-Mg-LXa" id="azp-S7-IKp"/>
                         <outlet property="iconView" destination="8XM-Z3-hLZ" id="YWI-TJ-meO"/>
+                        <outlet property="imageButton" destination="1pd-oc-fjd" id="dat-1h-pAj"/>
                         <segue destination="28I-Jb-fOo" kind="popoverPresentation" identifier="Show Menu" popoverAnchorView="s1X-LX-XiB" id="FsI-IC-crd">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                            <popoverPassthroughViews>
+                                <scrollView reference="s1X-LX-XiB"/>
+                            </popoverPassthroughViews>
                         </segue>
                     </connections>
                 </viewController>
@@ -89,16 +91,6 @@
                     <connections>
                         <action selector="deleteGates:" destination="BYZ-38-t0r" id="pvf-vk-qNN"/>
                     </connections>
-                </barButtonItem>
-                <barButtonItem id="4Cm-Cr-76e" userLabel="Gate Select">
-                    <button key="customView" opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="DIc-fO-uYo">
-                        <rect key="frame" x="56" y="6.5" width="45" height="31"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="Gate Icon 1"/>
-                        <connections>
-                            <action selector="toggleEdit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="98f-g2-0Ip"/>
-                        </connections>
-                    </button>
                 </barButtonItem>
             </objects>
             <point key="canvasLocation" x="952.79999999999995" y="0.44977511244377816"/>
@@ -202,11 +194,11 @@
                         <viewControllerLayoutGuide type="bottom" id="IXu-nx-fpw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Z1L-Vr-0tt">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
+                        <rect key="frame" x="0.0" y="0.0" width="163" height="25"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="bar" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9wE-Dj-rrL">
-                                <rect key="frame" x="16" y="6" width="168" height="29"/>
+                                <rect key="frame" x="-3" y="-2" width="168" height="29"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <segments>
@@ -222,11 +214,11 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="200" height="40"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="163" height="25"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="200" height="40"/>
+                    <size key="freeformSize" width="163" height="25"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vkr-pP-Zae" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -278,7 +270,6 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rle-8g-IAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -325,7 +316,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Gate Icon 1" width="45" height="31"/>
         <image name="Gate Icon 2" width="45" height="31"/>
         <image name="Nand Gate" width="123" height="70"/>
     </resources>

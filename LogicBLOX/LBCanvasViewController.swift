@@ -10,8 +10,7 @@ import UIKit
 
 class LBCanvasViewController: UIViewController {
     
-    @IBOutlet var gateSelectedBarButton: UIBarButtonItem!
-    @IBOutlet var gateBarButton: UIBarButtonItem!
+    @IBOutlet weak var imageButton: UIButton!
     @IBOutlet var deleteBarButton: UIBarButtonItem!
     @IBOutlet var filesBarButton: UIBarButtonItem!
     @IBOutlet weak var iconView: UIView!
@@ -98,24 +97,6 @@ class LBCanvasViewController: UIViewController {
             }
         })
     }
-    
-    
-    // MARK: - Support methods
-    
-//    func setButtonImage() {
-//        let image : UIImage
-//        if lastGateType == .line {
-//            image = Gates.imageOfConnection(highlight: true).imageByBestFitForSize(imageButton.bounds.size)!
-//        } else {
-//            let gate = LBGateType.classForGate(lastGateType)
-//            gate.highlighted = true
-//            gate.inputPinVisible = 0
-//            gate.outputPinVisible = 0
-//            gate.defaultBounds()
-//            image = gate.getImageOfObject(gate.bounds, scale: 1).imageByBestFitForSize(imageButton.bounds.size)!
-//        }
-//        imageButton.setImage(image, for: .normal)
-//    }
 
     // MARK: - Viewcontroller life cycle
     
@@ -143,14 +124,14 @@ class LBCanvasViewController: UIViewController {
         if editingGates {
             deleteBarButton.isEnabled = gateView.selected.count > 0
             navigationItem.setLeftBarButtonItems([deleteBarButton], animated: true)
-            navigationItem.setRightBarButtonItems([gateSelectedBarButton], animated: true)
-//            imageButton.setImage(UIImage(named: "Gate Icon 2"), for: .normal)
+//            navigationItem.setRightBarButtonItems([gateSelectedBarButton], animated: true)
+            imageButton.setImage(UIImage(named: "Gate Icon 2"), for: .normal)
         } else {
             gateView.clearSelected()
             saveActiveDoc()
             navigationItem.setLeftBarButtonItems([filesBarButton], animated: true)
-            navigationItem.setRightBarButtonItems([gateBarButton], animated: true)
-//            imageButton.setImage(UIImage(named: "Gate Icon 1"), for: .normal)
+//            navigationItem.setRightBarButtonItems([gateBarButton], animated: true)
+            imageButton.setImage(UIImage(named: "Gate Icon 1"), for: .normal)
         }
         UIView.animate(withDuration: 0.5) {
             self.iconView.isHidden = !self.editingGates
@@ -178,7 +159,6 @@ class LBCanvasViewController: UIViewController {
     
     @objc func didDoubleTap(_ sender: UITapGestureRecognizer) {
         if let gate = gateView.gateUnderPoint(sender.location(in: gateView)) {
-            print("Double tapped gate \(gate)")
             performSegue(withIdentifier: "Show Menu", sender: gate)
         }
     }
@@ -259,15 +239,20 @@ class LBCanvasViewController: UIViewController {
                 let gate = sender as! LBGate
                 // These are the pop-up menu actions
                 vc.actions = [
-                    { print("Editing \(gate)") },
+                    {
+                        print("Editing \(gate)")
+                        vc.dismiss(animated: true, completion: nil)
+                    },
                     {
                         print("Cloning \(sender!)")
                         self.gateView.cloneGate(gate)
                         print("Gates = \(self.gateView.gates)")
+                        vc.dismiss(animated: true, completion: nil)
                     },
                     {
                         print("Deleting \(gate)")
                         self.gateView.deleteGate(gate)
+                        vc.dismiss(animated: true, completion: nil)
                     }
                 ]
                 preparePopover(vc, sender: sender, delegate: self)
