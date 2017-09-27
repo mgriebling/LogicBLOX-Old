@@ -227,7 +227,7 @@
         <!--Gate Collection View Controller-->
         <scene sceneID="agK-34-9aW">
             <objects>
-                <collectionViewController id="Kvt-iQ-ihW" customClass="LBGateCollectionViewController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController modalPresentationStyle="currentContext" id="Kvt-iQ-ihW" customClass="LBGateCollectionViewController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" misplaced="YES" maximumZoomScale="3" dataMode="prototypes" id="2C1-Nf-FJ6">
                         <rect key="frame" x="0.0" y="0.0" width="107" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
