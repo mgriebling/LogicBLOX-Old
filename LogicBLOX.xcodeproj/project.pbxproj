@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2F3743E51F7941A5007AD1E3 /* LBNand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3743E41F7941A4007AD1E3 /* LBNand.swift */; };
 		2FE3BD4C1F601853005B4BF0 /* LBDesignTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */; };
+		471744B61F7BB1CA00DD553B /* LBTristate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471744B51F7BB1CA00DD553B /* LBTristate.swift */; };
+		471744B81F7BB46C00DD553B /* LBInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471744B71F7BB46C00DD553B /* LBInput.swift */; };
+		471744BA1F7BB5B900DD553B /* LBOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471744B91F7BB5B900DD553B /* LBOutput.swift */; };
 		47244B801F5D4AEE006CB51D /* Gates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B7F1F5D4AEE006CB51D /* Gates.swift */; };
 		47244B841F5D8D59006CB51D /* LBOr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B831F5D8D59006CB51D /* LBOr.swift */; };
 		47244B861F5D8E19006CB51D /* LBNor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B851F5D8E19006CB51D /* LBNor.swift */; };
@@ -41,6 +44,9 @@
 /* Begin PBXFileReference section */
 		2F3743E41F7941A4007AD1E3 /* LBNand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBNand.swift; sourceTree = "<group>"; };
 		2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDesignTableViewController.swift; sourceTree = "<group>"; };
+		471744B51F7BB1CA00DD553B /* LBTristate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBTristate.swift; sourceTree = "<group>"; };
+		471744B71F7BB46C00DD553B /* LBInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBInput.swift; sourceTree = "<group>"; };
+		471744B91F7BB5B900DD553B /* LBOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBOutput.swift; sourceTree = "<group>"; };
 		47244B7F1F5D4AEE006CB51D /* Gates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gates.swift; sourceTree = "<group>"; };
 		47244B831F5D8D59006CB51D /* LBOr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBOr.swift; sourceTree = "<group>"; };
 		47244B851F5D8E19006CB51D /* LBNor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNor.swift; sourceTree = "<group>"; };
@@ -97,8 +103,11 @@
 				47244B911F5D95F8006CB51D /* LBConnection.swift */,
 				47244B8D1F5D90DF006CB51D /* LBInverter.swift */,
 				47244B951F5EA03E006CB51D /* LBButton.swift */,
+				471744B51F7BB1CA00DD553B /* LBTristate.swift */,
 				47244B971F5EA05A006CB51D /* LBIndicator.swift */,
 				479B7AD91F6D46CF00116694 /* LogicState.swift */,
+				471744B71F7BB46C00DD553B /* LBInput.swift */,
+				471744B91F7BB5B900DD553B /* LBOutput.swift */,
 			);
 			name = "Logic Elements";
 			sourceTree = "<group>";
@@ -240,7 +249,9 @@
 				47244B901F5D90EB006CB51D /* LBBlock.swift in Sources */,
 				47244B8E1F5D90DF006CB51D /* LBInverter.swift in Sources */,
 				47244B861F5D8E19006CB51D /* LBNor.swift in Sources */,
+				471744BA1F7BB5B900DD553B /* LBOutput.swift in Sources */,
 				477BE0851F5AFEBD006A8E3E /* LBGateView.swift in Sources */,
+				471744B81F7BB46C00DD553B /* LBInput.swift in Sources */,
 				2F3743E51F7941A5007AD1E3 /* LBNand.swift in Sources */,
 				477BE0831F5AFDC4006A8E3E /* LBCanvasViewController.swift in Sources */,
 				477BE0871F5B03B0006A8E3E /* LBGrid.swift in Sources */,
@@ -253,6 +264,7 @@
 				472BF9581F6417900097DDDA /* UIImageExtras.swift in Sources */,
 				47D642F01F5FF499005F2069 /* LBDocument.swift in Sources */,
 				47244B881F5D8ECE006CB51D /* LBXor.swift in Sources */,
+				471744B61F7BB1CA00DD553B /* LBTristate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

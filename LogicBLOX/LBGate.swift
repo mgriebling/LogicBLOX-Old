@@ -29,36 +29,44 @@ public enum LBGateType : Int {
     xnor, xnor3, xnor4,
     buffer,
     inverter,
+    tristate,
+    tristateInverter,
+    input,
+    output,
     block,
     
     MAX // last item indicator
     
     static func classForGate(_ gate: LBGateType) -> LBGate {
         switch gate {
-        case .or:       return LBOr(kind: gate)
-        case .or3:      return LBOr3(kind: gate)
-        case .or4:      return LBOr4(kind: gate)
-        case .nor:      return LBNor(kind: gate)
-        case .nor3:     return LBNor3(kind: gate)
-        case .nor4:     return LBNor4(kind: gate)
-        case .xor:      return LBXor(kind: gate)
-        case .xor3:     return LBXor3(kind: gate)
-        case .xor4:     return LBXor4(kind: gate)
-        case .xnor:     return LBXnor(kind: gate)
-        case .xnor3:    return LBXnor3(kind: gate)
-        case .xnor4:    return LBXnor4(kind: gate)
-        case .and:      return LBAnd(kind: gate)
-        case .and3:     return LBAnd3(kind: gate)
-        case .and4:     return LBAnd4(kind: gate)
-        case .nand:     return LBNand(kind: gate)
-        case .nand3:    return LBNand3(kind: gate)
-        case .nand4:    return LBNand4(kind: gate)
-        case .inverter: return LBInverter(kind: gate)
-        case .buffer:   return LBBuffer(kind: gate)
-        case .block:    return LBBlock(kind: gate)
-        case .line:     return LBConnection(kind: gate)
-        case .indicator: return LBIndicator(kind: gate)
-        case .button:   return LBButton(kind: gate)
+        case .or:               return LBOr(kind: gate)
+        case .or3:              return LBOr3(kind: gate)
+        case .or4:              return LBOr4(kind: gate)
+        case .nor:              return LBNor(kind: gate)
+        case .nor3:             return LBNor3(kind: gate)
+        case .nor4:             return LBNor4(kind: gate)
+        case .xor:              return LBXor(kind: gate)
+        case .xor3:             return LBXor3(kind: gate)
+        case .xor4:             return LBXor4(kind: gate)
+        case .xnor:             return LBXnor(kind: gate)
+        case .xnor3:            return LBXnor3(kind: gate)
+        case .xnor4:            return LBXnor4(kind: gate)
+        case .and:              return LBAnd(kind: gate)
+        case .and3:             return LBAnd3(kind: gate)
+        case .and4:             return LBAnd4(kind: gate)
+        case .nand:             return LBNand(kind: gate)
+        case .nand3:            return LBNand3(kind: gate)
+        case .nand4:            return LBNand4(kind: gate)
+        case .inverter:         return LBInverter(kind: gate)
+        case .buffer:           return LBBuffer(kind: gate)
+        case .block:            return LBBlock(kind: gate)
+        case .line:             return LBConnection(kind: gate)
+        case .indicator:        return LBIndicator(kind: gate)
+        case .button:           return LBButton(kind: gate)
+        case .tristate:         return LBTristate(kind: gate)
+        case .tristateInverter: return LBTristateInverter(kind: gate)
+        case .input:            return LBInput(kind: gate)
+        case .output:           return LBOutput(kind: gate)
         default: break
         }
         return LBNand(kind: gate)

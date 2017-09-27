@@ -1475,11 +1475,17 @@ public class Gates : NSObject {
 
     }
 
-    @objc dynamic public class func drawOutput(frame: CGRect = CGRect(x: 5, y: 5, width: 135, height: 30), name: String = "I/O 1") {
+    @objc dynamic public class func drawOutput(frame: CGRect = CGRect(x: 0, y: 0, width: 135, height: 30), highlight: Bool = false, joinedPin: CGFloat = 0, inputPinVisible: CGFloat = 1, name: String = "I/O 1") {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         // This non-generic function dramatically improves compilation times of complex expressions.
         func fastFloor(_ x: CGFloat) -> CGFloat { return floor(x) }
+
+
+        //// Variable Declarations
+        let colour = highlight ? Gates.highlightColour : Gates.baseColor
+        let pin1Joined = fmod(joinedPin, 2) > 0.5
+        let pin1Visible = inputPinVisible == 1
 
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath()
@@ -1498,7 +1504,7 @@ public class Gates : NSObject {
         rectanglePath.addCurve(to: CGPoint(x: frame.minX + 29.82, y: frame.minY + 3.22), controlPoint1: CGPoint(x: frame.minX + 28.49, y: frame.minY + 4.12), controlPoint2: CGPoint(x: frame.minX + 29.07, y: frame.minY + 3.51))
         rectanglePath.addCurve(to: CGPoint(x: frame.minX + 32.4, y: frame.minY + 3), controlPoint1: CGPoint(x: frame.minX + 30.5, y: frame.minY + 3), controlPoint2: CGPoint(x: frame.minX + 31.13, y: frame.minY + 3))
         rectanglePath.close()
-        Gates.baseColor.setStroke()
+        colour.setStroke()
         rectanglePath.lineWidth = 2.5
         rectanglePath.stroke()
 
@@ -1526,15 +1532,21 @@ public class Gates : NSObject {
         context.clip(to: symbolRect)
         context.translateBy(x: symbolRect.minX, y: symbolRect.minY)
 
-        Gates.drawInputPin(frame: CGRect(origin: .zero, size: symbolRect.size), resizing: .stretch, highlight: false, pinVisible: true, isJoined: true)
+        Gates.drawInputPin(frame: CGRect(origin: .zero, size: symbolRect.size), resizing: .stretch, highlight: highlight, pinVisible: pin1Visible, isJoined: pin1Joined)
         context.restoreGState()
     }
 
-    @objc dynamic public class func drawInput(frame: CGRect = CGRect(x: 5, y: 5, width: 135, height: 30), name: String = "I/O 1") {
+    @objc dynamic public class func drawInput(frame: CGRect = CGRect(x: 0, y: 0, width: 135, height: 30), highlight: Bool = false, joinedOutputPin: CGFloat = 0, outputPinVisible: CGFloat = 1, name: String = "I/O 1") {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         // This non-generic function dramatically improves compilation times of complex expressions.
         func fastFloor(_ x: CGFloat) -> CGFloat { return floor(x) }
+
+
+        //// Variable Declarations
+        let colour = highlight ? Gates.highlightColour : Gates.baseColor
+        let outputPin1Joined = fmod(joinedOutputPin, 2) == 1
+        let outputPin1Visible = outputPinVisible == 1
 
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath()
@@ -1553,7 +1565,7 @@ public class Gates : NSObject {
         rectanglePath.addCurve(to: CGPoint(x: frame.minX + 5.82, y: frame.minY + 3.22), controlPoint1: CGPoint(x: frame.minX + 4.49, y: frame.minY + 4.12), controlPoint2: CGPoint(x: frame.minX + 5.07, y: frame.minY + 3.51))
         rectanglePath.addCurve(to: CGPoint(x: frame.minX + 8.4, y: frame.minY + 3), controlPoint1: CGPoint(x: frame.minX + 6.5, y: frame.minY + 3), controlPoint2: CGPoint(x: frame.minX + 7.13, y: frame.minY + 3))
         rectanglePath.close()
-        Gates.baseColor.setStroke()
+        colour.setStroke()
         rectanglePath.lineWidth = 2.5
         rectanglePath.stroke()
 
@@ -1581,7 +1593,7 @@ public class Gates : NSObject {
         context.clip(to: symbolRect)
         context.translateBy(x: symbolRect.minX, y: symbolRect.minY)
 
-        Gates.drawOutputPin(frame: CGRect(origin: .zero, size: symbolRect.size), resizing: .stretch, highlight: false, pinVisible: true, isJoined: true)
+        Gates.drawOutputPin(frame: CGRect(origin: .zero, size: symbolRect.size), resizing: .stretch, highlight: highlight, pinVisible: outputPin1Visible, isJoined: outputPin1Joined)
         context.restoreGState()
     }
 
