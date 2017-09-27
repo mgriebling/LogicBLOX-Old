@@ -60,26 +60,41 @@ class LBGateView: UIView {
                     
                     // create the initial connection
                     let connection = LBConnection(kind: .line)
+                    let sPin : Int
                     if let sourcePin = gate.getClosestPinIndex(gateOrigin) {
+                        sPin = sourcePin
                         if gate.pins[sourcePin].type == .output { gate.outputPinVisible = 1 }
                         else { gate.inputPinVisible = CGFloat(max(1, sourcePin)) }  // max in case of single pins
-                        print("Pin = \(sourcePin)")
-                        connection.addGatePin(gate, index: sourcePin)
-                        connection.highlighted = true
-                        gates.append(connection)
-                        creatingGate = connection
+                    } else {
+                        // we are dealing with a connection that contains no pins
+                        let pin = LBPin(x: gateOrigin.x, y: gateOrigin.y)
+                        pin.type = .output
+                        connection.pins.append(pin)
+                        sPin = connection.pins.count-1
+                        connection.outputPinVisible = CGFloat(connection.pins.count)
                     }
+                    connection.addGatePin(gate, index: sPin)
+                    connection.highlighted = true
+                    gates.append(connection)
+                    creatingGate = connection
                 } else {
                     // finish the connection to this destination gate
                     if let destinationPin = gate.getClosestPinIndex(gateOrigin) {
                         let connection = creatingGate as! LBConnection
                         connection.addGatePin(gate, index: destinationPin)
-                        editingGate?.highlighted = false
-                        editingGate?.inputPinVisible = 0
-                        editingGate?.outputPinVisible = 0
-                        creatingGate = nil
-                        gate.highlighted = false
+                    } else {
+                        // connection has no end termination on a gate
+                        let connection = creatingGate as! LBConnection
+                        let pin = LBPin(x: gateOrigin.x, y: gateOrigin.y)
+                        pin.type = .output
+                        connection.pins.append(pin)
+                        connection.addGatePin(gate, index: connection.pins.count-1)
                     }
+                    editingGate?.highlighted = false
+                    editingGate?.inputPinVisible = 0
+                    editingGate?.outputPinVisible = 0
+                    creatingGate = nil
+                    gate.highlighted = false
                 }
             } else {
                 toggleSelection(gate)

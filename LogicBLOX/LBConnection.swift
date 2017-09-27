@@ -87,6 +87,14 @@ class LBConnection: LBGate {
         for pin in connections.dropFirst() {
             path.addLine(to: CGPoint(x:org.x+pin.x, y: org.y+pin.y))
         }
+        
+        // also add paths to/from the connection
+        if let pin1 = pins.first {
+            path.move(to: CGPoint(x: org.x+pin1.pos.x, y: org.y+pin1.pos.y))
+            for pin in pins.dropFirst() {
+                path.addLine(to: CGPoint(x:org.x+pin.pos.x, y: org.y+pin.pos.y))
+            }
+        }
         return path
     }
     
