@@ -16,7 +16,7 @@ class LBButton: LBGate {
     let yoff : CGFloat = 0
     
     override public var description: String {
-        return "Input"
+        return "Button"
     }
     
     override func localInit() {
@@ -28,7 +28,6 @@ class LBButton: LBGate {
     
     override func evaluate() -> LogicState {
         pins[0].state = self.state
-//        print("Evaluating button = \(self.state)")
         return self.state
     }
     

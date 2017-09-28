@@ -45,11 +45,7 @@ class LBGateCollectionViewController: UICollectionViewController {
     
         // Configure the cell
         let image = cell.viewWithTag(10) as? UIImageView
-        if kind == .line {
-            image?.image  = Gates.imageOfConnection(highlight: indexPath.item == selectedItem)
-        } else {
-            image?.image = gate.getImageOfObject(gate.bounds, scale: 1)
-        }
+        image?.image = gate.getImageOfObject(gate.bounds, scale: 1)
         let label = cell.viewWithTag(20) as? UILabel
         label?.text = gate.description
         return cell

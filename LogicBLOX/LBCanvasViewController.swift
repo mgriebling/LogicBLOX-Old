@@ -11,12 +11,14 @@ import UIKit
 class LBCanvasViewController: UIViewController {
     
     @IBOutlet weak var imageButton: UIButton!
+    @IBOutlet weak var lineButton: UIButton!
     @IBOutlet var deleteBarButton: UIBarButtonItem!
     @IBOutlet var filesBarButton: UIBarButtonItem!
     @IBOutlet weak var iconView: UIView!
     
     var lastGateType : LBGateType = .nand
     var editingGates = true
+    var editingLines = false
     var panGesture : UIPanGestureRecognizer!
     
     @IBOutlet var canvasView: LBZoomingCanvasView! {
@@ -31,6 +33,11 @@ class LBCanvasViewController: UIViewController {
             // long press gesture for selecting objects and moving objects
             let pressGesture = UILongPressGestureRecognizer(target: self, action: #selector(didPress(_:)))
             canvasView.addGestureRecognizer(pressGesture)
+            
+            // add my own pan gesture
+            panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
+            canvasView.panGestureRecognizer.require(toFail: panGesture)
+            canvasView.addGestureRecognizer(panGesture)
             
             // double-tap to edit object
             let doubleTap = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap(_:)))
@@ -124,13 +131,11 @@ class LBCanvasViewController: UIViewController {
         if editingGates {
             deleteBarButton.isEnabled = gateView.selected.count > 0
             navigationItem.setLeftBarButtonItems([deleteBarButton], animated: true)
-//            navigationItem.setRightBarButtonItems([gateSelectedBarButton], animated: true)
             imageButton.setImage(UIImage(named: "Gate Icon 2"), for: .normal)
         } else {
             gateView.clearSelected()
             saveActiveDoc()
             navigationItem.setLeftBarButtonItems([filesBarButton], animated: true)
-//            navigationItem.setRightBarButtonItems([gateBarButton], animated: true)
             imageButton.setImage(UIImage(named: "Gate Icon 1"), for: .normal)
         }
         UIView.animate(withDuration: 0.5) {
@@ -142,6 +147,15 @@ class LBCanvasViewController: UIViewController {
     @IBAction func toggleEdit(_ sender: Any) {
         editingGates = !editingGates
         updateState()
+    }
+    
+    @IBAction func toggleLine(_ sender: Any) {
+        editingLines = !editingLines
+        if editingLines {
+            lineButton.setImage(UIImage(named: "Line Icon 2"), for: .normal)
+        } else {
+            lineButton.setImage(UIImage(named: "Line Icon 1"), for: .normal)
+        }
     }
     
     @IBAction func deleteGates(_ sender: UIBarButtonItem) {
@@ -167,6 +181,8 @@ class LBCanvasViewController: UIViewController {
         if editingGates {
             gateView.insertGate(lastGateType, withEvent: sender)
             deleteBarButton.isEnabled = gateView.selected.count > 0
+            let selected = gateView.selected
+            panGesture.isEnabled = selected.count > 0
         } else {
             // running simulation
             if let button = gateView.gateUnderPoint(sender.location(in: gateView)) as? LBButton {
@@ -199,8 +215,9 @@ class LBCanvasViewController: UIViewController {
         }
     }
     
-    func didPan(_ sender: UIPanGestureRecognizer) {
-        if editingGates {
+    @objc func didPan(_ sender: UIPanGestureRecognizer) {
+        let selected = gateView.selected
+        if selected.count > 0 {
             gateView.moveSelected(sender)
         }
     }

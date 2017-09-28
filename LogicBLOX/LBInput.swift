@@ -25,7 +25,7 @@ class LBInput: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-        Gates.drawInput(frame: bounds, name: name)
+        Gates.drawInput(frame: bounds, highlight: highlighted, joinedOutputPin: joinedOutputs, outputPinVisible: outputPinVisible, name: name)
     }
     
     override func evaluate() -> LogicState {

@@ -61,16 +61,28 @@
                                 </segue>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="5S9-Mg-LXa" userLabel="Gate Highlighted">
-                            <button key="customView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="1pd-oc-fjd">
-                                <rect key="frame" x="328" y="6.5" width="31" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="Gate Icon 2"/>
-                                <connections>
-                                    <action selector="toggleEdit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cHa-LI-q71"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem id="5S9-Mg-LXa" userLabel="Gate Highlighted">
+                                <button key="customView" opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="1pd-oc-fjd">
+                                    <rect key="frame" x="328" y="6.5" width="31" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="Gate Icon 2"/>
+                                    <connections>
+                                        <action selector="toggleEdit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cHa-LI-q71"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                            <barButtonItem id="NAU-hV-8Qx" userLabel="Line Mode">
+                                <button key="customView" opaque="NO" contentMode="redraw" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="fx4-kA-GO8">
+                                    <rect key="frame" x="289" y="6.5" width="31" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="Line Icon 1"/>
+                                    <connections>
+                                        <action selector="toggleLine:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E4n-Ft-f1z"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="canvasView" destination="s1X-LX-XiB" id="hAs-w7-h3h"/>
@@ -78,6 +90,7 @@
                         <outlet property="filesBarButton" destination="CMy-5T-rxq" id="Q5R-73-fVX"/>
                         <outlet property="iconView" destination="8XM-Z3-hLZ" id="YWI-TJ-meO"/>
                         <outlet property="imageButton" destination="1pd-oc-fjd" id="dat-1h-pAj"/>
+                        <outlet property="lineButton" destination="fx4-kA-GO8" id="iCm-f2-Hk1"/>
                         <segue destination="28I-Jb-fOo" kind="popoverPresentation" identifier="Show Menu" popoverAnchorView="s1X-LX-XiB" id="FsI-IC-crd">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                             <popoverPassthroughViews>
@@ -317,6 +330,7 @@
     </scenes>
     <resources>
         <image name="Gate Icon 2" width="31" height="31"/>
+        <image name="Line Icon 1" width="31" height="31"/>
         <image name="Nand Gate" width="123" height="70"/>
     </resources>
 </document>
