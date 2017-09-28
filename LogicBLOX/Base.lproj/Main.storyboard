@@ -63,7 +63,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="5S9-Mg-LXa" userLabel="Gate Highlighted">
                             <button key="customView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="1pd-oc-fjd">
-                                <rect key="frame" x="292" y="5" width="67" height="34"/>
+                                <rect key="frame" x="328" y="6.5" width="31" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Gate Icon 2"/>
                                 <connections>
@@ -316,7 +316,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Gate Icon 2" width="45" height="31"/>
+        <image name="Gate Icon 2" width="31" height="31"/>
         <image name="Nand Gate" width="123" height="70"/>
     </resources>
 </document>
