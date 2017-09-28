@@ -15,6 +15,10 @@ class LBCanvasViewController: UIViewController {
     @IBOutlet var deleteBarButton: UIBarButtonItem!
     @IBOutlet var filesBarButton: UIBarButtonItem!
     @IBOutlet weak var iconView: UIView!
+    @IBOutlet var playButton: UIBarButtonItem!
+    @IBOutlet var stopButton: UIBarButtonItem!
+    @IBOutlet weak var gatesItem: UIBarButtonItem!
+    @IBOutlet weak var timeItem: UIBarButtonItem!
     
     var lastGateType : LBGateType = .nand
     var editingGates = true
@@ -36,8 +40,9 @@ class LBCanvasViewController: UIViewController {
             
             // add my own pan gesture
             panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
-            canvasView.panGestureRecognizer.require(toFail: panGesture)
+//            canvasView.panGestureRecognizer.require(toFail: panGesture)
             canvasView.addGestureRecognizer(panGesture)
+            panGesture.isEnabled = false
             
             // double-tap to edit object
             let doubleTap = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap(_:)))
@@ -135,7 +140,8 @@ class LBCanvasViewController: UIViewController {
         } else {
             gateView.clearSelected()
             saveActiveDoc()
-            navigationItem.setLeftBarButtonItems([filesBarButton], animated: true)
+            navigationItem.setLeftBarButtonItems([filesBarButton, playButton], animated: true)
+            playButton.isEnabled = true
             imageButton.setImage(UIImage(named: "Gate Icon 1"), for: .normal)
         }
         UIView.animate(withDuration: 0.5) {
@@ -147,6 +153,18 @@ class LBCanvasViewController: UIViewController {
     @IBAction func toggleEdit(_ sender: Any) {
         editingGates = !editingGates
         updateState()
+    }
+    
+    @IBAction func startSimulating(_ sender: Any) {
+        navigationController?.isToolbarHidden = false
+        navigationItem.setLeftBarButtonItems([filesBarButton, stopButton], animated: true)
+        gatesItem.title = "Gates: \(gateView.gates.count)"
+        timeItem.title = "Time: 25nS"
+    }
+    
+    @IBAction func stopSimulating(_ sender: Any) {
+        navigationController?.isToolbarHidden = true
+        navigationItem.setLeftBarButtonItems([filesBarButton, playButton], animated: true)
     }
     
     @IBAction func toggleLine(_ sender: Any) {
@@ -183,8 +201,11 @@ class LBCanvasViewController: UIViewController {
             deleteBarButton.isEnabled = gateView.selected.count > 0
             let selected = gateView.selected
             panGesture.isEnabled = selected.count > 0
+            canvasView.panGestureRecognizer.isEnabled = selected.count == 0
         } else {
             // running simulation
+            panGesture.isEnabled = false
+            canvasView.panGestureRecognizer.isEnabled = true
             if let button = gateView.gateUnderPoint(sender.location(in: gateView)) as? LBButton {
                 button.toggleState()
 //                print("gates = \(gateView.gates)")

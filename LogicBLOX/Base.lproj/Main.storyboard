@@ -24,15 +24,15 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="A2A-rn-rPD">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                                 <subviews>
                                     <scrollView verifyAmbiguity="off" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="s1X-LX-XiB" customClass="LBZoomingCanvasView" customModule="LogicBLOX" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="268" height="603"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="268" height="559"/>
                                         <color key="backgroundColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                         <gestureRecognizers/>
                                     </scrollView>
                                     <containerView verifyAmbiguity="off" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XM-Z3-hLZ">
-                                        <rect key="frame" x="268" y="0.0" width="107" height="603"/>
+                                        <rect key="frame" x="268" y="0.0" width="107" height="559"/>
                                         <connections>
                                             <segue destination="Kvt-iQ-ihW" kind="embed" identifier="Show Gates" id="QNK-Ch-edY"/>
                                         </connections>
@@ -52,7 +52,13 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem title="Time: 0nS" id="phx-NG-Doj"/>
+                        <barButtonItem title="Step" id="6uo-tu-sxt"/>
+                        <barButtonItem systemItem="pause" id="oms-dL-kRO"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Nte-qe-F9m"/>
+                        <barButtonItem title="Gates: 23" id="nIm-nm-fAK"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="LogicBLOX" id="Vdm-gx-hT9">
                         <barButtonItem key="leftBarButtonItem" systemItem="organize" id="CMy-5T-rxq">
                             <connections>
@@ -84,13 +90,18 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="canvasView" destination="s1X-LX-XiB" id="hAs-w7-h3h"/>
                         <outlet property="deleteBarButton" destination="KFp-8q-sWn" id="lzH-bK-EkI"/>
                         <outlet property="filesBarButton" destination="CMy-5T-rxq" id="Q5R-73-fVX"/>
+                        <outlet property="gatesItem" destination="nIm-nm-fAK" id="xNo-zb-Teg"/>
                         <outlet property="iconView" destination="8XM-Z3-hLZ" id="YWI-TJ-meO"/>
                         <outlet property="imageButton" destination="1pd-oc-fjd" id="dat-1h-pAj"/>
                         <outlet property="lineButton" destination="fx4-kA-GO8" id="iCm-f2-Hk1"/>
+                        <outlet property="playButton" destination="7gs-XV-T1G" id="Gx2-oc-QKf"/>
+                        <outlet property="stopButton" destination="JwE-Gw-tuD" id="bkt-pe-kLp"/>
+                        <outlet property="timeItem" destination="phx-NG-Doj" id="90m-TG-Mrh"/>
                         <segue destination="28I-Jb-fOo" kind="popoverPresentation" identifier="Show Menu" popoverAnchorView="s1X-LX-XiB" id="FsI-IC-crd">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                             <popoverPassthroughViews>
@@ -103,6 +114,16 @@
                 <barButtonItem systemItem="trash" id="KFp-8q-sWn">
                     <connections>
                         <action selector="deleteGates:" destination="BYZ-38-t0r" id="pvf-vk-qNN"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem systemItem="play" id="7gs-XV-T1G">
+                    <connections>
+                        <action selector="startSimulating:" destination="BYZ-38-t0r" id="vxL-lN-kfv"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem systemItem="stop" id="JwE-Gw-tuD" userLabel="Stop Button">
+                    <connections>
+                        <action selector="stopSimulating:" destination="BYZ-38-t0r" id="hOp-nq-FRZ"/>
                     </connections>
                 </barButtonItem>
             </objects>
@@ -242,7 +263,7 @@
             <objects>
                 <collectionViewController modalPresentationStyle="currentContext" id="Kvt-iQ-ihW" customClass="LBGateCollectionViewController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" misplaced="YES" maximumZoomScale="3" dataMode="prototypes" id="2C1-Nf-FJ6">
-                        <rect key="frame" x="0.0" y="0.0" width="107" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="107" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="o2N-Ee-Dil">
