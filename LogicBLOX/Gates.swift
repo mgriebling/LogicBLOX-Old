@@ -959,15 +959,15 @@ public class Gates : NSObject {
             //// 4Pin4
             //// Bezier 10 Drawing
             let bezier10Path = UIBezierPath()
-            bezier10Path.move(to: CGPoint(x: 2, y: 52))
-            bezier10Path.addLine(to: CGPoint(x: 23, y: 52))
+            bezier10Path.move(to: CGPoint(x: 2, y: 48))
+            bezier10Path.addLine(to: CGPoint(x: 23, y: 48))
             colour.setStroke()
             bezier10Path.lineWidth = 2.5
             bezier10Path.stroke()
 
 
             //// Symbol 9 Drawing
-            let symbol9Rect = CGRect(x: 0, y: 48, width: 26, height: 8)
+            let symbol9Rect = CGRect(x: 0, y: 44, width: 26, height: 8)
             context.saveGState()
             context.clip(to: symbol9Rect)
             context.translateBy(x: symbol9Rect.minX, y: symbol9Rect.minY)
@@ -1028,15 +1028,15 @@ public class Gates : NSObject {
             //// 4Pin1
             //// Bezier Drawing
             let bezierPath = UIBezierPath()
-            bezierPath.move(to: CGPoint(x: 2, y: 4))
-            bezierPath.addLine(to: CGPoint(x: 25, y: 4))
+            bezierPath.move(to: CGPoint(x: 2, y: 8))
+            bezierPath.addLine(to: CGPoint(x: 25, y: 8))
             colour.setStroke()
             bezierPath.lineWidth = 2.5
             bezierPath.stroke()
 
 
             //// Symbol 8 Drawing
-            let symbol8Rect = CGRect(x: 0, y: 0, width: 26, height: 8)
+            let symbol8Rect = CGRect(x: 0, y: 4, width: 26, height: 8)
             context.saveGState()
             context.clip(to: symbol8Rect)
             context.translateBy(x: symbol8Rect.minX, y: symbol8Rect.minY)
@@ -1098,7 +1098,7 @@ public class Gates : NSObject {
         if (hasInputs4) {
             //// In4
             //// 4Pin4 Drawing
-            let _4Pin4Rect = CGRect(x: 0, y: 48, width: 27, height: 8)
+            let _4Pin4Rect = CGRect(x: 0, y: 44, width: 27, height: 8)
             context.saveGState()
             context.clip(to: _4Pin4Rect)
             context.translateBy(x: _4Pin4Rect.minX, y: _4Pin4Rect.minY)
@@ -1131,7 +1131,7 @@ public class Gates : NSObject {
 
 
             //// 4Pin1 Drawing
-            let _4Pin1Rect = CGRect(x: 0, y: 0, width: 27, height: 8)
+            let _4Pin1Rect = CGRect(x: 0, y: 4, width: 27, height: 8)
             context.saveGState()
             context.clip(to: _4Pin1Rect)
             context.translateBy(x: _4Pin1Rect.minX, y: _4Pin1Rect.minY)
