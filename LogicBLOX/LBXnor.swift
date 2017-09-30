@@ -23,12 +23,12 @@ class LBXnor: LBGate {
     
     override func localInit() {
         super.localInit()
-        nativeBounds = CGRect(x: 0, y: 0, width: 143, height: 67)
+        nativeBounds = CGRect(x: 0, y: 0, width: 132, height: 60)
         let xoff2 : CGFloat = invert ? 2 : 20   // account for inverter
         
-        let pin1 = LBPin(x: xoff, y: 9+yoff)
-        let pin2 = LBPin(x: xoff, y: 39+yoff)
-        let pin3 = LBPin(x: nativeBounds.width-xoff-xoff2, y: 34-1); pin3.type = .output
+        let pin1 = LBPin(x: xoff, y: 12+yoff)
+        let pin2 = LBPin(x: xoff, y: 36+yoff)
+        let pin3 = LBPin(x: nativeBounds.width-xoff-xoff2, y: 30); pin3.type = .output
         pins = [pin3, pin1, pin2]
     }
     
@@ -58,9 +58,9 @@ class LBXnor3 : LBXnor {
         super.localInit()
         
         // replace last two pins with 3-input pins
-        let pin1 = LBPin(x: xoff, y: 8+yoff)
-        let pin2 = LBPin(x: xoff, y: 27+yoff)
-        let pin3 = LBPin(x: xoff, y: 47+yoff)
+        let pin1 = LBPin(x: xoff, y: 4+yoff)
+        let pin2 = LBPin(x: xoff, y: 24+yoff)
+        let pin3 = LBPin(x: xoff, y: 44+yoff)
         pins = pins.dropLast(2) + [pin1, pin2, pin3]
     }
 }
@@ -73,10 +73,10 @@ class LBXnor4 : LBXnor {
         super.localInit()
         
         // replace last two pins with 3-input pins
-        let pin1 = LBPin(x: xoff, y: 8+yoff)
-        let pin2 = LBPin(x: xoff, y: 21+yoff)
-        let pin3 = LBPin(x: xoff, y: 34+yoff)
-        let pin4 = LBPin(x: xoff, y: 47+yoff)
+        let pin1 = LBPin(x: xoff, y: 4+yoff)
+        let pin2 = LBPin(x: xoff, y: 16+yoff)
+        let pin3 = LBPin(x: xoff, y: 32+yoff)
+        let pin4 = LBPin(x: xoff, y: 44+yoff)
         pins = pins.dropLast(2) + [pin1, pin2, pin3, pin4]
     }
 }

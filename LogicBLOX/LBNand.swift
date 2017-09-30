@@ -28,11 +28,11 @@ class LBNand : LBGate {
     
     override func localInit() {
         super.localInit()
-        nativeBounds = CGRect(x: 0, y: 0, width: 134, height: 68)
+        nativeBounds = CGRect(x: 0, y: 0, width: 120, height: 60)
         
-        let pin1 = LBPin(x: xoff, y: 9+yoff)
-        let pin2 = LBPin(x: xoff, y: 39+yoff)
-        let pin3 = LBPin(x: nativeBounds.width-xoff, y: 25+yoff-1); pin3.type = .output
+        let pin1 = LBPin(x: xoff, y: 10+yoff)
+        let pin2 = LBPin(x: xoff, y: 34+yoff)
+        let pin3 = LBPin(x: nativeBounds.width-xoff, y: 30+yoff-1); pin3.type = .output
         pins = [pin3, pin1, pin2]
     }
     
@@ -62,9 +62,9 @@ class LBNand3 : LBNand {
         super.localInit()
         
         // replace last two pins with 3-input pins
-        let pin1 = LBPin(x: xoff, y: 4+yoff)
-        let pin2 = LBPin(x: xoff, y: 23+yoff)
-        let pin3 = LBPin(x: xoff, y: 43+yoff)
+        let pin1 = LBPin(x: xoff, y: 2+yoff)
+        let pin2 = LBPin(x: xoff, y: 22+yoff)
+        let pin3 = LBPin(x: xoff, y: 42+yoff)
         pins = pins.dropLast(2) + [pin1, pin2, pin3]
     }
     
@@ -78,10 +78,10 @@ class LBNand4 : LBNand {
         super.localInit()
         
         // replace last two pins with 3-input pins
-        let pin1 = LBPin(x: xoff, y: 4+yoff)
-        let pin2 = LBPin(x: xoff, y: 17+yoff)
+        let pin1 = LBPin(x: xoff, y: 2+yoff)
+        let pin2 = LBPin(x: xoff, y: 14+yoff)
         let pin3 = LBPin(x: xoff, y: 30+yoff)
-        let pin4 = LBPin(x: xoff, y: 43+yoff)
+        let pin4 = LBPin(x: xoff, y: 42+yoff)
         pins = pins.dropLast(2) + [pin1, pin2, pin3, pin4]
     }
     

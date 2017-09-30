@@ -21,8 +21,8 @@ class LBButton: LBGate {
     
     override func localInit() {
         super.localInit()
-        nativeBounds = CGRect(x: 0, y: 0, width: 57, height: 35)
-        let pin1 = LBPin(x: nativeBounds.width-LBPin.size, y: 17.5+yoff); pin1.type = .output
+        nativeBounds = CGRect(x: 0, y: 0, width: 52, height: 32)
+        let pin1 = LBPin(x: nativeBounds.width-LBPin.size, y: 16+yoff); pin1.type = .output
         pins = [pin1]
     }
     

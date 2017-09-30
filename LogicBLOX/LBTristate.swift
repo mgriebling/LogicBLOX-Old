@@ -21,11 +21,11 @@ class LBTristateInverter: LBGate {
     
     override func localInit() {
         super.localInit()
-        nativeBounds = CGRect(x: 0, y: 0, width: 102, height: 67)
+        nativeBounds = CGRect(x: 0, y: 0, width: 92, height: 64)
         let xoff2 : CGFloat = invert ? 0 : 20   // account for inverter
         
-        let pin1 = LBPin(x: xoff, y: 28+yoff)
-        let pin2 = LBPin(x: nativeBounds.width-xoff-xoff2, y: 28+yoff); pin2.type = .output
+        let pin1 = LBPin(x: xoff, y: 32+yoff)
+        let pin2 = LBPin(x: nativeBounds.width-xoff-xoff2, y: 32+yoff); pin2.type = .output
         pins = [pin2, pin1]
     }
     

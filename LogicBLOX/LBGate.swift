@@ -20,7 +20,7 @@ enum Orientation: Int, Codable {
 // MARK: - LBGateType
 
 public enum LBGateType : Int {
-    case line = 0, button, indicator,
+    case button=0, indicator,
     or, or3, or4,
     nor, nor3, nor4,
     and, and3, and4,
@@ -33,9 +33,12 @@ public enum LBGateType : Int {
     tristateInverter,
     input,
     output,
+    oscillator,
     block,
     
-    MAX // last item indicator
+    MAX, // last item indicator
+    
+    line // ignore this for icons
     
     static func classForGate(_ gate: LBGateType) -> LBGate {
         switch gate {
@@ -67,6 +70,7 @@ public enum LBGateType : Int {
         case .tristateInverter: return LBTristateInverter(kind: gate)
         case .input:            return LBInput(kind: gate)
         case .output:           return LBOutput(kind: gate)
+        case .oscillator:       return LBOscillator(kind: gate)
         default: break
         }
         return LBNand(kind: gate)

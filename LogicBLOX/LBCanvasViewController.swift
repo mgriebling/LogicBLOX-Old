@@ -22,6 +22,7 @@ class LBCanvasViewController: UIViewController {
     
     var lastGateType : LBGateType = .nand
     var editingGates = true
+    var simulating = false
     var editingLines = false
     var panGesture : UIPanGestureRecognizer!
     
@@ -160,11 +161,13 @@ class LBCanvasViewController: UIViewController {
         navigationItem.setLeftBarButtonItems([filesBarButton, stopButton], animated: true)
         gatesItem.title = "Gates: \(gateView.gates.count)"
         timeItem.title = "Time: 25nS"
+        simulating = true
     }
     
     @IBAction func stopSimulating(_ sender: Any) {
         navigationController?.isToolbarHidden = true
         navigationItem.setLeftBarButtonItems([filesBarButton, playButton], animated: true)
+        simulating = false
     }
     
     @IBAction func toggleLine(_ sender: Any) {
@@ -196,13 +199,13 @@ class LBCanvasViewController: UIViewController {
     }
     
     @objc func didTap (_ sender: UITapGestureRecognizer) {
-        if editingGates {
+        if editingLines {
+            gateView.insertLine(sender)
+            deleteBarButton.isEnabled = gateView.selected.count > 0
+        } else if editingGates {
             gateView.insertGate(lastGateType, withEvent: sender)
             deleteBarButton.isEnabled = gateView.selected.count > 0
-            let selected = gateView.selected
-            panGesture.isEnabled = selected.count > 0
-            canvasView.panGestureRecognizer.isEnabled = selected.count == 0
-        } else {
+        } else if simulating {
             // running simulation
             panGesture.isEnabled = false
             canvasView.panGestureRecognizer.isEnabled = true

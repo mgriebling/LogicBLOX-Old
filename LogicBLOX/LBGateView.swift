@@ -46,63 +46,67 @@ class LBGateView: UIView {
         setNeedsDisplay()
     }
     
+    func insertLine (_ event: UITapGestureRecognizer?) {
+        let gateOrigin = event?.location(in: self) ?? CGPoint(x: 100, y: 100)
+        
+        if let gate = gateUnderPoint(gateOrigin) {
+            gate.inputPinVisible = 0
+            gate.outputPinVisible = 0
+            if creatingGate == nil {
+                // create a line starting from this gate
+                editingGate = gate
+                gate.highlighted = true
+                
+                // create the initial connection
+                let connection = LBConnection(kind: .line)
+                let sPin : Int
+                if let sourcePin = gate.getClosestPinIndex(gateOrigin) {
+                    sPin = sourcePin
+                    if gate.pins[sourcePin].type == .output { gate.outputPinVisible = 1 }
+                    else { gate.inputPinVisible = CGFloat(max(1, sourcePin)) }  // max in case of single pins
+                } else {
+                    // we are dealing with a connection that contains no pins
+                    let pin = LBPin(x: gateOrigin.x, y: gateOrigin.y)
+                    pin.type = .output
+                    connection.pins.append(pin)
+                    sPin = connection.pins.count-1
+                    connection.outputPinVisible = CGFloat(connection.pins.count)
+                }
+                connection.addGatePin(gate, index: sPin)
+                connection.highlighted = true
+                gates.append(connection)
+                creatingGate = connection
+            } else {
+                // finish the connection to this destination gate
+                if let destinationPin = gate.getClosestPinIndex(gateOrigin) {
+                    let connection = creatingGate as! LBConnection
+                    connection.addGatePin(gate, index: destinationPin)
+                } else {
+                    // connection has no end termination on a gate
+                    let connection = creatingGate as! LBConnection
+                    let pin = LBPin(x: gateOrigin.x, y: gateOrigin.y)
+                    pin.type = .output
+                    connection.pins.append(pin)
+                    connection.addGatePin(gate, index: connection.pins.count-1)
+                }
+                editingGate?.highlighted = false
+                editingGate?.inputPinVisible = 0
+                editingGate?.outputPinVisible = 0
+                creatingGate = nil
+                gate.highlighted = false
+            }
+        } else if creatingGate != nil {
+            // add a point to the line
+            let connection = creatingGate as! LBConnection
+            connection.addPoint(gateOrigin)
+        }
+    }
+    
     func insertGate (_ gateID: LBGateType, withEvent event: UITapGestureRecognizer?) {
         var gateOrigin = event?.location(in: self) ?? CGPoint(x: 100, y: 100)
         
         if let gate = gateUnderPoint(gateOrigin) {
-            if gateID == .line {
-                gate.inputPinVisible = 0
-                gate.outputPinVisible = 0
-                if creatingGate == nil {
-                    // create a line starting from this gate
-                    editingGate = gate
-                    gate.highlighted = true
-                    
-                    // create the initial connection
-                    let connection = LBConnection(kind: .line)
-                    let sPin : Int
-                    if let sourcePin = gate.getClosestPinIndex(gateOrigin) {
-                        sPin = sourcePin
-                        if gate.pins[sourcePin].type == .output { gate.outputPinVisible = 1 }
-                        else { gate.inputPinVisible = CGFloat(max(1, sourcePin)) }  // max in case of single pins
-                    } else {
-                        // we are dealing with a connection that contains no pins
-                        let pin = LBPin(x: gateOrigin.x, y: gateOrigin.y)
-                        pin.type = .output
-                        connection.pins.append(pin)
-                        sPin = connection.pins.count-1
-                        connection.outputPinVisible = CGFloat(connection.pins.count)
-                    }
-                    connection.addGatePin(gate, index: sPin)
-                    connection.highlighted = true
-                    gates.append(connection)
-                    creatingGate = connection
-                } else {
-                    // finish the connection to this destination gate
-                    if let destinationPin = gate.getClosestPinIndex(gateOrigin) {
-                        let connection = creatingGate as! LBConnection
-                        connection.addGatePin(gate, index: destinationPin)
-                    } else {
-                        // connection has no end termination on a gate
-                        let connection = creatingGate as! LBConnection
-                        let pin = LBPin(x: gateOrigin.x, y: gateOrigin.y)
-                        pin.type = .output
-                        connection.pins.append(pin)
-                        connection.addGatePin(gate, index: connection.pins.count-1)
-                    }
-                    editingGate?.highlighted = false
-                    editingGate?.inputPinVisible = 0
-                    editingGate?.outputPinVisible = 0
-                    creatingGate = nil
-                    gate.highlighted = false
-                }
-            } else {
-                toggleSelection(gate)
-            }
-        } else if gateID == .line && creatingGate != nil {
-            // add a point to the line
-            let connection = creatingGate as! LBConnection
-            connection.addPoint(gateOrigin)
+            toggleSelection(gate)
         } else {
             gateOrigin = grid.constrainedPoint(gateOrigin)
             let gate = LBGateType.classForGate(gateID)

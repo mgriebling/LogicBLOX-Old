@@ -12,6 +12,7 @@
 		471744B61F7BB1CA00DD553B /* LBTristate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471744B51F7BB1CA00DD553B /* LBTristate.swift */; };
 		471744B81F7BB46C00DD553B /* LBInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471744B71F7BB46C00DD553B /* LBInput.swift */; };
 		471744BA1F7BB5B900DD553B /* LBOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471744B91F7BB5B900DD553B /* LBOutput.swift */; };
+		471744BC1F7FEB7800DD553B /* LBOscillator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471744BB1F7FEB7800DD553B /* LBOscillator.swift */; };
 		47244B801F5D4AEE006CB51D /* Gates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B7F1F5D4AEE006CB51D /* Gates.swift */; };
 		47244B841F5D8D59006CB51D /* LBOr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B831F5D8D59006CB51D /* LBOr.swift */; };
 		47244B861F5D8E19006CB51D /* LBNor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B851F5D8E19006CB51D /* LBNor.swift */; };
@@ -47,6 +48,7 @@
 		471744B51F7BB1CA00DD553B /* LBTristate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBTristate.swift; sourceTree = "<group>"; };
 		471744B71F7BB46C00DD553B /* LBInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBInput.swift; sourceTree = "<group>"; };
 		471744B91F7BB5B900DD553B /* LBOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBOutput.swift; sourceTree = "<group>"; };
+		471744BB1F7FEB7800DD553B /* LBOscillator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBOscillator.swift; sourceTree = "<group>"; };
 		47244B7F1F5D4AEE006CB51D /* Gates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gates.swift; sourceTree = "<group>"; };
 		47244B831F5D8D59006CB51D /* LBOr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBOr.swift; sourceTree = "<group>"; };
 		47244B851F5D8E19006CB51D /* LBNor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNor.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				479B7AD91F6D46CF00116694 /* LogicState.swift */,
 				471744B71F7BB46C00DD553B /* LBInput.swift */,
 				471744B91F7BB5B900DD553B /* LBOutput.swift */,
+				471744BB1F7FEB7800DD553B /* LBOscillator.swift */,
 			);
 			name = "Logic Elements";
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */,
 				47B7C0381F7662D100EF8014 /* LBPopUpController.swift in Sources */,
 				47244B8A1F5D8F03006CB51D /* LBXnor.swift in Sources */,
+				471744BC1F7FEB7800DD553B /* LBOscillator.swift in Sources */,
 				47244B981F5EA05A006CB51D /* LBIndicator.swift in Sources */,
 				47244B841F5D8D59006CB51D /* LBOr.swift in Sources */,
 				472BF9581F6417900097DDDA /* UIImageExtras.swift in Sources */,

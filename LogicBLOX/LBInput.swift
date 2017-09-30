@@ -18,7 +18,7 @@ class LBInput: LBGate {
     
     override func localInit() {
         super.localInit()
-        nativeBounds = CGRect(x: 0, y: 0, width: 135, height: 30)
+        nativeBounds = CGRect(x: 0, y: 0, width: 111, height: 30)
         
         let pin1 = LBPin(x: bounds.width-LBPin.size, y: 15); pin1.type = .output
         pins = [pin1]
