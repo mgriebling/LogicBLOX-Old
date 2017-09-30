@@ -36,7 +36,6 @@
 		477BE0891F5C24C9006A8E3E /* LBGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0881F5C24C9006A8E3E /* LBGate.swift */; };
 		477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */; };
 		479B7ADA1F6D46CF00116694 /* LogicState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B7AD91F6D46CF00116694 /* LogicState.swift */; };
-		47B7C0381F7662D100EF8014 /* LBPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B7C0371F7662D100EF8014 /* LBPopUpController.swift */; };
 		47D642F01F5FF499005F2069 /* LBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642EF1F5FF499005F2069 /* LBDocument.swift */; };
 		47D642F21F6143D9005F2069 /* LBDesigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642F11F6143D9005F2069 /* LBDesigns.swift */; };
 		47D642F41F62A277005F2069 /* EditTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642F31F62A277005F2069 /* EditTableCell.swift */; };
@@ -74,7 +73,6 @@
 		477BE0881F5C24C9006A8E3E /* LBGate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGate.swift; sourceTree = "<group>"; };
 		477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateCollectionViewController.swift; sourceTree = "<group>"; };
 		479B7AD91F6D46CF00116694 /* LogicState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicState.swift; sourceTree = "<group>"; };
-		47B7C0371F7662D100EF8014 /* LBPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBPopUpController.swift; sourceTree = "<group>"; };
 		47D642EF1F5FF499005F2069 /* LBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDocument.swift; sourceTree = "<group>"; };
 		47D642F11F6143D9005F2069 /* LBDesigns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDesigns.swift; sourceTree = "<group>"; };
 		47D642F31F62A277005F2069 /* EditTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableCell.swift; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 			children = (
 				477BE0821F5AFDC4006A8E3E /* LBCanvasViewController.swift */,
 				477BE0721F5AD877006A8E3E /* Main.storyboard */,
-				47B7C0371F7662D100EF8014 /* LBPopUpController.swift */,
 				2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */,
 				477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */,
 				47D642EF1F5FF499005F2069 /* LBDocument.swift */,
@@ -260,7 +257,6 @@
 				477BE0871F5B03B0006A8E3E /* LBGrid.swift in Sources */,
 				477BE06F1F5AD877006A8E3E /* AppDelegate.swift in Sources */,
 				477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */,
-				47B7C0381F7662D100EF8014 /* LBPopUpController.swift in Sources */,
 				47244B8A1F5D8F03006CB51D /* LBXnor.swift in Sources */,
 				471744BC1F7FEB7800DD553B /* LBOscillator.swift in Sources */,
 				47244B981F5EA05A006CB51D /* LBIndicator.swift in Sources */,

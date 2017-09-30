@@ -25,6 +25,7 @@ class LBCanvasViewController: UIViewController {
     var simulating = false
     var editingLines = false
     var panGesture : UIPanGestureRecognizer!
+    var menuGate : LBGate?
     
     @IBOutlet var canvasView: LBZoomingCanvasView! {
         didSet {
@@ -162,6 +163,7 @@ class LBCanvasViewController: UIViewController {
         gatesItem.title = "Gates: \(gateView.gates.count)"
         timeItem.title = "Time: 25nS"
         simulating = true
+        togglePanGesture(true)
     }
     
     @IBAction func stopSimulating(_ sender: Any) {
@@ -177,6 +179,7 @@ class LBCanvasViewController: UIViewController {
         } else {
             lineButton.setImage(UIImage(named: "Line Icon 1"), for: .normal)
         }
+        togglePanGesture(gateView.selected.count == 0)
     }
     
     @IBAction func deleteGates(_ sender: UIBarButtonItem) {
@@ -184,6 +187,35 @@ class LBCanvasViewController: UIViewController {
             gateView.deleteSelected(sender)
             deleteBarButton.isEnabled = false
         }
+    }
+    
+    // MARK: - Support
+    
+    func togglePanGesture(_ enable: Bool) {
+        panGesture.isEnabled = !enable
+        canvasView.panGestureRecognizer.isEnabled = enable
+    }
+    
+    @objc func doEditMenu() {
+        print("Editing \(menuGate!)")
+    }
+    
+    @objc func doDeleteMenu() {
+        print("Deleting \(menuGate!)")
+        self.gateView.deleteGate(menuGate!)
+    }
+    
+    @objc func doCloneMenu() {
+        self.gateView.cloneGate(menuGate!)
+        print("Gates = \(self.gateView.gates)")
+    }
+    
+    func clearPopupMenu() {
+        let popupMenu = UIMenuController.shared
+        if popupMenu.isMenuVisible {
+            popupMenu.setMenuVisible(false, animated: true)
+        }
+        menuGate = nil
     }
     
     // MARK: - Gesture management
@@ -194,21 +226,42 @@ class LBCanvasViewController: UIViewController {
     
     @objc func didDoubleTap(_ sender: UITapGestureRecognizer) {
         if let gate = gateView.gateUnderPoint(sender.location(in: gateView)) {
-            performSegue(withIdentifier: "Show Menu", sender: gate)
+            let popupMenu = UIMenuController.shared
+            if popupMenu.isMenuVisible {
+                clearPopupMenu()
+            } else {
+                gateView.becomeFirstResponder()  // required to show the menu
+                popupMenu.setTargetRect(gate.bounds, in: gateView)
+                let items = popupMenu.menuItems
+                menuGate = gate
+                if items == nil {
+                    let edit = UIMenuItem(title: "Edit", action: #selector(doEditMenu))
+                    let delete = UIMenuItem(title: "Delete", action: #selector(doDeleteMenu))
+                    let clone = UIMenuItem(title: "Clone", action: #selector(doCloneMenu))
+                    popupMenu.menuItems = [edit, delete, clone]
+                    popupMenu.update()
+                }
+//                print(popupMenu.menuItems!)
+                popupMenu.setMenuVisible(true, animated: true)
+            }
+            togglePanGesture(true)
+        } else {
+            clearPopupMenu()
         }
     }
     
     @objc func didTap (_ sender: UITapGestureRecognizer) {
+        togglePanGesture(true)
         if editingLines {
+            clearPopupMenu()
             gateView.insertLine(sender)
-            deleteBarButton.isEnabled = gateView.selected.count > 0
         } else if editingGates {
+            clearPopupMenu()
             gateView.insertGate(lastGateType, withEvent: sender)
             deleteBarButton.isEnabled = gateView.selected.count > 0
+            togglePanGesture(gateView.selected.count == 0)
         } else if simulating {
             // running simulation
-            panGesture.isEnabled = false
-            canvasView.panGestureRecognizer.isEnabled = true
             if let button = gateView.gateUnderPoint(sender.location(in: gateView)) as? LBButton {
                 button.toggleState()
 //                print("gates = \(gateView.gates)")
@@ -236,6 +289,10 @@ class LBCanvasViewController: UIViewController {
                 NSLog("Finished")
                 gateView.setNeedsDisplay()
             }
+        } else {
+            // edit objects
+            didDoubleTap(sender)
+            togglePanGesture(gateView.selected.count == 0)
         }
     }
     
@@ -243,6 +300,9 @@ class LBCanvasViewController: UIViewController {
         let selected = gateView.selected
         if selected.count > 0 {
             gateView.moveSelected(sender)
+            if sender.state == .ended {
+                togglePanGesture(true)
+            }
         }
     }
 
@@ -261,11 +321,6 @@ class LBCanvasViewController: UIViewController {
             contentController.popoverPresentationController?.sourceRect = view.bounds
         } else if let button = sender as? UIBarButtonItem {
             contentController.popoverPresentationController?.barButtonItem = button
-        } else if let gate = sender as? LBGate {
-            // position pop-up in the middle of a view
-            contentController.popoverPresentationController?.backgroundColor = UIColor.darkGray
-            contentController.popoverPresentationController?.sourceView = gateView
-            contentController.popoverPresentationController?.sourceRect = gate.bounds
         }
     }
 
@@ -275,28 +330,6 @@ class LBCanvasViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if let id = segue.identifier {
             switch id {
-            case "Show Menu" :
-                let vc = segue.destination as! LBPopUpController
-                let gate = sender as! LBGate
-                // These are the pop-up menu actions
-                vc.actions = [
-                    {
-                        print("Editing \(gate)")
-                        vc.dismiss(animated: true, completion: nil)
-                    },
-                    {
-                        print("Cloning \(sender!)")
-                        self.gateView.cloneGate(gate)
-                        print("Gates = \(self.gateView.gates)")
-                        vc.dismiss(animated: true, completion: nil)
-                    },
-                    {
-                        print("Deleting \(gate)")
-                        self.gateView.deleteGate(gate)
-                        vc.dismiss(animated: true, completion: nil)
-                    }
-                ]
-                preparePopover(vc, sender: sender, delegate: self)
             case "Show Gates" :
                 let vc = segue.destination as? LBGateCollectionViewController
                 vc?.selectedItem = lastGateType.rawValue

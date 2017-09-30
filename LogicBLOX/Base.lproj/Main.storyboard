@@ -102,12 +102,6 @@
                         <outlet property="playButton" destination="7gs-XV-T1G" id="Gx2-oc-QKf"/>
                         <outlet property="stopButton" destination="JwE-Gw-tuD" id="bkt-pe-kLp"/>
                         <outlet property="timeItem" destination="phx-NG-Doj" id="90m-TG-Mrh"/>
-                        <segue destination="28I-Jb-fOo" kind="popoverPresentation" identifier="Show Menu" popoverAnchorView="s1X-LX-XiB" id="FsI-IC-crd">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                            <popoverPassthroughViews>
-                                <scrollView reference="s1X-LX-XiB"/>
-                            </popoverPassthroughViews>
-                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -219,45 +213,6 @@
             </objects>
             <point key="canvasLocation" x="1708" y="806"/>
         </scene>
-        <!--Popup Menu-->
-        <scene sceneID="Lk5-8g-Cxu">
-            <objects>
-                <viewController storyboardIdentifier="Popup Menu" modalPresentationStyle="overCurrentContext" id="28I-Jb-fOo" userLabel="Popup Menu" customClass="LBPopUpController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="sr1-BR-D1G"/>
-                        <viewControllerLayoutGuide type="bottom" id="IXu-nx-fpw"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Z1L-Vr-0tt">
-                        <rect key="frame" x="0.0" y="0.0" width="163" height="25"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="bar" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9wE-Dj-rrL">
-                                <rect key="frame" x="-3" y="-2" width="168" height="29"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <segments>
-                                    <segment title="Edit"/>
-                                    <segment title="Clone"/>
-                                    <segment title="Delete"/>
-                                </segments>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="performAction:" destination="28I-Jb-fOo" eventType="valueChanged" id="PXU-oc-Pdr"/>
-                                </connections>
-                            </segmentedControl>
-                        </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="163" height="25"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="163" height="25"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vkr-pP-Zae" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1618" y="-328"/>
-        </scene>
         <!--Gate Collection View Controller-->
         <scene sceneID="agK-34-9aW">
             <objects>
@@ -307,7 +262,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rle-8g-IAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1600" y="24"/>
+            <point key="canvasLocation" x="1561" y="1"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ux1-GV-Odq">

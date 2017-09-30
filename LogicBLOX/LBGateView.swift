@@ -41,6 +41,8 @@ class LBGateView: UIView {
         }
     }
     
+    override var canBecomeFirstResponder: Bool { return true }  // needed to show menu
+    
     func toggleSelection (_ gate : LBGate) {
         gate.highlighted = !gate.highlighted
         setNeedsDisplay()
