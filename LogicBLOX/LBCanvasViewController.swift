@@ -339,8 +339,8 @@ class LBCanvasViewController: UIViewController {
 //                    self.setButtonImage()
                 }
             case "Show Designs":
-                let vc = (segue.destination as! UINavigationController).viewControllers[0] as? LBDesignTableViewController
-                preparePopover(segue.destination, sender: sender, delegate: self)
+                let vc = (segue.destination as! UINavigationController).viewControllers[0] as? LBDesignViewController
+//                preparePopover(segue.destination, sender: sender, delegate: self)
                 vc?.selectedItem = Designs.list.index(of: document!.fileURL) ?? 0
                 vc?.callback = { selected in
                     let url = Designs.list[selected]

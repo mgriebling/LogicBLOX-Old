@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2F3743E51F7941A5007AD1E3 /* LBNand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3743E41F7941A4007AD1E3 /* LBNand.swift */; };
-		2FE3BD4C1F601853005B4BF0 /* LBDesignTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */; };
 		471744B61F7BB1CA00DD553B /* LBTristate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471744B51F7BB1CA00DD553B /* LBTristate.swift */; };
 		471744B81F7BB46C00DD553B /* LBInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471744B71F7BB46C00DD553B /* LBInput.swift */; };
 		471744BA1F7BB5B900DD553B /* LBOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471744B91F7BB5B900DD553B /* LBOutput.swift */; };
 		471744BC1F7FEB7800DD553B /* LBOscillator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471744BB1F7FEB7800DD553B /* LBOscillator.swift */; };
+		471744BE1F80F6BE00DD553B /* LBDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471744BD1F80F6BE00DD553B /* LBDesignViewController.swift */; };
 		47244B801F5D4AEE006CB51D /* Gates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B7F1F5D4AEE006CB51D /* Gates.swift */; };
 		47244B841F5D8D59006CB51D /* LBOr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B831F5D8D59006CB51D /* LBOr.swift */; };
 		47244B861F5D8E19006CB51D /* LBNor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47244B851F5D8E19006CB51D /* LBNor.swift */; };
@@ -38,7 +38,7 @@
 		479B7ADA1F6D46CF00116694 /* LogicState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B7AD91F6D46CF00116694 /* LogicState.swift */; };
 		47D642F01F5FF499005F2069 /* LBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642EF1F5FF499005F2069 /* LBDocument.swift */; };
 		47D642F21F6143D9005F2069 /* LBDesigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642F11F6143D9005F2069 /* LBDesigns.swift */; };
-		47D642F41F62A277005F2069 /* EditTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642F31F62A277005F2069 /* EditTableCell.swift */; };
+		47D642F41F62A277005F2069 /* EditDesignCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642F31F62A277005F2069 /* EditDesignCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +48,7 @@
 		471744B71F7BB46C00DD553B /* LBInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBInput.swift; sourceTree = "<group>"; };
 		471744B91F7BB5B900DD553B /* LBOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBOutput.swift; sourceTree = "<group>"; };
 		471744BB1F7FEB7800DD553B /* LBOscillator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBOscillator.swift; sourceTree = "<group>"; };
+		471744BD1F80F6BE00DD553B /* LBDesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBDesignViewController.swift; sourceTree = "<group>"; };
 		47244B7F1F5D4AEE006CB51D /* Gates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gates.swift; sourceTree = "<group>"; };
 		47244B831F5D8D59006CB51D /* LBOr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBOr.swift; sourceTree = "<group>"; };
 		47244B851F5D8E19006CB51D /* LBNor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBNor.swift; sourceTree = "<group>"; };
@@ -75,7 +76,7 @@
 		479B7AD91F6D46CF00116694 /* LogicState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicState.swift; sourceTree = "<group>"; };
 		47D642EF1F5FF499005F2069 /* LBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDocument.swift; sourceTree = "<group>"; };
 		47D642F11F6143D9005F2069 /* LBDesigns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDesigns.swift; sourceTree = "<group>"; };
-		47D642F31F62A277005F2069 /* EditTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableCell.swift; sourceTree = "<group>"; };
+		47D642F31F62A277005F2069 /* EditDesignCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDesignCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,11 +151,12 @@
 				477BE0821F5AFDC4006A8E3E /* LBCanvasViewController.swift */,
 				477BE0721F5AD877006A8E3E /* Main.storyboard */,
 				2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */,
+				471744BD1F80F6BE00DD553B /* LBDesignViewController.swift */,
 				477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */,
 				47D642EF1F5FF499005F2069 /* LBDocument.swift */,
 				47D642F11F6143D9005F2069 /* LBDesigns.swift */,
 				477BE0841F5AFEBD006A8E3E /* LBGateView.swift */,
-				47D642F31F62A277005F2069 /* EditTableCell.swift */,
+				47D642F31F62A277005F2069 /* EditDesignCell.swift */,
 				47244B931F5DF111006CB51D /* Logic Elements */,
 				47244B941F5DF133006CB51D /* Support */,
 			);
@@ -236,8 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47D642F41F62A277005F2069 /* EditTableCell.swift in Sources */,
-				2FE3BD4C1F601853005B4BF0 /* LBDesignTableViewController.swift in Sources */,
+				47D642F41F62A277005F2069 /* EditDesignCell.swift in Sources */,
 				477BE0811F5AFC16006A8E3E /* LBZoomingCanvasView.swift in Sources */,
 				479B7ADA1F6D46CF00116694 /* LogicState.swift in Sources */,
 				47244B961F5EA03E006CB51D /* LBButton.swift in Sources */,
@@ -264,6 +265,7 @@
 				472BF9581F6417900097DDDA /* UIImageExtras.swift in Sources */,
 				47D642F01F5FF499005F2069 /* LBDocument.swift in Sources */,
 				47244B881F5D8ECE006CB51D /* LBXor.swift in Sources */,
+				471744BE1F80F6BE00DD553B /* LBDesignViewController.swift in Sources */,
 				471744B61F7BB1CA00DD553B /* LBTristate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

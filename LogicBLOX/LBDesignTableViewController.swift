@@ -62,7 +62,7 @@ class LBDesignTableViewController: UITableViewController {
         // Configure the cell...
         let design = Designs.list[indexPath.row]
         if indexPath.row == editingItem {
-            let editCell = cell as! EditTableCell
+            let editCell = cell as! EditDesignCell
             editCell.cellTextField.text = design.deletingPathExtension().lastPathComponent
             editCell.cellTextField.delegate = self
             editCell.cellTextField.becomeFirstResponder()

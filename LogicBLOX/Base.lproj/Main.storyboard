@@ -62,9 +62,7 @@
                     <navigationItem key="navigationItem" title="LogicBLOX" id="Vdm-gx-hT9">
                         <barButtonItem key="leftBarButtonItem" systemItem="organize" id="CMy-5T-rxq">
                             <connections>
-                                <segue destination="k7y-LP-gcG" kind="popoverPresentation" identifier="Show Designs" popoverAnchorBarButtonItem="CMy-5T-rxq" id="TKm-Pd-n72">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
+                                <segue destination="k7y-LP-gcG" kind="show" identifier="Show Designs" id="TKm-Pd-n72"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
@@ -124,94 +122,111 @@
             <point key="canvasLocation" x="952.79999999999995" y="0.44977511244377816"/>
         </scene>
         <!--Designs-->
-        <scene sceneID="y5b-S8-45k">
+        <scene sceneID="UK1-Od-L9e">
             <objects>
-                <tableViewController id="5CU-O9-qHf" customClass="LBDesignTableViewController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="a7l-Uf-cPH">
+                <collectionViewController title="Designs" id="iH1-ee-lhd" customClass="LBDesignViewController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Afp-rZ-njv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Design ID" textLabel="klg-4f-vkh" imageView="xAx-SO-2wO" style="IBUITableViewCellStyleDefault" id="Pbn-Ye-8Tp">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pbn-Ye-8Tp" id="D8Q-EO-85X">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1yE-6q-kG3">
+                            <size key="itemSize" width="134" height="149"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="G7Q-fR-J9R" userLabel="Cell" customClass="EditDesignCell" customModule="LogicBLOX" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="134" height="149"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="134" height="149"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Design Name 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="klg-4f-vkh">
-                                            <rect key="frame" x="107" y="0.0" width="253" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Nand Gate" translatesAutoresizingMaskIntoConstraints="NO" id="PNR-3a-0Jd">
+                                            <rect key="frame" x="0.0" y="1" width="134" height="128"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yAx-tt-AgY">
+                                            <rect key="frame" x="0.0" y="122" width="134" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Nand Gate" id="xAx-SO-2wO">
-                                            <rect key="frame" x="16" y="0.0" width="76" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </imageView>
                                     </subviews>
-                                </tableViewCellContentView>
+                                </view>
                                 <connections>
-                                    <segue destination="ofi-JX-Qg7" kind="unwind" trigger="accessoryAction" unwindAction="exitFromPopupWithSegue:" id="qSg-JY-N81"/>
+                                    <outlet property="cellPic" destination="PNR-3a-0Jd" id="ikU-q2-AsT"/>
+                                    <outlet property="cellText" destination="yAx-tt-AgY" id="VQY-wq-tkf"/>
                                 </connections>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Edit Design ID" id="jfz-zJ-mop" customClass="EditTableCell" customModule="LogicBLOX" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jfz-zJ-mop" id="N36-NP-Zmh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EditCell" id="k65-qn-BYy" customClass="EditDesignCell" customModule="LogicBLOX" customModuleProvider="target">
+                                <rect key="frame" x="241" y="0.0" width="134" height="149"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="134" height="149"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hSx-wp-CyC">
-                                            <rect key="frame" x="93" y="6" width="267" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
-                                        </textField>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="Nand Gate" translatesAutoresizingMaskIntoConstraints="NO" id="4SP-3o-ys2">
-                                            <rect key="frame" x="15" y="0.0" width="63" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Nand Gate" translatesAutoresizingMaskIntoConstraints="NO" id="eIo-jb-SHL">
+                                            <rect key="frame" x="0.0" y="1" width="134" height="128"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Design Name" textAlignment="center" minimumFontSize="9" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4Tx-Qx-go4">
+                                            <rect key="frame" x="0.0" y="119" width="134" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
                                     </subviews>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
+                                </view>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
-                                    <outlet property="cellPic" destination="4SP-3o-ys2" id="CX9-Il-w1v"/>
-                                    <outlet property="cellTextField" destination="hSx-wp-CyC" id="Iju-Lf-ufu"/>
+                                    <outlet property="cellPic" destination="eIo-jb-SHL" id="LBq-xm-yYM"/>
+                                    <outlet property="cellTextField" destination="4Tx-Qx-go4" id="QdQ-g3-lvF"/>
                                 </connections>
-                            </tableViewCell>
-                        </prototypes>
+                            </collectionViewCell>
+                        </cells>
                         <connections>
-                            <outlet property="dataSource" destination="5CU-O9-qHf" id="dSH-3P-6ou"/>
-                            <outlet property="delegate" destination="5CU-O9-qHf" id="q69-w6-X8h"/>
+                            <outlet property="dataSource" destination="iH1-ee-lhd" id="dJB-P6-4PI"/>
+                            <outlet property="delegate" destination="iH1-ee-lhd" id="p9T-WV-Gr6"/>
                         </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Designs" id="q4b-r7-SGj">
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Designs" id="pFW-hl-LSP">
                         <leftBarButtonItems>
-                            <barButtonItem title="Open" id="pXF-cT-H5E">
+                            <barButtonItem systemItem="add" id="rl3-Ke-Urb">
                                 <connections>
-                                    <segue destination="ofi-JX-Qg7" kind="unwind" unwindAction="exitFromPopupWithSegue:" id="qPT-Pt-HQd"/>
+                                    <action selector="addNewDesign:" destination="iH1-ee-lhd" id="cxy-rb-UKi"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="add" id="a3S-lJ-p09">
+                            <barButtonItem title="Show" id="DII-AK-hre">
                                 <connections>
-                                    <action selector="addNewDesign:" destination="5CU-O9-qHf" id="9JO-1H-lzq"/>
+                                    <segue destination="pZ5-92-GIp" kind="unwind" unwindAction="exitFromPopupWithSegue:" id="G7v-VK-IeI"/>
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="action" id="oS1-Ws-UhR">
+                                <connections>
+                                    <action selector="shareDesigns:" destination="iH1-ee-lhd" id="SWj-LF-MS5"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="trash" id="agm-bP-Vo0">
+                                <connections>
+                                    <action selector="deleteDesign:" destination="iH1-ee-lhd" id="anQ-dM-xGJ"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="AddItemBarButton" destination="a3S-lJ-p09" id="I03-b1-oHX"/>
-                        <outlet property="openBarButton" destination="pXF-cT-H5E" id="rT5-zV-ofA"/>
+                        <outlet property="shareButton" destination="oS1-Ws-UhR" id="BQJ-rF-b0z"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Sj-8y-MG0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="ofi-JX-Qg7" userLabel="Exit" sceneMemberID="exit"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ehk-cg-qf4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="pZ5-92-GIp" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1708" y="806"/>
+            <point key="canvasLocation" x="1718" y="806"/>
         </scene>
         <!--Gate Collection View Controller-->
         <scene sceneID="agK-34-9aW">
@@ -296,7 +311,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="5CU-O9-qHf" kind="relationship" relationship="rootViewController" id="H89-cQ-42z"/>
+                        <segue destination="iH1-ee-lhd" kind="relationship" relationship="rootViewController" id="Z5i-KL-lQj"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ud2-pF-sfN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -307,6 +322,6 @@
     <resources>
         <image name="Gate Icon 2" width="31" height="31"/>
         <image name="Line Icon 1" width="31" height="31"/>
-        <image name="Nand Gate" width="123" height="70"/>
+        <image name="Nand Gate" width="120" height="60"/>
     </resources>
 </document>

@@ -8,10 +8,10 @@
 
 import UIKit
 
-class EditTableCell: UITableViewCell {
+class EditDesignCell: UICollectionViewCell {
     
-    @IBOutlet var cellPic: UIImageView!
-    @IBOutlet var cellTextField: UITextField!
+    @IBOutlet weak var cellPic: UIImageView!
+    @IBOutlet weak var cellTextField: UITextField!
+    @IBOutlet weak var cellText: UILabel!
     
-
 }
