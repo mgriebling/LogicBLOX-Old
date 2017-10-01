@@ -29,6 +29,10 @@ class LBDesignViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
 //        navigationItem.rightBarButtonItems = [editButtonItem, shareButton]
 //        editButtonItem.isEnabled = Designs.list.count > 1
+        let background = UIImage(named: "Backdrop")
+        let bgView = UIImageView(image: background)
+        bgView.contentMode = .scaleToFill
+        collectionView?.backgroundView = bgView
         collectionView?.selectItem(at: IndexPath(item: selectedItem, section: 0), animated: false, scrollPosition: .centeredVertically)
     }
     
@@ -82,7 +86,7 @@ class LBDesignViewController: UICollectionViewController {
         do {
             try FileManager.default.removeItem(at: url)
         } catch {
-            print("Couldn't delete \(url.lastPathComponent)")
+            print("Couldn't delete \"\(url.lastPathComponent)\"")
         }
         collectionView?.performBatchUpdates({
             self.collectionView?.deleteItems(at: [IndexPath(item: index, section: 0)])
@@ -98,7 +102,7 @@ class LBDesignViewController: UICollectionViewController {
     @IBAction func deleteDesign(_ sender: UIBarButtonItem) {
         if selectedItem != consts.None {
             let design = Designs.list[selectedItem].deletingPathExtension().lastPathComponent
-            let prompt = UIAlertController(title: "Confirm Deletion", message: "Delete \(design)?", preferredStyle: .alert)
+            let prompt = UIAlertController(title: "Confirm Deletion", message: "Delete \"\(design)\"?", preferredStyle: .alert)
             prompt.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
                 // Delete the row from the data source
                 self.deleteDesign(at: self.selectedItem)
@@ -143,20 +147,12 @@ class LBDesignViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDelegate
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         let prevPath = IndexPath(item: selectedItem, section: 0)
         editingItem = consts.None
         if selectedItem == indexPath.item { editingItem = indexPath.item } // 2nd click we edit text field
         selectedItem = indexPath.item
-        print("Reloading \(indexPath) & \(prevPath)")
         self.collectionView?.performBatchUpdates({
             if prevPath == indexPath {
                 // crashes with two identical index paths
@@ -185,21 +181,6 @@ class LBDesignViewController: UICollectionViewController {
             selectedItem = destinationIndexPath.item
         }
     }
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }
 

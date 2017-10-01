@@ -26,6 +26,7 @@ class LBCanvasViewController: UIViewController {
     var editingLines = false
     var panGesture : UIPanGestureRecognizer!
     var menuGate : LBGate?
+    var transitionManager = LBTransitionManager()
     
     @IBOutlet var canvasView: LBZoomingCanvasView! {
         didSet {
@@ -336,11 +337,10 @@ class LBCanvasViewController: UIViewController {
                 vc?.callback = { selected in
                     self.lastGateType = selected
                     self.gateView.insertGate(selected, withEvent: nil)
-//                    self.setButtonImage()
                 }
             case "Show Designs":
                 let vc = (segue.destination as! UINavigationController).viewControllers[0] as? LBDesignViewController
-//                preparePopover(segue.destination, sender: sender, delegate: self)
+                segue.destination.transitioningDelegate = self.transitionManager
                 vc?.selectedItem = Designs.list.index(of: document!.fileURL) ?? 0
                 vc?.callback = { selected in
                     let url = Designs.list[selected]

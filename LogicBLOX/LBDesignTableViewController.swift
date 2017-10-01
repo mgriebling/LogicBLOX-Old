@@ -60,19 +60,19 @@ class LBDesignTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: designID, for: indexPath)
 
         // Configure the cell...
-        let design = Designs.list[indexPath.row]
-        if indexPath.row == editingItem {
-            let editCell = cell as! EditDesignCell
-            editCell.cellTextField.text = design.deletingPathExtension().lastPathComponent
-            editCell.cellTextField.delegate = self
-            editCell.cellTextField.becomeFirstResponder()
-            editCell.cellPic.tintColor = UIColor.black
-            editCell.backgroundColor = UIColor.init(white: 0.89, alpha: 1)
-        } else {
-            cell.textLabel?.text = design.deletingPathExtension().lastPathComponent
-            cell.imageView?.tintColor = UIColor.black
-            cell.backgroundColor = indexPath.row == selectedItem ? UIColor.init(white: 0.89, alpha: 1) : UIColor.white
-        }
+//        let design = Designs.list[indexPath.row]
+//        if indexPath.row == editingItem {
+////            let editCell = cell as! EditDesignCell
+//            editCell.cellTextField.text = design.deletingPathExtension().lastPathComponent
+//            editCell.cellTextField.delegate = self
+//            editCell.cellTextField.becomeFirstResponder()
+//            editCell.cellPic.tintColor = UIColor.black
+//            editCell.backgroundColor = UIColor.init(white: 0.89, alpha: 1)
+//        } else {
+//            cell.textLabel?.text = design.deletingPathExtension().lastPathComponent
+//            cell.imageView?.tintColor = UIColor.black
+//            cell.backgroundColor = indexPath.row == selectedItem ? UIColor.init(white: 0.89, alpha: 1) : UIColor.white
+//        }
         return cell
     }
     
