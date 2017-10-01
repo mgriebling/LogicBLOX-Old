@@ -19,7 +19,7 @@
                         <viewControllerLayoutGuide type="top" id="A45-zf-TKa"/>
                         <viewControllerLayoutGuide type="bottom" id="AlF-Km-DEd"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="NZ7-ba-99q">
+                    <view key="view" contentMode="redraw" id="NZ7-ba-99q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -31,7 +31,7 @@
                                         <color key="backgroundColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                         <gestureRecognizers/>
                                     </scrollView>
-                                    <containerView verifyAmbiguity="off" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XM-Z3-hLZ">
+                                    <containerView verifyAmbiguity="off" opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="8XM-Z3-hLZ">
                                         <rect key="frame" x="268" y="0.0" width="107" height="559"/>
                                         <connections>
                                             <segue destination="Kvt-iQ-ihW" kind="embed" identifier="Show Gates" id="QNK-Ch-edY"/>
@@ -45,9 +45,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="A2A-rn-rPD" firstAttribute="top" secondItem="A45-zf-TKa" secondAttribute="bottom" id="7Dk-jN-lbY"/>
+                            <constraint firstAttribute="trailing" secondItem="A2A-rn-rPD" secondAttribute="trailing" id="2rL-gF-Ugr"/>
                             <constraint firstItem="A2A-rn-rPD" firstAttribute="leading" secondItem="NZ7-ba-99q" secondAttribute="leading" id="LJ1-L7-5Qp"/>
-                            <constraint firstAttribute="trailing" secondItem="A2A-rn-rPD" secondAttribute="trailing" id="tlV-J6-z4h"/>
+                            <constraint firstItem="A2A-rn-rPD" firstAttribute="top" secondItem="A45-zf-TKa" secondAttribute="bottom" id="SaU-8x-lga"/>
                             <constraint firstItem="AlF-Km-DEd" firstAttribute="top" secondItem="A2A-rn-rPD" secondAttribute="bottom" id="yOy-dh-hTF"/>
                         </constraints>
                     </view>
@@ -149,12 +149,14 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yAx-tt-AgY">
                                             <rect key="frame" x="0.0" y="122" width="134" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="cellPic" destination="PNR-3a-0Jd" id="ikU-q2-AsT"/>
                                     <outlet property="cellText" destination="yAx-tt-AgY" id="VQY-wq-tkf"/>
@@ -174,12 +176,14 @@
                                         <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Design Name" textAlignment="center" minimumFontSize="9" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4Tx-Qx-go4">
                                             <rect key="frame" x="0.0" y="119" width="134" height="30"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                     </subviews>
                                 </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="cellPic" destination="eIo-jb-SHL" id="LBq-xm-yYM"/>
                                     <outlet property="cellTextField" destination="4Tx-Qx-go4" id="QdQ-g3-lvF"/>
@@ -230,10 +234,10 @@
             </objects>
             <point key="canvasLocation" x="1718" y="806"/>
         </scene>
-        <!--Gate Collection View Controller-->
+        <!--Gate View Controller-->
         <scene sceneID="agK-34-9aW">
             <objects>
-                <collectionViewController modalPresentationStyle="currentContext" id="Kvt-iQ-ihW" customClass="LBGateCollectionViewController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController modalPresentationStyle="currentContext" id="Kvt-iQ-ihW" customClass="LBGateViewController" customModule="LogicBLOX" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" misplaced="YES" maximumZoomScale="3" dataMode="prototypes" id="2C1-Nf-FJ6">
                         <rect key="frame" x="0.0" y="0.0" width="107" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

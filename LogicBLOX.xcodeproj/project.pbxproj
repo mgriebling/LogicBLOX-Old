@@ -35,7 +35,7 @@
 		477BE0851F5AFEBD006A8E3E /* LBGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0841F5AFEBD006A8E3E /* LBGateView.swift */; };
 		477BE0871F5B03B0006A8E3E /* LBGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0861F5B03B0006A8E3E /* LBGrid.swift */; };
 		477BE0891F5C24C9006A8E3E /* LBGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE0881F5C24C9006A8E3E /* LBGate.swift */; };
-		477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */; };
+		477BE08F1F5C4092006A8E3E /* LBGateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477BE08E1F5C4092006A8E3E /* LBGateViewController.swift */; };
 		479B7ADA1F6D46CF00116694 /* LogicState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B7AD91F6D46CF00116694 /* LogicState.swift */; };
 		47D642F01F5FF499005F2069 /* LBDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642EF1F5FF499005F2069 /* LBDocument.swift */; };
 		47D642F21F6143D9005F2069 /* LBDesigns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D642F11F6143D9005F2069 /* LBDesigns.swift */; };
@@ -44,7 +44,6 @@
 
 /* Begin PBXFileReference section */
 		2F3743E41F7941A4007AD1E3 /* LBNand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBNand.swift; sourceTree = "<group>"; };
-		2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDesignTableViewController.swift; sourceTree = "<group>"; };
 		471744B51F7BB1CA00DD553B /* LBTristate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBTristate.swift; sourceTree = "<group>"; };
 		471744B71F7BB46C00DD553B /* LBInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBInput.swift; sourceTree = "<group>"; };
 		471744B91F7BB5B900DD553B /* LBOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBOutput.swift; sourceTree = "<group>"; };
@@ -74,7 +73,7 @@
 		477BE0841F5AFEBD006A8E3E /* LBGateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateView.swift; sourceTree = "<group>"; };
 		477BE0861F5B03B0006A8E3E /* LBGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGrid.swift; sourceTree = "<group>"; };
 		477BE0881F5C24C9006A8E3E /* LBGate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGate.swift; sourceTree = "<group>"; };
-		477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateCollectionViewController.swift; sourceTree = "<group>"; };
+		477BE08E1F5C4092006A8E3E /* LBGateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBGateViewController.swift; sourceTree = "<group>"; };
 		479B7AD91F6D46CF00116694 /* LogicState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogicState.swift; sourceTree = "<group>"; };
 		47D642EF1F5FF499005F2069 /* LBDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDocument.swift; sourceTree = "<group>"; };
 		47D642F11F6143D9005F2069 /* LBDesigns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBDesigns.swift; sourceTree = "<group>"; };
@@ -152,9 +151,8 @@
 			children = (
 				477BE0821F5AFDC4006A8E3E /* LBCanvasViewController.swift */,
 				477BE0721F5AD877006A8E3E /* Main.storyboard */,
-				2FE3BD4B1F601853005B4BF0 /* LBDesignTableViewController.swift */,
 				471744BD1F80F6BE00DD553B /* LBDesignViewController.swift */,
-				477BE08E1F5C4092006A8E3E /* LBGateCollectionViewController.swift */,
+				477BE08E1F5C4092006A8E3E /* LBGateViewController.swift */,
 				47D642EF1F5FF499005F2069 /* LBDocument.swift */,
 				47D642F11F6143D9005F2069 /* LBDesigns.swift */,
 				477BE0841F5AFEBD006A8E3E /* LBGateView.swift */,
@@ -261,7 +259,7 @@
 				477BE0831F5AFDC4006A8E3E /* LBCanvasViewController.swift in Sources */,
 				477BE0871F5B03B0006A8E3E /* LBGrid.swift in Sources */,
 				477BE06F1F5AD877006A8E3E /* AppDelegate.swift in Sources */,
-				477BE08F1F5C4092006A8E3E /* LBGateCollectionViewController.swift in Sources */,
+				477BE08F1F5C4092006A8E3E /* LBGateViewController.swift in Sources */,
 				47244B8A1F5D8F03006CB51D /* LBXnor.swift in Sources */,
 				471744BC1F7FEB7800DD553B /* LBOscillator.swift in Sources */,
 				47244B981F5EA05A006CB51D /* LBIndicator.swift in Sources */,

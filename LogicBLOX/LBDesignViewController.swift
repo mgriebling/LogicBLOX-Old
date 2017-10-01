@@ -29,10 +29,12 @@ class LBDesignViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
 //        navigationItem.rightBarButtonItems = [editButtonItem, shareButton]
 //        editButtonItem.isEnabled = Designs.list.count > 1
-        let background = UIImage(named: "Backdrop")
-        let bgView = UIImageView(image: background)
-        bgView.contentMode = .scaleToFill
-        collectionView?.backgroundView = bgView
+        let background = UIImage(named: "Backdrop")!
+        let tiledColour = UIColor(patternImage: background)
+//        let bgView = UIImageView
+//        bgView.contentMode = .tile
+//        collectionView?.backgroundView = bgView
+        collectionView?.backgroundColor = tiledColour
         collectionView?.selectItem(at: IndexPath(item: selectedItem, section: 0), animated: false, scrollPosition: .centeredVertically)
     }
     
@@ -54,13 +56,17 @@ class LBDesignViewController: UICollectionViewController {
         // Configure the cell...
         let design = Designs.list[indexPath.item]
         let editCell = cell as! EditDesignCell
+        editCell.backgroundColor = UIColor.clear
+        let image = Gates.imageOfDocImage(highlight: indexPath.item == editingItem || indexPath.item == selectedItem)
+        let background = UIImageView(image: image)
+        editCell.backgroundView = background
         if indexPath.item == editingItem {
             editCell.cellTextField.text = design.deletingPathExtension().lastPathComponent
             editCell.cellTextField.delegate = self
-            editCell.backgroundColor = UIColor.init(white: 0.89, alpha: 1)
+//            editCell.backgroundColor = UIColor.init(white: 0.89, alpha: 1)
         } else {
             editCell.cellText.text = design.deletingPathExtension().lastPathComponent
-            editCell.backgroundColor = indexPath.item == selectedItem ? UIColor.init(white: 0.89, alpha: 1) : UIColor.white
+//            editCell.backgroundColor = indexPath.item == selectedItem ? UIColor.init(white: 0.89, alpha: 1) : UIColor.white
         }
         return cell
     }

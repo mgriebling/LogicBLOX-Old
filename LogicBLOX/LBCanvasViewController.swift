@@ -332,7 +332,7 @@ class LBCanvasViewController: UIViewController {
         if let id = segue.identifier {
             switch id {
             case "Show Gates" :
-                let vc = segue.destination as? LBGateCollectionViewController
+                let vc = segue.destination as? LBGateViewController
                 vc?.selectedItem = lastGateType.rawValue
                 vc?.callback = { selected in
                     self.lastGateType = selected

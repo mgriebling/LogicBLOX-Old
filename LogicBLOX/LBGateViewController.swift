@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "GateCell"
 
-class LBGateCollectionViewController: UICollectionViewController {
+class LBGateViewController: UICollectionViewController {
     
     var selectedItem : Int = LBGateType.nand.rawValue
     var callback : (_ selected: LBGateType) -> () = { _ in }

@@ -14,4 +14,9 @@ class EditDesignCell: UICollectionViewCell {
     @IBOutlet weak var cellTextField: UITextField!
     @IBOutlet weak var cellText: UILabel!
     
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        self.backgroundView = UIImageView(image: UIImage(named: "DocImage"))
+//    }
+    
 }

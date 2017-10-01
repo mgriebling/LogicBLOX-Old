@@ -15,7 +15,5 @@ class LBZoomingCanvasView: UIScrollView {
             self.zoomScale = scaleFactor
         }
     }
-    
-    
 
 }

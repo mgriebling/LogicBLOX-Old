@@ -24,7 +24,7 @@ class LBTransitionManager: NSObject, UIViewControllerAnimatedTransitioning {
         UIView.animate(withDuration: duration, animations: {
             fromView.alpha = 0
             toView.alpha = 1
-        }) { (done) in
+        }) { _ in
             transitionContext.completeTransition(true)
         }
     }
