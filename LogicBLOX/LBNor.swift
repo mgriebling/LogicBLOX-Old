@@ -33,7 +33,7 @@ class LBNor: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-        Gates.drawOrNorGate(frame: bounds, highlight: highlighted, inputs: CGFloat(inputs), joinedPin: joinedInputs, joinedOutputPin: joinedOutputs, inputPinVisible: inputPinVisible, outputPinVisible: outputPinVisible, invert: invert)
+        Gates.drawOrNorGateR(frame: bounds, highlight: highlighted, inputs: CGFloat(inputs), joinedPin: joinedInputs, joinedOutputPin: joinedOutputs, inputPinVisible: inputPinVisible, outputPinVisible: outputPinVisible, invert: invert)
     }
     
     override func evaluate() -> LogicState {

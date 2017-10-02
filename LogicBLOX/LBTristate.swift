@@ -30,7 +30,7 @@ class LBTristateInverter: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-        Gates.drawTristateBufferInverter(frame: bounds, highlight: highlighted, joinedPin: joinedInputs, joinedOutputPin: joinedInputs, inputPinVisible: inputPinVisible, outputPinVisible: outputPinVisible, invert: invert)
+        Gates.drawTristateBufferInverterR(frame: bounds, highlight: highlighted, joinedPin: joinedInputs, joinedOutputPin: joinedInputs, inputPinVisible: inputPinVisible, outputPinVisible: outputPinVisible, invert: invert)
     }
     
     override func evaluate() -> LogicState {

@@ -53,7 +53,7 @@ class LBOscillator: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-        Gates.drawOscillator(frame: bounds, highlight: highlighted, joinedOutputPin: joinedOutputs, outputPinVisible: outputPinVisible)
+        Gates.drawOscillatorR(frame: bounds, highlight: highlighted, joinedOutputPin: joinedOutputs, outputPinVisible: outputPinVisible)
     }
     
 }

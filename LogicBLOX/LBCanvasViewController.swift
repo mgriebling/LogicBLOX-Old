@@ -126,6 +126,26 @@ class LBCanvasViewController: UIViewController {
         saveActiveDoc()
     }
     
+    var newBounds : CGRect = CGRect.zero
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        newBounds = self.view.bounds
+        newBounds.size = size
+//        self.view.bounds = newBounds
+//        self.view.setNeedsLayout()
+        print("Switching to \(size)")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("Current bounds = \(self.view.bounds), new bounds = \(newBounds)")
+        if newBounds != CGRect.zero {
+            self.view.bounds = newBounds
+            self.view.setNeedsLayout()
+        }
+    }
+    
     // MARK: - Bar button actions
     
     @IBAction func doneAction(_ sender: UIBarButtonItem) {

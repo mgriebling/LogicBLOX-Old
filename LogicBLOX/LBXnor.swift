@@ -33,7 +33,7 @@ class LBXnor: LBGate {
     }
     
     override func draw(_ scale: CGFloat) {
-        Gates.drawXorXnorGate(frame: bounds, highlight: highlighted, inputs: CGFloat(inputs), inputPinVisible: CGFloat(inputPinVisible), outputPinVisible: CGFloat(outputPinVisible), invert: invert)
+        Gates.drawXorXnorGateR(frame: bounds, highlight: highlighted, inputs: CGFloat(inputs), inputPinVisible: CGFloat(inputPinVisible), outputPinVisible: CGFloat(outputPinVisible), invert: invert)
     }
     
     override func evaluate() -> LogicState {
