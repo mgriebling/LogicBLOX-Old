@@ -26,7 +26,7 @@ class LBCanvasViewController: UIViewController {
     var editingLines = false
     var panGesture : UIPanGestureRecognizer!
     var menuGate : LBGate?
-    var transitionManager = LBTransitionManager()
+    var fade = LBFadeInAnimator()
     
     @IBOutlet var canvasView: LBZoomingCanvasView! {
         didSet {
@@ -126,24 +126,30 @@ class LBCanvasViewController: UIViewController {
         saveActiveDoc()
     }
     
-    var newBounds : CGRect = CGRect.zero
+//    var newBounds : CGRect = CGRect.zero
+//
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//        newBounds = self.view.bounds
+//        newBounds.size = size
+////        self.view.bounds = newBounds
+////        self.view.setNeedsLayout()
+//        print("Switching to \(size)")
+//    }
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        print("Current bounds = \(self.view.bounds), new bounds = \(newBounds)")
+//        if newBounds != CGRect.zero {
+//            self.view.bounds = newBounds
+//            self.view.setNeedsLayout()
+//        }
+//    }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        newBounds = self.view.bounds
-        newBounds.size = size
-//        self.view.bounds = newBounds
-//        self.view.setNeedsLayout()
-        print("Switching to \(size)")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("Current bounds = \(self.view.bounds), new bounds = \(newBounds)")
-        if newBounds != CGRect.zero {
-            self.view.bounds = newBounds
-            self.view.setNeedsLayout()
-        }
+        
+        
     }
     
     // MARK: - Bar button actions
@@ -360,7 +366,8 @@ class LBCanvasViewController: UIViewController {
                 }
             case "Show Designs":
                 let vc = (segue.destination as! UINavigationController).viewControllers[0] as? LBDesignViewController
-                segue.destination.transitioningDelegate = self.transitionManager
+                // transitioningManager causes rotation issues
+                segue.destination.transitioningDelegate = self
                 vc?.selectedItem = Designs.list.index(of: document!.fileURL) ?? 0
                 vc?.callback = { selected in
                     let url = Designs.list[selected]
@@ -409,6 +416,20 @@ extension LBCanvasViewController : UIPopoverPresentationControllerDelegate {
     // Just so the iPhone shows pop-overs too
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
+    }
+    
+}
+
+extension LBCanvasViewController : UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        fade.presenting = true
+        return fade
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        fade.presenting = false
+        return fade
     }
     
 }

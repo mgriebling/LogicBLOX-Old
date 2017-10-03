@@ -53,11 +53,17 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <toolbarItems>
-                        <barButtonItem title="Time: 0nS" id="phx-NG-Doj"/>
+                        <barButtonItem title="Time: 0nS" id="phx-NG-Doj">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="HLu-mK-7Eh"/>
                         <barButtonItem title="Step" id="6uo-tu-sxt"/>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="GZ7-Lx-nSg"/>
                         <barButtonItem systemItem="pause" id="oms-dL-kRO"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Nte-qe-F9m"/>
-                        <barButtonItem title="Gates: 23" id="nIm-nm-fAK"/>
+                        <barButtonItem title="Gates: 23" id="nIm-nm-fAK">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="LogicBLOX" id="Vdm-gx-hT9">
                         <barButtonItem key="leftBarButtonItem" systemItem="organize" id="CMy-5T-rxq">
@@ -132,11 +138,11 @@
                             <size key="itemSize" width="134" height="149"/>
                             <size key="headerReferenceSize" width="0.0" height="10"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                            <inset key="sectionInset" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="G7Q-fR-J9R" userLabel="Cell" customClass="EditDesignCell" customModule="LogicBLOX" customModuleProvider="target">
-                                <rect key="frame" x="10" y="10" width="134" height="149"/>
+                                <rect key="frame" x="30" y="10" width="134" height="149"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="134" height="149"/>
@@ -163,7 +169,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EditCell" id="k65-qn-BYy" customClass="EditDesignCell" customModule="LogicBLOX" customModuleProvider="target">
-                                <rect key="frame" x="231" y="10" width="134" height="149"/>
+                                <rect key="frame" x="211" y="10" width="134" height="149"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="134" height="149"/>
@@ -277,9 +283,6 @@
                             <outlet property="delegate" destination="Kvt-iQ-ihW" id="f4n-vL-ob8"/>
                         </connections>
                     </collectionView>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rle-8g-IAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
