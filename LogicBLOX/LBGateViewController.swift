@@ -17,6 +17,13 @@ class LBGateViewController: UICollectionViewController {
     
     // MARK: Life cycle methods
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let layout = collectionViewLayout as? LBGateLayout {
+            layout.delegate = self
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView?.scrollToItem(at: IndexPath(item: selectedItem, section: 0), at: UICollectionViewScrollPosition.centeredVertically, animated: false)
@@ -59,5 +66,21 @@ class LBGateViewController: UICollectionViewController {
         collectionView.reloadData()
     }
 
+}
 
+extension LBGateViewController : GateLayoutDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, heightForGateAtIndexPath indexPath: IndexPath, usingWidth width: CGFloat) -> CGFloat {
+        let labelHeight : CGFloat = 12
+        let minimumHeight : CGFloat = 40
+        let kind = LBGateType(rawValue: indexPath.item)!
+        let gate = LBGateType.classForGate(kind)
+        gate.defaultBounds()
+        let image = gate.getImageOfObject(gate.bounds, scale: 1)
+        
+        // scale the height based on the actual column width to maintain the aspect ratio
+        let scale = min(1, width / image.size.width)
+        return max(minimumHeight, image.size.height * scale) + labelHeight
+    }
+    
 }

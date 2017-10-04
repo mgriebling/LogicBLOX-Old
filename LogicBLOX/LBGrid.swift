@@ -11,7 +11,7 @@ import UIKit
 class LBGrid {
     
     var color : UIColor? = UIColor.lightGray
-    var spacing : CGFloat = 9
+    var spacing : CGFloat = 8
     var isAlwaysShown : Bool = true
     var isConstraining : Bool = true
     var isUsable : Bool { return spacing > 0 }
