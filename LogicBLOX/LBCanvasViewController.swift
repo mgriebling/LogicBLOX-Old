@@ -126,32 +126,6 @@ class LBCanvasViewController: UIViewController {
         saveActiveDoc()
     }
     
-//    var newBounds : CGRect = CGRect.zero
-//
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//        newBounds = self.view.bounds
-//        newBounds.size = size
-////        self.view.bounds = newBounds
-////        self.view.setNeedsLayout()
-//        print("Switching to \(size)")
-//    }
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        print("Current bounds = \(self.view.bounds), new bounds = \(newBounds)")
-//        if newBounds != CGRect.zero {
-//            self.view.bounds = newBounds
-//            self.view.setNeedsLayout()
-//        }
-//    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        
-    }
-    
     // MARK: - Bar button actions
     
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
@@ -225,6 +199,7 @@ class LBCanvasViewController: UIViewController {
     
     @objc func doEditMenu() {
         print("Editing \(menuGate!)")
+        performSegue(withIdentifier: "Show Properties", sender: menuGate)
     }
     
     @objc func doDeleteMenu() {
@@ -348,6 +323,10 @@ class LBCanvasViewController: UIViewController {
             contentController.popoverPresentationController?.sourceRect = view.bounds
         } else if let button = sender as? UIBarButtonItem {
             contentController.popoverPresentationController?.barButtonItem = button
+        } else if let gate = sender as? LBGate {
+            contentController.popoverPresentationController?.barButtonItem = nil
+            contentController.popoverPresentationController?.sourceRect = gate.bounds
+            contentController.popoverPresentationController?.sourceView = gateView
         }
     }
 
@@ -379,6 +358,9 @@ class LBCanvasViewController: UIViewController {
                     // update the title in case an existing design is renamed
                     self.title = url.deletingPathExtension().lastPathComponent
                 }
+            case "Show Properties":
+                preparePopover(segue.destination, sender: sender, delegate: self)
+                break
             default: break
             }
         }
