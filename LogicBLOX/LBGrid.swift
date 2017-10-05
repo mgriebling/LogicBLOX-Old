@@ -11,7 +11,7 @@ import UIKit
 class LBGrid {
     
     var color : UIColor? = UIColor.lightGray
-    var spacing : CGFloat = 8
+    var spacing : CGFloat = 4
     var isAlwaysShown : Bool = true
     var isConstraining : Bool = true
     var isUsable : Bool { return spacing > 0 }
@@ -39,6 +39,7 @@ class LBGrid {
     }
     
     func drawRect(_ rect: CGRect, inView view: UIView) {
+        let spacing = self.spacing * 2  // visible spacing skips lines
         if isUsable && isAlwaysShown {
             let gridPath = UIBezierPath()
             let firstVerticalLineNumber = Int(ceil(rect.minX / spacing))
