@@ -13,6 +13,12 @@ class LBPropertiesController: UITableViewController {
     @IBOutlet weak var facingControl: UISegmentedControl!
     @IBOutlet weak var inputsSlider: UISlider!
     @IBOutlet weak var inputsText: UITextField!
+    @IBOutlet weak var widthSlider: UISlider!
+    @IBOutlet weak var widthText: UITextField!
+    
+    weak var gate : LBGate? { didSet { configure() } }
+    var invertedController : LBSwitchViewController?
+    var states : [Bool] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,62 +29,64 @@ class LBPropertiesController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        configure()
+    }
+    
+    func configure() {
+        if let gate = gate {
+            widthSlider?.value = Float(gate.bounds.width)
+            widthText?.text = "\(Int(gate.bounds.width))"
+            let inputs : Int
+            switch gate.kind {
+            case .and, .nor, .or, .nand, .xor, .xnor : inputs = 2
+            case .and3, .nor3, .or3, .nand3, .xor3, .xnor3 : inputs = 3
+            case .and4, .nor4, .or4, .nand4, .xor4, .xnor4 : inputs = 4
+            default: inputs = 0
+            }
+            states = [Bool](repeating: false, count:inputs)
+            if let active = invertedController?.states {
+                // refresh states
+                if active.count >= inputs {
+                    states[0..<inputs] = active[0..<inputs]
+                } else {
+                    states[0..<inputs] = active[0..<inputs]
+                }
+            }
+            print("Setting input to \(inputs)")
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
+            inputsSlider?.value = Float(inputs)
+            inputsText?.text = "\(inputs)"
+            invertedController?.states = states
+            self.title = "\(gate.description) Properties"
+        }
     }
 
     // MARK: - Table view data source
     
     @IBAction func inputNumberChanged(_ sender: UISlider) {
-        inputsText.text = "\(Int(sender.value))"
-        inputsText.setNeedsDisplay()
+        configure()
+    }
+    
+    @IBAction func widthChanged(_ sender: UISlider) {
+        configure()
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "Switch Embed" {
+            if let vc = segue.destination as? LBSwitchViewController {
+                vc.states = states
+                invertedController = vc
+            }
+        }
     }
-    */
 
 }

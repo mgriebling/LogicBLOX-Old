@@ -359,6 +359,8 @@ class LBCanvasViewController: UIViewController {
                     self.title = url.deletingPathExtension().lastPathComponent
                 }
             case "Show Properties":
+                let vc = (segue.destination as! UINavigationController).viewControllers[0] as? LBPropertiesController
+                vc?.gate = menuGate
                 preparePopover(segue.destination, sender: sender, delegate: self)
                 break
             default: break
