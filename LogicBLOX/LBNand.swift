@@ -16,7 +16,7 @@ import UIKit
 
 class LBNand : LBGate {
     
-    fileprivate var inputs : Int { return 2 }
+//    fileprivate var inputs : Int { return 2 }
     fileprivate var invert : Bool { return true }
     fileprivate let yoff : CGFloat = 10
     fileprivate let xoff : CGFloat = 4
@@ -29,6 +29,7 @@ class LBNand : LBGate {
     override func localInit() {
         super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 120, height: 60)
+        inputs = 2
         
         let pin1 = LBPin(x: xoff, y: 10+yoff)
         let pin2 = LBPin(x: xoff, y: 34+yoff)
@@ -56,10 +57,11 @@ class LBNand : LBGate {
 
 class LBNand3 : LBNand {
     
-    override fileprivate var inputs : Int { return 3 }
+//    override fileprivate var inputs : Int { return 3 }
     
     override func localInit() {
         super.localInit()
+        inputs = 3
         
         // replace last two pins with 3-input pins
         let pin1 = LBPin(x: xoff, y: 2+yoff)
@@ -72,10 +74,11 @@ class LBNand3 : LBNand {
 
 class LBNand4 : LBNand {
     
-    override fileprivate var inputs : Int { return 4 }
+//    override fileprivate var inputs : Int { return 4 }
     
     override func localInit() {
         super.localInit()
+        inputs = 4
         
         // replace last two pins with 3-input pins
         let pin1 = LBPin(x: xoff, y: 2+yoff)

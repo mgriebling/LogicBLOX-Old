@@ -144,10 +144,13 @@ class LBGate : NSObject, NSCoding {
     static let kHighlighted = "Highlighted"
     static let kPins        = "Pins"
     static let kKind        = "Kind"
+    static let kInputs      = "Inputs"
     
     var pins: [LBPin] = []
     var bounds: CGRect
     var kind: LBGateType
+    
+    public var inputs : Int = 0
     
     var highlighted = false
     var outputPinVisible : CGFloat = 0
@@ -177,6 +180,7 @@ class LBGate : NSObject, NSCoding {
         bounds = decoder.decodeCGRect(forKey: LBGate.kRect)
         highlighted = decoder.decodeBool(forKey: LBGate.kHighlighted)
         pins = decoder.decodeObject(forKey: LBGate.kPins) as! [LBPin]
+        inputs = decoder.decodeInteger(forKey: LBGate.kInputs)
         super.init()
     }
     
@@ -187,6 +191,7 @@ class LBGate : NSObject, NSCoding {
         encoder.encode(bounds, forKey: LBGate.kRect)
         encoder.encode(highlighted, forKey: LBGate.kHighlighted)
         encoder.encode(pins, forKey: LBGate.kPins)
+        encoder.encode(inputs, forKey: LBGate.kInputs)
     }
     
     // MARK: - Object Methods

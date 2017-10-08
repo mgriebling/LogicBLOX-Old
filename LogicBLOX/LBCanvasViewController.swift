@@ -272,7 +272,7 @@ class LBCanvasViewController: UIViewController {
                 NSLog("Started clearing inputs")
                 for gate in gateView.gates {
                     if let connection = gate as? LBConnection {
-                        for pin in connection.outputs {
+                        for pin in connection.outputPins {
                             pin.state = .U
                         }
                     }
@@ -337,7 +337,7 @@ class LBCanvasViewController: UIViewController {
         if let id = segue.identifier {
             switch id {
             case "Show Gates" :
-                let vc = segue.destination as? LBGateViewController
+                let vc = (segue.destination as! UINavigationController).viewControllers[0] as? LBGateViewController
                 vc?.selectedItem = lastGateType.rawValue
                 vc?.callback = { selected in
                     self.lastGateType = selected

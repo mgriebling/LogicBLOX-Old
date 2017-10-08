@@ -13,7 +13,7 @@ class LBNor: LBGate {
     let yoff : CGFloat = 11
     let xoff : CGFloat = 4
     
-    var inputs : Int { return 2 }
+//    var inputs : Int { return 2 }
     public var invert : Bool { return true }
     
     override public var description: String {
@@ -24,6 +24,8 @@ class LBNor: LBGate {
     override func localInit() {
         super.localInit()
         nativeBounds = CGRect(x: 0, y: 0, width: 124, height: 60)
+        inputs = 2
+        
         let xoff2 : CGFloat = invert ? 2 : 20   // account for inverter
         
         let pin1 = LBPin(x: xoff, y: 12+yoff)
@@ -52,10 +54,11 @@ class LBNor: LBGate {
 
 class LBNor3 : LBNor {
     
-    override var inputs: Int { return 3 }
+//    override var inputs: Int { return 3 }
     
     override func localInit() {
         super.localInit()
+        inputs = 3
         
         // replace last two pins with 3-input pins
         let pin1 = LBPin(x: xoff, y: 4+yoff)
@@ -68,10 +71,11 @@ class LBNor3 : LBNor {
 
 class LBNor4 : LBNor {
     
-    override var inputs: Int { return 4 }
+//    override var inputs: Int { return 4 }
     
     override func localInit() {
         super.localInit()
+        inputs = 4
         
         // replace last two pins with 3-input pins
         let pin1 = LBPin(x: xoff, y: 4+yoff)

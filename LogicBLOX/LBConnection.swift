@@ -12,17 +12,17 @@ class LBConnection: LBGate {
     
     static let MatchSize : CGFloat = 10
     
-    static let kInputs      = "Inputs"
-    static let kOutputs     = "Outputs"
+    static let kInputPins   = "InputPins"
+    static let kOutputPins  = "OutputPins"
     static let kConnections = "Connections"
     
     // MARK: - Internal state
     
     /// Output pins from other gates
-    var inputs = [LBPin]()
+    var inputPins = [LBPin]()
     
     // Input pins from other gates
-    var outputs = [LBPin]()
+    var outputPins = [LBPin]()
     
     // wired connections relative to our origin
     var connections = [CGPoint]()
@@ -47,21 +47,21 @@ class LBConnection: LBGate {
     
     required init? (coder decoder: NSCoder) {
         super.init(coder: decoder)
-        inputs = decoder.decodeObject(forKey: LBConnection.kInputs) as! [LBPin]
-        outputs = decoder.decodeObject(forKey: LBConnection.kOutputs) as! [LBPin]
+        inputPins = decoder.decodeObject(forKey: LBConnection.kInputPins) as! [LBPin]
+        outputPins = decoder.decodeObject(forKey: LBConnection.kOutputPins) as! [LBPin]
         connections = decoder.decodeObject(forKey: LBConnection.kConnections) as! [CGPoint]
     }
     
     override func encode(with encoder: NSCoder) {
         super.encode(with: encoder)
-        encoder.encode(inputs, forKey: LBConnection.kInputs)
-        encoder.encode(outputs, forKey: LBConnection.kOutputs)
+        encoder.encode(inputPins, forKey: LBConnection.kInputPins)
+        encoder.encode(outputPins, forKey: LBConnection.kOutputPins)
         encoder.encode(connections, forKey: LBConnection.kConnections)
     }
     
     deinit {
         // need to release all the pins since we don't own most of them
-        inputs = []; outputs = []
+        inputPins = []; outputPins = []
     }
     
     // MARK: - Drawing
@@ -103,10 +103,10 @@ class LBConnection: LBGate {
     func addPin(_ pin: LBPin) {
         if pin.type == .input {
             // we drive gate inputs so they are outputs here
-            outputs.append(pin)
+            outputPins.append(pin)
         } else if pin.type == .output {
             // we take gate outputs as inputs here
-            inputs.append(pin)
+            inputPins.append(pin)
         } else {
             print("Erroneous pin entry!")
         }
@@ -174,10 +174,10 @@ class LBConnection: LBGate {
     
     override func evaluate() -> LogicState {
         let state : LogicState
-        if inputs.count == 0 && outputs.count > 1 {
+        if inputPins.count == 0 && outputPins.count > 1 {
             // no inputs so check if one of the outputs is driven and propagate this value
             var pinState : LogicState?
-            for pin in outputs {
+            for pin in outputPins {
                 if pin.state.isOne || pin.state == .𝟶 {
                     pinState = pin.state
                     break
@@ -186,14 +186,14 @@ class LBConnection: LBGate {
             
             // set all pins to the driven value
             if let pinState = pinState {
-                for pin in outputs {
+                for pin in outputPins {
                     pin.state = pinState
                 }
             }
             state = pinState ?? .U
         } else {
-            state = LogicState.resolve(inputs.map { $0.state })  // combine all inputs -- more than one implies a bus
-            for pin in outputs {                                 // drive all the outputs
+            state = LogicState.resolve(inputPins.map { $0.state })  // combine all inputs -- more than one implies a bus
+            for pin in outputPins {                                 // drive all the outputs
                 pin.state = state
             }
         }
