@@ -41,6 +41,7 @@ class LBDesignViewController: UICollectionViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         callback(selectedItem)
+//        mySegmentTitle.sectionTitles = ["Gates", "Inputs", "Outputs"]
     }
 
     // MARK: UICollectionViewDataSource

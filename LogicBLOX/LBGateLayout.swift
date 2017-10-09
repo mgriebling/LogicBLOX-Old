@@ -15,7 +15,7 @@ protocol GateLayoutDelegate : class {
 class LBGateLayout: UICollectionViewLayout {
     
     fileprivate var cache = [UICollectionViewLayoutAttributes]()
-    fileprivate var numberOfColumns = 1
+    var numberOfColumns = 1 { didSet { cache = [] } }
     fileprivate var cellPadding : CGFloat = 2
     fileprivate var contentHeight : CGFloat = 0
     fileprivate var contentWidth : CGFloat {
@@ -29,9 +29,19 @@ class LBGateLayout: UICollectionViewLayout {
         return CGSize(width: contentWidth, height: contentHeight)
     }
     
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        let bounds = collectionView!.bounds
+        guard newBounds.width != bounds.width || newBounds.height != bounds.height else { return false }
+        cache = []
+        numberOfColumns = Int(newBounds.width / 95)
+        print("Bounds = \(newBounds), columns = \(numberOfColumns)")
+        return true
+    }
+    
     override func prepare() {
         guard cache.isEmpty == true, let collectionView = collectionView else { return }
         
+        print("Preparing with columns = \(numberOfColumns)")
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
         var xOffset = [CGFloat]()
         for column in 0..<numberOfColumns {
@@ -39,6 +49,7 @@ class LBGateLayout: UICollectionViewLayout {
         }
         var column = 0
         var yOffset = [CGFloat](repeating: 0, count: numberOfColumns)
+        contentHeight = 0
         
         for item in 0..<collectionView.numberOfItems(inSection: 0) {
             let indexPath = IndexPath(item: item, section: 0)
@@ -54,7 +65,7 @@ class LBGateLayout: UICollectionViewLayout {
             
             contentHeight = max(contentHeight, frame.maxY)
             yOffset[column] = yOffset[column] + height
-            column = column > (numberOfColumns - 1) ? (column + 1) : 0
+            column = column+1 > (numberOfColumns - 1) ? 0 : (column + 1)
         }
     }
     

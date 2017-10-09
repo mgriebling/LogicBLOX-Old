@@ -26,8 +26,40 @@ class LBGateViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+//        mySegmentedControl.segmentStyle = .textOnly
+//        mySegmentedControl.insertSegment(withTitle: "Gates", at: 0)
+//        mySegmentedControl.insertSegment(withTitle: "Inputs", at: 1)
+//        mySegmentedControl.insertSegment(withTitle: "Flip-Flops", at: 2)
+        
         collectionView?.scrollToItem(at: IndexPath(item: selectedItem, section: 0), at: UICollectionViewScrollPosition.centeredVertically, animated: false)
     }
+    
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//        print("Transitioning to new size")
+//        if let layout = collectionViewLayout as? LBGateLayout {
+//
+//            collectionView?.collectionViewLayout.invalidateLayout()
+//            layout.numberOfColumns = size.width > collectionView!.bounds.width ? 2 : 1
+//            
+//            coordinator.animate(alongsideTransition: { (context) in
+//                
+//            }, completion: { (context) in
+//                self.collectionView?.collectionViewLayout.invalidateLayout()
+//            })
+//            
+//        }
+//    }
+//    
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        super.traitCollectionDidChange(previousTraitCollection)
+//        guard let prev = previousTraitCollection, traitCollection.verticalSizeClass != prev.verticalSizeClass ||
+//              traitCollection.horizontalSizeClass != prev.horizontalSizeClass
+//        else { return }
+//        collectionView?.collectionViewLayout.invalidateLayout()
+//        collectionView?.reloadData()
+//    }
 
     // MARK: UICollectionViewDataSource
 
@@ -76,11 +108,14 @@ extension LBGateViewController : GateLayoutDelegate {
         let kind = LBGateType(rawValue: indexPath.item)!
         let gate = LBGateType.classForGate(kind)
         gate.defaultBounds()
+        print("Getting height for item \(indexPath.item)")
         let image = gate.getImageOfObject(gate.bounds, scale: 1)
         
         // scale the height based on the actual column width to maintain the aspect ratio
         let scale = min(1, width / image.size.width)
+        print("width = \(image.size.width)")
         return max(minimumHeight, image.size.height * scale) + labelHeight
     }
     
 }
+
